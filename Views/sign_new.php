@@ -1,10 +1,11 @@
-<form action="index.php" method="post">
+<form  method="post">
     <div class="input-log">
         Username:  <input id="logform" type="text" name="login">
         <br />
         Password:  <input id="logform" type="password" name="passwd">
         <br />
-        <input id="bt-log" type="submit" name="submit" value="Login">
+        E-mail:  <input id="logform" type="text" name="email">
+        <br />
+        <input id="bt-log" type="submit" name="submit" value="SignNew">
     </div>
 </form>
-<a href="Views/sign_new.php">New User</a>

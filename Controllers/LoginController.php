@@ -1,6 +1,6 @@
 <?php
-    require_once 'Controllers/Controller.php';
-    require_once "Models/Connection.php";
+    // require_once 'Controllers/Controller.php';
+    // require_once "Models/Connection.php";
 
     class LoginController extends Controller{
 

@@ -5,13 +5,13 @@ class Controller{
     protected $view = "";
 
     public static function loadpage($filename){
-        include "views/$filename";
+        include "Views/$filename";
     }
 
     public function renderView(){
         if ($this->view){
             extract($this->data);
-            require("views/" . $this->view . ".phtml");
+            require("Views/" . $this->view . ".phtml");
         }
     }
 }

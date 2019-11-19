@@ -1,0 +1,23 @@
+/* index */
+#bt-log{
+    background-color: rgb(69, 100, 69);
+    border: none;
+    color: white;
+    padding: 15px 40px;
+    margin: 4px 2px;
+    width: 15%;
+}
+
+#logform{
+    width: 10%;
+    position: relative;
+    border: none;
+    border-bottom: solid 1px rgb(200,200,200);
+}
+
+.input-log {
+    margin: 0 auto;
+    font-family: 'roboto', sans-serif;
+    color: rgb(69, 100, 69);
+}
+/* end index */

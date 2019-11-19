@@ -14,8 +14,39 @@
 
     spl_autoload_register("autoloadFunction");
     require ('Router.php');
+    require ('Views/login.php');
 
     $title = "Camagrue";
     $content = ob_get_clean();
 
     require('template.php');
+
+
+    // require('controler/frontend.php');
+
+    // try {
+    //     if (isset($_GET['action'])) {
+    //         if ($_GET['action'] == 'accueil') {
+    //             accueil();
+    //         }
+
+    //         elseif ($_GET['action'] == 'laFerme') {
+    //             laFerme();
+    //         }
+
+    //         elseif ($_GET['action'] == 'brebisVaches') {
+    //             brebisVaches($_GET['anchor']);
+    //         }
+
+    //         elseif ($_GET['action'] == 'porcs') {
+    //             porcs();
+    //         }
+            
+    //     }
+    //     else {
+    //         accueil();
+    //     }
+    // }
+    // catch(Exception $e) {
+    //     echo 'Erreur : ' . $e->getMessage();
+    // }

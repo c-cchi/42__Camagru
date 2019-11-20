@@ -16,37 +16,26 @@
     require ('Router.php');
     require ('Views/login.php');
 
+
+    // $request = $_SERVER['REQUEST_URI'];
+    // switch ($request) {
+    //     case '/camagrue/index.php' :
+    //         require __DIR__ . 'index.php';
+    //         break;
+    //     case '' :
+    //         require __DIR__ . 'index.php';
+    //         break;
+    //     case '/sign_new' :
+    //         require __DIR__ . '/Views/sign_new.php';
+    //         break;
+    //     default:
+    //         http_response_code(404);
+    //         require __DIR__ . '/Views/error.phtml';
+    //         break;
+    // }
+
     $title = "Camagrue";
     $content = ob_get_clean();
 
     require('template.php');
-
-
-    // require('controler/frontend.php');
-
-    // try {
-    //     if (isset($_GET['action'])) {
-    //         if ($_GET['action'] == 'accueil') {
-    //             accueil();
-    //         }
-
-    //         elseif ($_GET['action'] == 'laFerme') {
-    //             laFerme();
-    //         }
-
-    //         elseif ($_GET['action'] == 'brebisVaches') {
-    //             brebisVaches($_GET['anchor']);
-    //         }
-
-    //         elseif ($_GET['action'] == 'porcs') {
-    //             porcs();
-    //         }
-            
-    //     }
-    //     else {
-    //         accueil();
-    //     }
-    // }
-    // catch(Exception $e) {
-    //     echo 'Erreur : ' . $e->getMessage();
-    // }
+?>

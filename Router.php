@@ -10,8 +10,7 @@ if($_SESSION['submit'] == 'sign_new'){
 }else if ($_POST['submit'] == "SignNew"){
     $newcheck = new UserController;
     $reslt = $newcheck->check_username();
-
-    require_once('Views/sign_new.php');
+    // require_once('Views/sign_new.php');
 }else{
-    require('Views/login.php');
+    // require('Views/login.php');
 }

@@ -7,4 +7,4 @@
         <input id="bt-log" type="submit" name="submit" value="Login">
     </div>
 </form>
-<a href="Views/sign_new.php">New User</a>
+<a href="Views/sign_new.phtml">New User</a>

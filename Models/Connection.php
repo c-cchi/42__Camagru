@@ -25,8 +25,7 @@ class Connection{
         }
     }
 
-    public function runQuery($qry, $arr)
-    {
+    public function runQuery($qry, $arr){
         $stmt = $this->_conn->prepare($qry);
         $stmt->execute($arr);
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);

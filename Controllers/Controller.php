@@ -13,13 +13,11 @@ abstract class Controller{
         }
     }
 
-    public function redirect($url)
-    {
+    public function redirect($url){
         header("Location: /$url");
         header("Connection: close");
             exit;
     }
-    
 }
 
 // class Controller{
@@ -30,6 +28,4 @@ abstract class Controller{
 //     public static function loadpage($filename){
 //         include "Views/$filename";
 //     }
-
-
 // }

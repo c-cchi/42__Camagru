@@ -1,6 +1,5 @@
 <?php
-class RouterController extends Controller
-{
+class RouterController extends Controller {
     protected $controller;
 
     public function process($params){
@@ -17,7 +16,6 @@ class RouterController extends Controller
         }
         else
             $this->redirect('error');
-
     }
 
     private function parseUrl($url){

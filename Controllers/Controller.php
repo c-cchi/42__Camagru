@@ -1,12 +1,10 @@
 <?php
-class Controller{
-
+abstract class Controller{
     protected $data = array();
     protected $view = "";
+    protected $head = array('title' => '', 'description' => '');
 
-    public static function loadpage($filename){
-        include "Views/$filename";
-    }
+    abstract function process($params);
 
     public function renderView(){
         if ($this->view){
@@ -14,4 +12,24 @@ class Controller{
             require("Views/" . $this->view . ".phtml");
         }
     }
+
+    public function redirect($url)
+    {
+        header("Location: /$url");
+        header("Connection: close");
+            exit;
+    }
+    
 }
+
+// class Controller{
+
+//     protected $data = array();
+//     protected $view = "";
+
+//     public static function loadpage($filename){
+//         include "Views/$filename";
+//     }
+
+
+// }

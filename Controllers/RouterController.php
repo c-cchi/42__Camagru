@@ -4,15 +4,16 @@ class RouterController extends Controller {
 
     public function process($params){
         $parsedUrl = $this->parseUrl($params[0]);
-
         if (empty($parsedUrl[0]))
-                $this->redirect('camagrue/home');
+            $this->redirect('index');
+        // $this->view = $parsedUrl[0];
         $controllerClass = $this->dashesToCamel(array_shift($parsedUrl)) . 'Controller';
-        if (file_exists('controllers/' . $controllerClass . '.php')){
+
+        if (file_exists('Controllers/' . $controllerClass . '.php')){
             $this->controller = new $controllerClass;
             $this->controller->process($parsedUrl);
-            $this->data['title'] = $this->controller->head['title'];
-            $this->data['description'] = $this->controller->head['description'];
+            // $this->data['title'] = $this->controller->head['title'];
+            // $this->data['description'] = $this->controller->head['description'];
         }
         else
             $this->redirect('error');

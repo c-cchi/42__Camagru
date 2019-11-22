@@ -4,17 +4,16 @@
 
     class LoginController extends Controller{
 
-        public function invoke(){
-            $qry = "SELECT `username`,`password` FROM `users` WHERE `username`= :username";
-            $username = $_POST['login'];
-            $arr = array('username' => $username);
-            $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
-            $reslt = $this->getlogin($sqlidata);
-            if ($reslt == 'loggued'){
-                return ('loggued in');
+        public function process($params){
+            $this->view = 'Login';
+            if (isset($_SESSION['loggued_on_user']['user']))
+                exit;
+            else if (isset($_POST['login'])){
+                $msg = $this->invoke();
+                print($msg);
             }
             else{
-                return ('fail to login');
+                $this->renderView();
             }
         }
 
@@ -40,6 +39,20 @@
                         return ('pwinvalid');
                     }
                 }
+            }
+        }
+
+        public function invoke(){
+            $qry = "SELECT `username`,`password` FROM `users` WHERE `username`= :username";
+            $username = $_POST['login'];
+            $arr = array('username' => $username);
+            $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
+            $reslt = $this->getlogin($sqlidata);
+            if ($reslt == 'loggued'){
+                return ('loggued in');
+            }
+            else{
+                return ('fail to login');
             }
         }
 }

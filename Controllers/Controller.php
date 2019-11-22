@@ -1,6 +1,7 @@
 <?php
 abstract class Controller{
     protected $data = array();
+    // which will be used to store data retrieved from models.
     protected $view = "";
     protected $head = array('title' => '', 'description' => '');
 
@@ -19,13 +20,3 @@ abstract class Controller{
             exit;
     }
 }
-
-// class Controller{
-
-//     protected $data = array();
-//     protected $view = "";
-
-//     public static function loadpage($filename){
-//         include "Views/$filename";
-//     }
-// }

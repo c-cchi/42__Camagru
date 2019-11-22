@@ -1,8 +1,12 @@
 Options -Indexes
 RewriteEngine On
 RewriteBase /
+
+#does not apply to existing directories, don't run the directory
 RewriteCond %{REQUEST_FILENAME} !-d
+
 RewriteCond %{REQUEST_FILENAME} !-f
+
 RewriteRule ^(.+)$ index.php [QSA,L]
 RewriteRule !\.(css|js|icon|zip|rar|png|jpg|gif|pdf)$ index.php [L]
 AddType application/x-httpd-php .php .phtml

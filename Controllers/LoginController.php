@@ -1,16 +1,14 @@
 <?php
-    // require_once 'Controllers/Controller.php';
-    // require_once "Models/Connection.php";
-
     class LoginController extends Controller{
 
         public function process($params){
             $this->view = 'Login';
             if (isset($_SESSION['loggued_on_user']['user']))
-                exit;
+                echo 'Hello User '.$_SESSION['loggued_on_user']['user'];
             else if (isset($_POST['login'])){
                 $msg = $this->invoke();
-                print($msg);
+                if (isset($_SESSION['loggued_on_user']['user']))
+                    echo 'Hello User '.$_SESSION['loggued_on_user']['user'];
             }
             else{
                 $this->renderView();

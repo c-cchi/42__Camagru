@@ -6,7 +6,7 @@
 
         public function __construct(){
             $this->username = $_POST['uid'];
-            $this->email = $_POST['mail'];
+            $this->email = $_POST['email'];
             $this->pwd = $_POST['pwd'];
         }
         public function checkUidmail(){
@@ -17,10 +17,11 @@
             
             $sqlidatauid = Connection::getInstance()->runQuery($qry, $arr);
             $sqlidataemail = Connection::getInstance()->runQuery($qry2, $arr2);
-            if (isset($sqlidatauid[0]) || isset($sqlidataemail[0])){
+            if (isset($sqlidataemail[0]) || isset($sqlidatauid[0])){
                 if (isset($sqlidatauid[0])){
                     echo "<div class=\"alert-box\">Username exist.</div>";
-                }else{
+                }
+                if (isset($sqlidataemail[0])){
                     echo "<div class=\"alert-box\">E-mail exist.</div>";
                 }
                 return (FALSE);

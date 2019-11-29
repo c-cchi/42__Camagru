@@ -18,20 +18,30 @@
             $sqlidatauid = Connection::getInstance()->runQuery($qry, $arr);
             $sqlidataemail = Connection::getInstance()->runQuery($qry2, $arr2);
             if (isset($sqlidatauid[0]) || isset($sqlidataemail[0])){
-                echo "Username exist.";
-                return (False);
-            }else{
-                $rslt = $this->addUserdata();
-                if ($rslt == "TRUE"){
-                    echo "Sign Up successfully.";
+                if (isset($sqlidatauid[0])){
+                    echo "<div class=\"alert-box\">Username exist.</div>";
                 }else{
-                    echo "Fail to Sign Up.";
+                    echo "<div class=\"alert-box\">E-mail exist.</div>";
                 }
+                return (FALSE);
             }
+            // else{
+            //     $rslt = $this->addUserdata();
+            //     if ($rslt == "TRUE"){
+            //         echo "Sign Up successfully.";
+            //     }else{
+            //         echo "Fail to Sign Up.";
+            //     }
+            // }
         }
     
         public function addUserdata(){
-            $this->checkUidmail();
+            
+            if ($this->checkUidmail() == false){
+                return (FALSE);
+            }else{
+                echo "insert sql";
+            }
             return (TRUE);
         }
     }

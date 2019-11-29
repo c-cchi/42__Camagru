@@ -25,7 +25,7 @@
                 header("Location: newuser?error=invaliduid&email=".$email);
                 exit();
             }else{
-                // $rslt = $this->addUser();
+                $rslt = $this->addUser();
                 // if ($rslt == FALSE);
             }
         }
@@ -33,7 +33,8 @@
         public function addUser(){
             if($_POST['submit'] == "SignUp" && $this->checkPwdstrength($_POST['pwd']) == "TRUE"){
                 $newusermodel = new NewuserModel();
-                $newusermodel->addUserdata();
+                $rsltadduser = $newusermodel->addUserdata();
+                if ($rsltadduser == "Uidexist")
             return ("");
             }
     }

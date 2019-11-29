@@ -34,7 +34,9 @@
             if($_POST['submit'] == "SignUp" && $this->checkPwdstrength($_POST['pwd']) == "TRUE"){
                 $newusermodel = new NewuserModel();
                 $rsltadduser = $newusermodel->addUserdata();
-                if ($rsltadduser == "Uidexist")
+                if ($rsltadduser == FALSE){
+                    $this->renderView();
+                }
             return ("");
             }
     }

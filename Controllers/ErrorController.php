@@ -1,6 +1,9 @@
 <?php
     class ErrorController extends Controller{
-        public function process(){
-            $this->view = 'error';
+
+        public function process($parsedURL){
+            $this->view = $parsedURL;
+            // $this->head
+            $this->renderView();
         }
     }

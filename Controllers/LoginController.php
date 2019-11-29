@@ -3,12 +3,12 @@
 
         public function process($params){
             $this->view = 'Login';
-            if (isset($_SESSION['loggued_on_user']['user']))
-                echo 'Hello User '.$_SESSION['loggued_on_user']['user'];
+            if (isset($_SESSION['logged_on_user']['user']))
+                echo 'Hello User '.$_SESSION['logged_on_user']['user'];
             else if (isset($_POST['login'])){
                 $msg = $this->invoke();
-                if (isset($_SESSION['loggued_on_user']['user']))
-                    echo 'Hello User '.$_SESSION['loggued_on_user']['user'];
+                if (isset($_SESSION['logged_on_user']['user']))
+                    echo 'Hello User '.$_SESSION['logged_on_user']['user'];
             }
             else{
                 $this->renderView();
@@ -26,14 +26,14 @@
         public function getlogin($sqlidata){
             if (isset($_POST['login']) && isset($_POST['passwd']) && $_POST['submit'] == "Login"){
                 if (!$sqlidata){
-                    $_SESSION['loggued_on_user']['user'] = "";
+                    $_SESSION['logged_on_user']['user'] = "";
                     return ('usrnonexist');
                 }else{
                     if ($this->check_user($sqlidata) === TRUE){
-                        $_SESSION['loggued_on_user']['user'] = $_POST['login'];
-                        return ('loggued');
+                        $_SESSION['logged_on_user']['user'] = $_POST['login'];
+                        return ('logged');
                     }else{
-                        $_SESSION['loggued_on_user']['user'] = "";
+                        $_SESSION['logged_on_user']['user'] = "";
                         return ('pwinvalid');
                     }
                 }
@@ -45,9 +45,10 @@
             $username = $_POST['login'];
             $arr = array('username' => $username);
             $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
+            print_r($sqlidata);
             $reslt = $this->getlogin($sqlidata);
-            if ($reslt == 'loggued'){
-                return ('loggued in');
+            if ($reslt == 'logged'){
+                return ('logged in');
             }
             else{
                 return ('fail to login');

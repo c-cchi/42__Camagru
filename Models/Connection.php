@@ -13,11 +13,10 @@ class Connection{
     }
     
     public function __construct(){
-        $dsn = 'mysql:host=localhost;dbname=camagrue;charset=utf8';
-        $user = 'root';
-        $password = '123456';
+        // require "Config/database.php";
         try {
-            $this->_conn = new PDO($dsn, $user, $password);
+            // $this->_conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+            $this->_conn = new PDO("mysql:host=localhost;dbname=camagrue;charset=utf8", "root", "123456");
             $this->_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo 'Error!: ' . $e->getMessage();

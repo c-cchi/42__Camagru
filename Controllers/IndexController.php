@@ -3,8 +3,7 @@
         function process($params){
             $this->head = array(
                 'title' => 'Camagrue');
-        $login = new LoginController;
-        $login->process();
-        // $gallery = new GalleryController;
+            $login = new LoginController;
+            $login->process();
         }
     }

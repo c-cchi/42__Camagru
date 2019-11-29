@@ -6,15 +6,16 @@ class RouterController extends Controller {
         $parsedUrl = $this->parseUrl($params[0]);
         if (empty($parsedUrl[0]))
             $this->redirect('index');
-        $controllerClass = $this->dashesToCamel(array_shift($parsedUrl)) . 'Controller';
+        $controllerClass = $this->dashesToCamel($parsedUrl[0]) . 'Controller';
         if (file_exists('Controllers/' . $controllerClass . '.php')){
             $this->controller = new $controllerClass;
-            $this->controller->process($parsedUrl);
+            $this->controller->process($parsedUrl[0]);
             // $this->data['title'] = $this->controller->head['title'];
             // $this->data['description'] = $this->controller->head['description'];
         }
-        else
+        else{
             $this->redirect('error');
+        }
     }
 
     private function parseUrl($url){

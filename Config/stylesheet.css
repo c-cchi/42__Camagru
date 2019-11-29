@@ -42,3 +42,10 @@ footer {position: absolute; bottom: 0; right: 25px;}
     font-family: Arial, Helvetica, sans-serif;
 }
 /*end of index login-box*/
+
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}

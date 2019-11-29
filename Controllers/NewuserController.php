@@ -6,7 +6,7 @@
 
         public function __construct(){
             $this->username = $_POST['uid'];
-            $this->email = $_POST['mail'];
+            $this->email = $_POST['email'];
             $this->pwd = $_POST['pwd'];
         }
 
@@ -17,9 +17,16 @@
                 $this->renderView();
             }else if(empty($this->username) || empty($this->email) || empty($this->pwd)){
                 header("Location: newuser?error=emptyfields&uid=".$this->username."&email=".$this->email); 
+                exit();
+            }else if(!filter_var($this->email, FILTER_VALIDATE_EMAIL) === true){
+                header("Location: newuser?error=invalidemail");
+                exit();
+            }else if (!preg_match("/^[a-zA-Z0-9]*$/", $this->username)){
+                header("Location: newuser?error=invalideuid&email=".$email);
+                exit();
             }else{
-                $rslt = $this->addUser();
-                if ($rslt == FALSE);
+                // $rslt = $this->addUser();
+                // if ($rslt == FALSE);
             }
         }
 
@@ -27,7 +34,6 @@
             if($_POST['submit'] == "SignUp" && $this->checkPwdstrength($_POST['pwd']) == "TRUE"){
                 $newusermodel = new NewuserModel();
                 $newusermodel->addUserdata();
-                // if (Connection:: ) success
             return ("");
             }
     }

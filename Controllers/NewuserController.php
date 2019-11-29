@@ -22,7 +22,7 @@
                 header("Location: newuser?error=invalidemail");
                 exit();
             }else if (!preg_match("/^[a-zA-Z0-9]*$/", $this->username)){
-                header("Location: newuser?error=invalideuid&email=".$email);
+                header("Location: newuser?error=invaliduid&email=".$email);
                 exit();
             }else{
                 // $rslt = $this->addUser();

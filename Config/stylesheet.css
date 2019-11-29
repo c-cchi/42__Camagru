@@ -44,8 +44,12 @@ footer {position: absolute; bottom: 0; right: 25px;}
 /*end of index login-box*/
 
 .alert-box {
-	padding: 15px;
+	padding: 20px;
     margin-bottom: 20px;
     border: 1px solid transparent;
-    border-radius: 4px;  
+    border-radius: 4px; 
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    font-family: Arial, Helvetica, sans-serif;
 }

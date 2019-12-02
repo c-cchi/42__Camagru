@@ -27,7 +27,9 @@
             }else{
                 $rslt = $this->addUser();
                 if ($rslt == FALSE){
-                    $this->renderView();
+                    // $this->renderView();
+                }else{
+                    $this->redirect('gallery');
                 }
             }
         }
@@ -38,7 +40,7 @@
                 $newusermodel = new NewuserModel();
                 $rsltadduser = $newusermodel->addUserdata();
                 if ($rsltadduser == FALSE){
-                    echo '<div class="alert-box">Error of database.</div>';
+                    header("Location: newuser?error=sqlerror&uid=".$this->username."&email=".$this->email);
                     return (FALSE);
                 }else{
                     return (TRUE);

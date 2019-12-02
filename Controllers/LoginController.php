@@ -1,7 +1,7 @@
 <?php
     class LoginController extends Controller{
 
-        public function process($params){
+        public function process($login){
             $this->view = 'Login';
             if (isset($_SESSION['logged_on_user']['user'])){
                 $this->redirect('gallery');
@@ -9,8 +9,8 @@
                 $msg = $this->invoke();
                 echo $msg.'<br/>';
                 if (isset($_SESSION['logged_on_user']['user'])){
-                    echo 'Hello User '.$_SESSION['logged_on_user']['user'];
-                    // $this->redirect('gallery');
+                    // echo 'Hello User '.$_SESSION['logged_on_user']['user'];
+                    $this->redirect('gallery');
                 }else{
                     echo "error of login";
                 }
@@ -31,14 +31,14 @@
         public function getlogin($sqlidata){
             if (isset($_POST['login']) && isset($_POST['passwd']) && $_POST['submit'] == "Login"){
                 if (!$sqlidata){
-                    session_destroy();
+                    // session_destroy();
                     return ('usrnonexist');
                 }else{
                     if ($this->check_user($sqlidata) == TRUE){
                         $_SESSION['logged_on_user']['user'] = $_POST['login'];
                         return ('logged');
                     }else{
-                        session_destroy();
+                        // session_destroy();
                         return ('');
                     }
                 }

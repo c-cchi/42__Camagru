@@ -3,12 +3,17 @@
 
         public function process($params){
             $this->view = 'Login';
-            if (isset($_SESSION['logged_on_user']['user']))
-                echo 'Hello User '.$_SESSION['logged_on_user']['user'];
-            else if (isset($_POST['login'])){
+            if (isset($_SESSION['logged_on_user']['user'])){
+                $this->redirect('gallery');
+            }else if(isset($_POST['login'])){
                 $msg = $this->invoke();
-                if (isset($_SESSION['logged_on_user']['user']))
+                echo $msg.'<br/>';
+                if (isset($_SESSION['logged_on_user']['user'])){
                     echo 'Hello User '.$_SESSION['logged_on_user']['user'];
+                    // $this->redirect('gallery');
+                }else{
+                    echo "error of login";
+                }
             }
             else{
                 $this->renderView();
@@ -16,7 +21,7 @@
         }
 
         public function check_user($arr){
-            if ($_POST['passwd'] == $arr[0]['password']){
+            if (password_verify($_POST['passwd'], $arr[0]['password']) == TRUE){
                 return (TRUE);
             }else{
                 return (FALSE);
@@ -26,15 +31,15 @@
         public function getlogin($sqlidata){
             if (isset($_POST['login']) && isset($_POST['passwd']) && $_POST['submit'] == "Login"){
                 if (!$sqlidata){
-                    $_SESSION['logged_on_user']['user'] = "";
+                    session_destroy();
                     return ('usrnonexist');
                 }else{
-                    if ($this->check_user($sqlidata) === TRUE){
+                    if ($this->check_user($sqlidata) == TRUE){
                         $_SESSION['logged_on_user']['user'] = $_POST['login'];
                         return ('logged');
                     }else{
-                        $_SESSION['logged_on_user']['user'] = "";
-                        return ('pwinvalid');
+                        session_destroy();
+                        return ('');
                     }
                 }
             }
@@ -45,12 +50,10 @@
             $username = $_POST['login'];
             $arr = array('username' => $username);
             $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
-            print_r($sqlidata);
             $reslt = $this->getlogin($sqlidata);
             if ($reslt == 'logged'){
-                return ('logged in');
-            }
-            else{
+                return ('logged');
+            }else{
                 return ('fail to login');
             }
         }

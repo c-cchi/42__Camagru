@@ -53,3 +53,15 @@ footer {position: absolute; bottom: 0; right: 25px;}
     border-color: #ebccd1;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.success-box {
+	padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px; 
+    color: #5fc240;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+

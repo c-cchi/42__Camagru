@@ -50,11 +50,7 @@
         }
 
     public function checkPwdstrength($password){
-        $uppercase = preg_match('@[A-Z]@', $password);
-        $lowercase = preg_match('@[a-z]@', $password);
-        $number    = preg_match('@[0-9]@', $password);
-        $specialChars = preg_match('@[^\w]@', $password);
-        if(!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+        if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,50}$/', $password)) {
             return (FALSE);
         }else{
             return (TRUE);

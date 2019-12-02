@@ -26,23 +26,20 @@
                 }
                 return (FALSE);
             }
-            // else{
-            //     $rslt = $this->addUserdata();
-            //     if ($rslt == "TRUE"){
-            //         echo "Sign Up successfully.";
-            //     }else{
-            //         echo "Fail to Sign Up.";
-            //     }
-            // }
+            else{
+                $rslt = $this->addUserdata();
+                if ($rslt == "TRUE"){
+                    echo "Sign Up successfully.";
+                }else{
+                    echo "<div class=\"alert-box\">Fail to Sign Up.</div>";
+                }
+            }
         }
     
         public function addUserdata(){
-            
-            if ($this->checkUidmail() == false){
-                return (FALSE);
-            }else{
-                echo "insert sql";
-            }
+            $qry = "INSERT INTO `users` (username, password, email) VALUES (:usrname, :pwd, :mail);";
+            $arr = array('usrname' => $this->username, 'pwd' => $this->pwd, 'mail' => $this->email);
+            $addData = Connection::getInstance()->runQuery($qry, $arr);
             return (TRUE);
         }
     }

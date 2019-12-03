@@ -7,15 +7,17 @@
                 $this->redirect('gallery');
             }else if(isset($_POST['login'])){
                 $msg = $this->invoke();
-                echo $msg.'<br/>';
+                // echo $msg.'<br/>';
                 if (isset($_SESSION['logged_on_user']['user'])){
-                    // echo 'Hello User '.$_SESSION['logged_on_user']['user'];
-                    $this->redirect('gallery');
+                    echo "hello user";
+                    // $this->redirect('gallery');
                 }else{
                     echo "error of login";
                 }
-            }
-            else{
+            }else if(isset($_POST['logout'])){
+                session_destroy();
+                // $this->redirect('index');
+            }else{
                 $this->renderView();
             }
         }
@@ -52,7 +54,7 @@
             $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
             $reslt = $this->getlogin($sqlidata);
             if ($reslt == 'logged'){
-                return ('logged');
+                turn ('logged');
             }else{
                 return ('fail to login');
             }

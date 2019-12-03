@@ -1,5 +1,6 @@
 <?php
     ob_start();
+    session_start();
     function autoloadFunction($class){
         if (preg_match('/Controller$/', $class))
             require("Controllers/" . $class . ".php");

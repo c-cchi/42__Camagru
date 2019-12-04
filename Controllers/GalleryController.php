@@ -4,10 +4,10 @@
         public function process($params){
             $this->view = 'gallery';
             $this->renderView();
-            // if (isset($_SESSION['logged_on_user']['user'])){
-            //     $this->renderView();
+            $login = new LoginController;
+            $login->process('login');
+            // if (isset($_SESSION['user'])){
             // }else{
-            //     $this->redirect('login');
             // }
         }
     }

@@ -10,7 +10,8 @@
             $conn = Connection::getInstance();
         
             $sql = "SELECT * FROM users";
-            $rslt = mysqli_query($conn, $sql);
+            $arr = array();
+            $rslt = Connection::getInstance()->runQuery($sql, $arr);
             if (my_sqli_num_rows($rslt) > 0){
                 while ($row = mysqli_fetch_assoc($rslt)){
                     $id = $row['id'];

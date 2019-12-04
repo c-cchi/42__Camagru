@@ -26,6 +26,7 @@
                 exit();
             }else{
                 $rslt = $this->addUser();
+                echo $rslt;
                 if ($rslt == FALSE){
                     // $this->renderView();
                 }else{

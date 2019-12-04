@@ -7,7 +7,6 @@
                 $this->redirect('gallery');
             }else if(isset($_POST['login'])){
                 $msg = $this->invoke();
-                // echo $msg.'<br/>';
                 if (isset($_SESSION['logged_on_user']['user'])){
                     echo "hello user";
                     // $this->redirect('gallery');

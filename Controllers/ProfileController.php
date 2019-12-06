@@ -9,5 +9,6 @@
             session_start();
         
             $promodel = new ProfileModel;
+            
         }
     }

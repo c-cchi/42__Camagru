@@ -25,33 +25,26 @@
                 header("Location: newuser?error=invaliduid&email=".$email);
                 exit();
             }else{
-                $rslt = $this->addUser();
-                if ($rslt == TRUE){
-                    $this->redirect('gallery');
-                
-                }
-                // $this->renderView();
+                $this->addUser();
+                $this->redirect('gallery');
             }
         }
 
         public function addUser(){
-            $pwdstrength = $this->checkPwdstrength($_POST['pwd']);
+            $pwdstrength = $this->checkPwdstrength($this->pwd);
             $newusermodel = new NewuserModel;
-
+            $checkuidmail = $newusermodel->checkUidmail();
             if($pwdstrength == TRUE){
-                $checkuidmail = $newusermodel->checkUidmail();
-
-                if ($chekuidmail === 'usrnmexist'){
+                if ($checkuidmail === 'usrnmexist'){
                     header("Location: newuser?error=usrnmexist&email=".$this->email);
-                }else if ($chekuidmail === 'emailexist'){
+                }else if ($checkuidmail === 'emailexist'){
                     header("Location: newuser?error=emailexist&uid=".$this->username);
-                }else if ($chekuidmail === 'valid'){
-                    return ($newusermodel->addUserdata());
+                }else if ($checkuidmail === 'valid'){
+                    $newusermodel->addUserdata();
                 }
             }else if($pwdstrength == FALSE){
                 header("Location: newuser?error=invalidpwd&uid=".$this->username."&email=".$this->email);
             }
-            return (FALSE);
         }
 
     public function checkPwdstrength($password){
@@ -61,5 +54,4 @@
             return (TRUE);
         }
     }
-
 }

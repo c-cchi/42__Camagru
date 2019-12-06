@@ -11,9 +11,9 @@
         }
 
         public function process($newuser){
-            $this->view = $newuser;
+            $this->view = 'newuser';
             
-            if ($_POST['submit'] != "SignUp" || $rslt == "fail"){
+            if ($_POST['submit'] != "SignUp"){
                 $this->renderView();
             }else if(empty($this->username) || empty($this->email) || empty($this->pwd)){
                 header("Location: newuser?error=emptyfields&uid=".$this->username."&email=".$this->email); 
@@ -26,28 +26,30 @@
                 exit();
             }else{
                 $rslt = $this->addUser();
-                echo $rslt;
-                if ($rslt == FALSE){
-                    // $this->renderView();
-                }else{
+                if ($rslt == TRUE){
                     $this->redirect('gallery');
+                
                 }
+                // $this->renderView();
             }
         }
 
         public function addUser(){
             $pwdstrength = $this->checkPwdstrength($_POST['pwd']);
-            if($_POST['submit'] == "SignUp" && $pwdstrength == TRUE){
-                $newusermodel = new NewuserModel();
-                $rsltadduser = $newusermodel->addUserdata();
-                if ($rsltadduser == FALSE){
-                    header("Location: newuser?error=sqlerror&uid=".$this->username."&email=".$this->email);
-                    return (FALSE);
-                }else{
-                    return (TRUE);
+            $newusermodel = new NewuserModel;
+
+            if($pwdstrength == TRUE){
+                $checkuidmail = $newusermodel->checkUidmail();
+
+                if ($chekuidmail === 'usrnmexist'){
+                    header("Location: newuser?error=usrnmexist&email=".$this->email);
+                }else if ($chekuidmail === 'emailexist'){
+                    header("Location: newuser?error=emailexist&uid=".$this->username);
+                }else if ($chekuidmail === 'valid'){
+                    return ($newusermodel->addUserdata());
                 }
-        }elseif($_POST['submit'] == "SignUp" && $pwdstrength == FALSE){
-            header("Location: newuser?error=invalidpwd&uid=".$this->username."&email=".$this->email);
+            }else if($pwdstrength == FALSE){
+                header("Location: newuser?error=invalidpwd&uid=".$this->username."&email=".$this->email);
             }
             return (FALSE);
         }

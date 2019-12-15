@@ -10,7 +10,7 @@
             $this->username = $_POST['uid'];
             $this->email = $_POST['email'];
             $this->nonhspwd = $_POST['pwd'];
-            $this->conf_id = 
+            $this->conf_id = uniqid('verifyemail');
         }
 
         public function checkUidmail(){

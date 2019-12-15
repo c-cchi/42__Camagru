@@ -15,7 +15,8 @@ $sql = "CREATE TABLE users (
     username VARCHAR(100) NOT NULL,
     password VARCHAR(400) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    valid_mail int DEFAULT 0,
+    confirm varchar(10) DEFAULT `NO`,
+    con_id varchr(100) NOT NULL,
     )";
 if ($con->query($sql) === FALSE)
     echo "Error creating users table: " . $con->error . "\n";

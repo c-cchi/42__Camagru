@@ -4,6 +4,5 @@
         public function process($params){
             $this->view = 'gallery';
             $this->renderView();
-
         }
     }

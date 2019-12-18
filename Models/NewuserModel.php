@@ -5,6 +5,7 @@
         protected $pwd;
         protected $nonhspwd;
         protected $conf_id;
+        protected $verify_id;
 
         public function __construct(){
             $this->username = $_POST['uid'];
@@ -44,8 +45,9 @@
 
         public function addUserdata(){
             $this->pwd = password_hash($this->nonhspwd, PASSWORD_DEFAULT);
-            $qry = "INSERT INTO `users` (username, password, email, con_id) VALUES (:usrname, :pwd, :mail, :conf_id);";
-            $arr = array('usrname' => $this->username, 'pwd' => $this->pwd, 'mail' => $this->email, 'conf_id' => $this->conf_id);
+            $this->verify_id = uniqid(rand());
+            $qry = "INSERT INTO `users` (username, password, email, verify_id) VALUES (:usrname, :pwd, :mail, :verify_id);";
+            $arr = array('usrname' => $this->username, 'pwd' => $this->pwd, 'mail' => $this->email, 'verify_id' => $this->verify_id);
             $addData = Connection::getInstance()->runQuery($qry, $arr);
             // $this->addProfile();
         }

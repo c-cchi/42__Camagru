@@ -41,6 +41,13 @@
                     header("Location: newuser?error=emailexist&uid=".$this->username);
                 }else if ($checkuidmail === 'valid'){
                     $newusermodel->addUserdata();
+                    $sub = 'Mail: Activate your Account of Camagrue';
+                    $msg = "Hello ".$this->username." :,<br />
+                    To Activate your account of Camagrue<br />
+                    Click <a href=>Here</a>";
+                    $headers = 'From: admin@camagrue.42';
+                    mb_internal_encoding("UTF-8");
+                    mb_send_mail($this->email, $sub, $msg, $header);
                 }
             }else if($pwdstrength == FALSE){
                 header("Location: newuser?error=invalidpwd&uid=".$this->username."&email=".$this->email);

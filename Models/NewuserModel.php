@@ -43,12 +43,28 @@
         //     echo $rsltPrf;
         // }
 
+        public function sendMail(){
+            $sub = 'Mail: Activate your Account of Camagrue';
+            $msg = "Hello ".$this->username." :,<br />
+            To Activate your account of Camagrue<br />
+            Click <a href='localhost:8080/activate?at_id=".$this->verify_id."'>Here</a>";
+            $headers = 'From: admin@camagrue.42';
+            mb_internal_encoding("UTF-8");
+            if (!mb_send_mail($this->email, $sub, $msg, $header)){
+                return (FALSE);
+            }
+            return (TRUE);
+        }
+
         public function addUserdata(){
             $this->pwd = password_hash($this->nonhspwd, PASSWORD_DEFAULT);
             $this->verify_id = uniqid(rand());
             $qry = "INSERT INTO `users` (username, password, email, verify_id) VALUES (:usrname, :pwd, :mail, :verify_id);";
             $arr = array('usrname' => $this->username, 'pwd' => $this->pwd, 'mail' => $this->email, 'verify_id' => $this->verify_id);
             $addData = Connection::getInstance()->runQuery($qry, $arr);
+            if (sendMail() === FALSE){
+                return (FALSE);
+            }
             // $this->addProfile();
         }
     }

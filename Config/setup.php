@@ -11,12 +11,12 @@ if ($con->query("USE camagrue") === FALSE)
     echo "Error using database: " . $con->error . "\n";
 
 $sql = "CREATE TABLE users (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+    no INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     username VARCHAR(100) NOT NULL,
     password VARCHAR(400) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    confirm varchar(10) DEFAULT `NO`,
-    con_id varchr(100) NOT NULL,
+    verify_id TEXT NOT NULL,
+    confirmed BOOLEAN DEFAULT `FALSE`,
     )";
 if ($con->query($sql) === FALSE)
     echo "Error creating users table: " . $con->error . "\n";

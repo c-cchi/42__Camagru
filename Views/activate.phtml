@@ -1,8 +1,1 @@
-<?php 
-    include ('index.php');
-    $qry = "UPDATE `users` SET `confirmed` = true WHERE 'verify_id'=':verifyid'";
-    $id = $_GET['id'];
-    $arr = array('verifyid' => $id);
-    $sql_at_id = Connection::getInstance()->runQuery();
-    if ($sql_at_id !== NULL)
-        echo "<div class='success-box'>Successfully Activate your account.</div>";
+<h1>activate page</h1>

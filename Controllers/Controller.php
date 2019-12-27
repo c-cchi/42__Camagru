@@ -19,4 +19,7 @@ abstract class Controller{
         header("Connection: close");
             exit;
     }
+
+    public function addErrMessage($err){
+    }
 }

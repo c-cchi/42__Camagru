@@ -8,7 +8,11 @@
                 exit;
             }else{
                 $activeModel = new ActivateModel();
-                
+                if ($activeModel == true){
+                    echo "your account is activate.";
+                }else{
+                    echo "fail to activate your account.";
+                }
             }
         }
     }

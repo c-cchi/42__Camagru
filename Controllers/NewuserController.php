@@ -26,7 +26,7 @@
                 exit();
             }else{
                 $this->addUser();
-                $this->redirect('gallery');
+                // $this->redirect('gallery');
             }
         }
 

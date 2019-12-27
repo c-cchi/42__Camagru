@@ -16,14 +16,15 @@ $sql = "CREATE TABLE users (
     password VARCHAR(400) NOT NULL,
     email VARCHAR(100) NOT NULL,
     verify_id TEXT NOT NULL,
-    confirmed BOOLEAN DEFAULT `FALSE`,
+    confirmed BOOLEAN DEFAULT FALSE
     )";
 if ($con->query($sql) === FALSE)
     echo "Error creating users table: " . $con->error . "\n";
 
 $sql = "CREATE TABLE photos (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-    src TEXT NOT NULL,
+    id_pic INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    no_user INT(6) UNSIGNED,
+    src TEXT NOT NULL
     )";
 if ($con->query($sql) === FALSE)    echo "Error creating products table: " . $con->error . "\n";
 

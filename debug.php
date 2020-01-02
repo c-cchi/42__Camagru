@@ -1,8 +1,10 @@
 <?php
-// DEBUGGING PHP
-function console_log( $data ){
-    echo '<script>';
-    echo 'console.log('. json_encode( $data ) .')';
-    echo '</script>';
-}
-?>
+    function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = json_encode($output);
+    echo "<script>console.debug('Debug Objects: " . $output . "' );</script>";
+    }
+
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);

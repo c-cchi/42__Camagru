@@ -1,4 +1,5 @@
 <?php
+if (isset($_GET['error'])){
         if ($_GET['error'] == "invaliduid"){ 
                 echo "<div class=\"alert-box\">Invalid Username, Please contain only characters and numbers.</div>"; 
         }else if($_GET['error'] == "emptyfields"){
@@ -12,4 +13,5 @@
         }else if ($_GET['error'] == "emailexist"){
                 echo '<div class=\"alert-box\">E-mail exist.</div>';
         }
+}
 ?>

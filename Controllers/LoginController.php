@@ -12,7 +12,7 @@
                 }
             }else if($_POST['submit'] == 'Logout'){
                 session_destroy();
-                $this->redirect('gallery');
+                $this->redirect('index');
             }
             if(isset($_SESSION['user'])){
                 include "views/Logout.phtml";

@@ -5,7 +5,5 @@
                 'title' => 'Camagrue');
             $gallery = new GalleryController;
             $gallery->process();
-            $login = new LoginController;
-            $login->process();
         }
     }

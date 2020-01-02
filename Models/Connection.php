@@ -3,7 +3,7 @@ require_once 'Models/Connection.php';
 
 class Connection{
     protected static $_instance;
-    protected $_conn = null;
+    protected $_conn;
 
     public static function getInstance() {
         if (!self::$_instance instanceof self) {

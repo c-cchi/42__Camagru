@@ -10,15 +10,15 @@
                     $id = $_SESSION['no'];
                     $sqlImg = "SELECT * FROM `profile` WHERE userid ='$id'";
                     $rsltImg = mysqli_query($conn, $sqlImg);
-                    while($rowImg = mysqli_fetch_assoc($rsltImg)){
+                    if ($rowImg = mysqli_fetch_assoc($rsltImg)){
                         echo "<div>";
-                        if ($rowImag['status'] == 0){ // already upload img
+                        if ($rowImag['status'] == TRUE){ // already upload img
                             echo "<img src='uploads/profile".$id.".jpg?".mt_rand().">"; //mt rand給予一個random數字，這樣在更新圖片的時候browser才不會記住之前的那張照片而沒有更換
-                        }else{
-                            echo "<img src='uploads/profiledefault.jpg'>";
                         }
-                        echo "</div>";
+                    }else{
+                        echo "<img src='uploads/profiledefault.jpg'>";
                     }
+                    echo "</div>";
                 }
             }
         }

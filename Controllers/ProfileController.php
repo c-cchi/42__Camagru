@@ -5,9 +5,7 @@
             $this->renderView();
         }
 
-        public function proImg(){
-            session_start();
-        
+        public function proImg(){        
             $promodel = new ProfileModel;
             
         }

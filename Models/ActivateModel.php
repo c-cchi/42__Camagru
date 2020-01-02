@@ -1,18 +1,15 @@
 <?php
 class ActivateModel{
-    protected $activate_id;
+    protected $actId;
 
     public function __construct(){
-        if ($_GET['activate_id']){
-            $sql = "Update `users` SET `confirmed` = True WHERE `verify_id`=:verifyid";
-            $arr = array('verifyid' => $_GET['activate_id']);
-            $rslt = Connection::getInstance()->runQuery($sql, $arr);
-            if (!$rslt){
-                return (FALSE);
-            }
-            return (TRUE);
-        }
+        $this->actId = $_GET['activate_id'];
     }
-    
-    
+
+    public function activateAccount(){
+        $qry = "Update `users` SET `confirmed` = True WHERE `verify_id`=:verifyid";
+        $arr = array('verifyid' => $this->actId);
+        $rslt = Connection::getInstance()->runQuery($qry, $arr);
+        // return ($rslt);
+    }
 }

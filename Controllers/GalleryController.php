@@ -4,5 +4,7 @@
         public function process($params){
             $this->view = 'gallery';
             $this->renderView();
+            $login = new LoginController;
+            $login->process();
         }
     }

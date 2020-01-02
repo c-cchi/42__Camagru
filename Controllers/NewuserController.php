@@ -1,19 +1,24 @@
 <?php
+include "debug.php";
     class NewuserController extends Controller{
         protected $username;
         protected $email;
         protected $pwd;
 
         public function __construct(){
-            $this->username = $_POST['uid'];
-            $this->email = $_POST['email'];
-            $this->pwd = $_POST['pwd'];
+            if (isset($_POST['uid'])){
+                $this->username = $_POST['uid'];
+            }if (isset($_POST['email'])){
+                $this->email = $_POST['email'];
+            }if (isset($_POST['pwd'])){
+                $this->pwd = $_POST['pwd'];
+            }
         }
 
         public function process($newuser){
             $this->view = 'newuser';
             
-            if ($_POST['submit'] != "SignUp"){
+            if (empty($_POST['submit'])){
                 $this->renderView();
             }else if(empty($this->username) || empty($this->email) || empty($this->pwd)){
                 header("Location: newuser?error=emptyfields&uid=".$this->username."&email=".$this->email); 
@@ -26,7 +31,7 @@
                 exit();
             }else{
                 $this->addUser();
-                // $this->redirect('gallery');
+                $this->redirect('gallery');
             }
         }
 

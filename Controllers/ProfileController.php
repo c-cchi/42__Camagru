@@ -1,13 +1,14 @@
 <?php
     class ProfileController extends Controller{
-
+        public $link_pro;
+        
         function process($params){
             $this->view = 'profile';
-            $link_pro = $this->proImg();
+            $this->link_pro = 'profiledefault.jpg';
             $this->renderView();
         }
 
-        public function proImg(){   //to call the profile image  
+        public function proImg(){
             $promodel = new ProfileModel;
             return ($promodel->profileImg());
         }

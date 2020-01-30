@@ -1,5 +1,4 @@
 <?php
-include "debug.php";
     class NewuserController extends Controller{
         protected $username;
         protected $email;

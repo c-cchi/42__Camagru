@@ -21,13 +21,14 @@ $sql = "CREATE TABLE users (
 if ($con->query($sql) === FALSE)
     echo "Error creating users table: " . $con->error . "\n";
 
-$sql = "CREATE TABLE photos (
+$sql = "CREATE TABLE profile (
     id_pic INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     no_user INT(6) UNSIGNED,
     src TEXT NOT NULL,
     status BOOLEAN DEFAULT FALSE
     )";
-if ($con->query($sql) === FALSE)    echo "Error creating products table: " . $con->error . "\n";
+if ($con->query($sql) === FALSE)    
+    echo "Error creating photos table: " . $con->error . "\n";
 
 $con->close();
 ?>

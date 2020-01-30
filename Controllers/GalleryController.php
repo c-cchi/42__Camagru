@@ -3,8 +3,10 @@
         
         public function process($params){
             $this->view = 'gallery';
-            $this->renderView();
             $login = new LoginController;
             $login->process();
+            if (isset($_SESSION['user'])){
+                $this->renderView();
+            }
         }
     }

@@ -1,25 +1,26 @@
 <?php
     class ProfilerModel{
 
-        public function proImg(){
-            $sql = "SELECT `status` FROM `profile` WHERE `username`=:username";
-            $arr = array('username' => $_SESSION['user']);
+        public function profileImg(){
+            $sql = "SELECT * FROM `profiles` WHERE `no_user`=:no";
+            $arr = array('no' => $_SESSION['no']);
             $rslt = Connection::getInstance()->runQuery($sql, $arr);
-            if ($rslt->rowCount() > 0){
-                while ($row = mysqli_fetch_assoc($rslt)){
-                    $id = $_SESSION['no'];
-                    $sqlImg = "SELECT * FROM `profile` WHERE userid ='$id'";
-                    $rsltImg = mysqli_query($conn, $sqlImg);
-                    if ($rowImg = mysqli_fetch_assoc($rsltImg)){
-                        echo "<div>";
-                        if ($rowImag['status'] == TRUE){ // already upload img
-                            echo "<img src='uploads/profile".$id.".jpg?".mt_rand().">"; //mt rand給予一個random數字，這樣在更新圖片的時候browser才不會記住之前的那張照片而沒有更換
-                        }
-                    }else{
-                        echo "<img src='uploads/profiledefault.jpg'>";
-                    }
-                    echo "</div>";
-                }
-            }
+            if (!empty($rslt)) {
+                $no = $_SESSION['no'];
+                $qry = "SELECT * FROM `profile` WHERE no_user =:no";
+                $arr = array('no' => $no);
+                $rsltProfile = Connection::getInstance()->runQuery($qry, $arr);
+            //     if ($rsltProfile){
+            //         if ($rsltProfile['status'] == TRUE){ // already upload img
+            //             return ('profile'.$id.'.jpg?'.mt_rand()); //mt rand給予一個random數字，這樣在更新圖片的時候browser才不會記住之前的那張照片而沒有更換
+            //         }else{
+            //             return ('profiledefault.jpg');
+            //         }
+            //     }
+            // }else{
+                return ('profiledefault.jpg');
+            // }
         }
+        return ('profiledefault.jpg');
     }
+}

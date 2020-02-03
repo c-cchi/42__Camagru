@@ -70,14 +70,7 @@ footer {position: absolute; bottom: 0; right: 25px;}
     position : relative;
     max-width : 100%;
 }
-img.masked {
-    position : absolute;
-    background-color : #fff;
-    border : 1px solid #babbbd;
-    padding :10px;
-    box-shadow :1px 1px 1px #babbbd;
-    margin : 10px auto 0;
-}
+
 #player {
     width : 320px;
     height : 240px;
@@ -91,7 +84,4 @@ canvas{
 #capture-btn{
     width : 130px;
     margin : 0 auto;
-}
-#pick-image{
-    display : none;
 }

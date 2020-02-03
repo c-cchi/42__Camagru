@@ -36,7 +36,7 @@
                 return ('usrnonexist');
             }else{
                 if ($this->check_user($sqlidata) == TRUE){
-                    $_SESSION['user'] = $_POST['login'];
+                    $_SESSION['user'] = $sqlidata[0]['username'];
                     $_SESSION['no'] = $sqlidata[0]['no'];
                     return (TRUE);
                 }else{
@@ -48,7 +48,7 @@
     }
 
     public function invoke(){
-        $qry = "SELECT `username`,`password` FROM `users` WHERE `username`= :username";
+        $qry = "SELECT `username`,`password`,`no`,`email` FROM `users` WHERE `username`= :username OR `email`= :username";
         $username = $_POST['login'];
         $arr = array('username' => $username);
         $sqlidata = Connection::getInstance()->runQuery($qry, $arr);

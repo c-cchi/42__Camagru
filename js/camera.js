@@ -1,6 +1,3 @@
-window.addEventListener('load', startCamera());
-document.getElementById("capture-btn").addEventListener("click", takepicture);
-
 function startCamera(){
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
@@ -11,16 +8,21 @@ function startCamera(){
 }
 function takepicture() {
     var camera = document.getElementById("player");
-    var canvas = document.getElementById("canvas").getContext('2d').drawImage(camera, 0, 0, 640 , 480);
-    var data = canvas.toDataURL('image/png');
+    document.getElementById("canvas").getContext('2d').drawImage(camera, 0, 0, 640 , 480);
     // document.getElementById('photo').setAttribute('src', data);
 }
 
-// const screenshotButton = document.querySelector('#capture-btn');
-// screenshotButton.onclick  = function() {
-//     // canvas.width = video.videoWidth;
-//     // canvas.height = video.videoHeight;
-//     canvas.getContext('2d').drawImage(player, 0, 0, 640, 480);
-//     // Other browsers will fall back to image/png
-//     img.src = canvas.toDataURL('image/png');
-// };
+function uploadpicture(){
+    let canvas = document.getElementById("canvas").toDataURL();
+    fetch('/uploads/save_image.php', {
+    method : 'post',
+    body   : JSON.stringify({data: canvas})
+    })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error))
+}
+
+window.addEventListener('load', startCamera());
+document.getElementById("capture-btn").addEventListener("click", takepicture);
+document.getElementById("upload-btn").addEventListener("click", uploadpicture);

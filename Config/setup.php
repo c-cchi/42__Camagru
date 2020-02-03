@@ -21,7 +21,7 @@ $sql = "CREATE TABLE users (
 if ($con->query($sql) === FALSE)
     echo "Error creating users table: " . $con->error . "\n";
 
-$sql = "CREATE TABLE profile (
+$sql = "CREATE TABLE profiles (
     id_pic INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     no_user INT(6) UNSIGNED,
     src TEXT NOT NULL,

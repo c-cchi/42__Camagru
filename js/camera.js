@@ -13,16 +13,16 @@ function takepicture() {
 }
 
 function uploadpicture(){
-    let canvas = document.getElementById("canvas").toDataURL();
-    fetch('/uploads/save_image.php', {
+    var dataUrl = document.getElementById("canvas").toDataURL();
+    var img_src = dataUrl.src;
+    fetch('../uploads/upload.php', {
     method : 'post',
-    body   : JSON.stringify({data: canvas})
+    body   : JSON.stringify({data: dataUrl})
     })
     .then((res) => res.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error))
+    // .then((data) => console.log(data))
+    // .catch((error) => console.log(error))
 }
-
 window.addEventListener('load', startCamera());
 document.getElementById("capture-btn").addEventListener("click", takepicture);
 document.getElementById("upload-btn").addEventListener("click", uploadpicture);

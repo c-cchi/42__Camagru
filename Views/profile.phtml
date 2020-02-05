@@ -1,4 +1,5 @@
 <h2>Profile Page</h2>
 <p>Hello <?= $_SESSION['user']?></p>
 <img src='uploads/<?php echo $this->link_pro;?>' >
+<p><?= $profilemodel->profileInfo['email']?></p>
 <a href="gallery"><input type="button" value="Gallery"></a>

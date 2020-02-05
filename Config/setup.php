@@ -24,7 +24,7 @@ if ($con->query($sql) === FALSE)
 $sql = "CREATE TABLE profiles (
     id_pic INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     no_user INT(6) UNSIGNED,
-    src TEXT NOT NULL,
+    src TEXT DEFAULT NULL,
     status BOOLEAN DEFAULT FALSE
     )";
 if ($con->query($sql) === FALSE)    

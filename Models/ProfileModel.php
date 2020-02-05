@@ -13,4 +13,11 @@
                 }
             }
         }
+
+        public function profileEmail(){
+            $sql = "SELECT * FROM `users` WHERE `no`=:no";
+            $arr = array('no' => $_SESSION['no']);
+            $rslt = Connection::getInstance()->runQuery($sql, $arr);
+            return ($rslt[0]);
+        }
 }

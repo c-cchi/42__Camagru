@@ -9,7 +9,8 @@ class RouterController extends Controller {
         $controllerClass = $this->dashesToCamel($parsedUrl[0]) . 'Controller';
         if (file_exists('Controllers/' . $controllerClass . '.php')){
             $this->controller = new $controllerClass;
-            $this->controller->process($parsedUrl[0]);
+            $this->controller->process($parsedUrl);
+            
             // $this->data['title'] = $this->controller->head['title'];
             // $this->data['description'] = $this->controller->head['description'];
         }

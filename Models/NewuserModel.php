@@ -19,7 +19,6 @@
             $qry2 = "SELECT * FROM `users` WHERE `email`=:email";
             $arr = array('username' => $this->username);
             $arr2 = array('email' => $this->email);
-            
             $sqlidatauid = Connection::getInstance()->runQuery($qry, $arr);
             $sqlidataemail = Connection::getInstance()->runQuery($qry2, $arr2);
             if (isset($sqlidataemail[0]) || isset($sqlidatauid[0])){
@@ -33,28 +32,24 @@
             }
         }
     
-        // public function addProfile(){
-        //     $qry = "SELECT `no` FROM `users` WHERE `username`=:username";
-        //     $arr = array('username' => $this->username);
-        //     $rslt = Connection::getInstance()->runQuery($qry, $arr);
-        //     $qryPrf = "INSERT INTO `profile` (`no`, `username`, `statusimg`) VALUES (:no, :uname);";
-        //     $arrPrf = array('no' => $rslt['no'], 'username' => $this->username);
-        //     $rsltPrf = Connection::getInstance()->runQuery($qryPrf, $arrPrf);
-        //     echo $rsltPrf;
-        // }
-
-        public function sendMail(){
-            $sub = 'Mail: Activate your Account of Camagrue';
-            $msg = "Hello ".$this->username." :,<br />
-            To Activate your account of Camagrue<br />
-            Click <a href='localhost:8080/activate?at_id=".$this->verify_id."'>Here</a>";
-            $headers = 'From: admin@camagrue.42';
-            mb_internal_encoding("UTF-8");
-            if (!mb_send_mail($this->email, $sub, $msg, $header)){
-                return (FALSE);
-            }
-            return (TRUE);
+        public function addProfile(){
+            $qryPrf = "INSERT INTO `profiles` (no_user) VALUES (:no);";
+            $arrPrf = array('no' => $rslt[0]['no']);
+            $rsltPrf = Connection::getInstance()->runQuery($qryPrf, $arrPrf);
         }
+
+        // public function sendMail(){
+        //     $sub = 'Mail: Activate your Account of Camagrue';
+        //     $msg = "Hello ".$this->username." :,<br />
+        //     To Activate your account of Camagrue<br />
+        //     Click <a href='localhost:8080/activate?at_id=".$this->verify_id."'>Here</a>";
+        //     $headers = 'From: admin@camagrue.42';
+        //     mb_internal_encoding("UTF-8");
+        //     if (!mb_send_mail($this->email, $sub, $msg, $header)){
+        //         return (FALSE);
+        //     }
+        //     return (TRUE);
+        // }
 
         public function addUserdata(){
             $this->pwd = password_hash($this->nonhspwd, PASSWORD_DEFAULT);
@@ -62,9 +57,12 @@
             $qry = "INSERT INTO `users` (username, password, email, verify_id) VALUES (:usrname, :pwd, :mail, :verify_id);";
             $arr = array('usrname' => $this->username, 'pwd' => $this->pwd, 'mail' => $this->email, 'verify_id' => $this->verify_id);
             $addData = Connection::getInstance()->runQuery($qry, $arr);
-            if (sendMail() === FALSE){
-                return (FALSE);
-            }
-            // $this->addProfile();
+            // $qry = "SELECT `no` FROM `users` WHERE `username`=:username";
+            // $arr = array('username' => $this->username);
+            // $rslt = Connection::getInstance()->runQuery($qry, $arr);
+            // $_SESSION['no'] = $rslt[0]['no'];
+            // if (sendMail() === FALSE){
+            //     return (FALSE);
+            // }
         }
     }

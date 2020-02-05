@@ -3,7 +3,7 @@
     $output = $data;
     if (is_array($output))
         $output = json_encode($output);
-    echo "<script>console.debug('Debug Objects: " . $output . "' );</script>";
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
     }
 
     // error_reporting(E_ALL);

@@ -10,19 +10,29 @@ function takepicture() {
     var camera = document.getElementById("player");
     document.getElementById("canvas").getContext('2d').drawImage(camera, 0, 0, 640 , 480);
     // document.getElementById('photo').setAttribute('src', data);
+    camera.srcObject.getVideoTracks().forEach((track) => {
+        // track.stop(); 
+    });
 }
 
+const form = document.querySelector('form');
+
 function uploadpicture(){
-    var dataUrl = document.getElementById("canvas").toDataURL();
-    var img_src = dataUrl.src;
-    fetch('../uploads/upload.php', {
-    method : 'post',
-    body   : JSON.stringify({data: dataUrl})
+    let picture = document.getElementById("canvas").toDataURL();
+
+    fetch('/gallery/uploads', {
+    method : 'POST',
+    body   : JSON.stringify({data: picture})
     })
-    .then((res) => res.json())
+    console.log(JSON.stringify({data: picture}))
+    .then((res) => console.log(response))
     // .then((data) => console.log(data))
     // .catch((error) => console.log(error))
 }
+
 window.addEventListener('load', startCamera());
 document.getElementById("capture-btn").addEventListener("click", takepicture);
-document.getElementById("upload-btn").addEventListener("click", uploadpicture);
+form.addEventListener("submit", e => {
+    e.preventDefault();
+    uploadpicture();
+});

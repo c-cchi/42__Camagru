@@ -11,9 +11,11 @@ if (isset($_GET['error'])){
         }else if ($_GET['error'] == "usrnmexist"){
                 echo '<div class=\"alert-box\">Username exist.</div>';
         }else if ($_GET['error'] == "emailexist"){
-                echo '<div class=\"alert-box\">E-mail exist.</div>';
+                echo '<div class="alert-box">E-mail exist.</div>';
         }else if ($_GET['error'] == "sql"){
-                echo '<div class=\"alert-box\">Problem of Create NewUser, please try later.</div>';
+                echo '<div class="alert-box">Problem of Create NewUser, please try later.</div>';
+        }else if ($_GET['error'] == 'pwdrpt'){
+                echo '<div class="alert-box">Password do not match, please try again.</div>';
         }
 }
 ?>

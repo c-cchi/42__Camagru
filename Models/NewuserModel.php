@@ -1,5 +1,5 @@
 <?php
-    class NewuserModel{
+    class UserModel{
         protected $username;
         protected $email;
         protected $pwd;

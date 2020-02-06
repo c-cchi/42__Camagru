@@ -20,6 +20,14 @@ abstract class Controller{
             exit;
     }
 
+    public function checkPwdstrength($password){
+        if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,50}$/', $password) || strcmp($this->pwdrepeat, $this->pwd)) {
+            return (FALSE);
+        }else{
+            return (TRUE);
+        }
+    }
+
     public function addErrMessage($err){
     }
 }

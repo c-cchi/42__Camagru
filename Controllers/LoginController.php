@@ -10,7 +10,7 @@
             }else{
                 echo "<h4>error of login</h4>";
             }
-        }else if($_POST['submit'] == 'Logout'){
+        }else if(isset($_POST['submit']) && $_POST['submit'] == "Logout"){
             session_destroy();
             $this->redirect('index');
         }

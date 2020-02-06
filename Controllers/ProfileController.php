@@ -13,9 +13,6 @@
                 $this->renderView();
                 if (isset($_POST['modify'])){
                     $rslt = $this->modifyInfo();
-                    if ($rslt == 'pwderror'){
-                        header("Location: /profile/modify?error=pwdrpt"); 
-                    }
                 }
             }else{
                 $this->view = 'profile';
@@ -41,10 +38,25 @@
             $this->email = $_POST['email'];
             $this->username = $_POST['username'];
             $this->nonhspwd = $_POST['pwd'];
+            $usermodel = new UserModel;
+            $rsltusermodel = $usermodel->checkUidmail();
+            $pwdstrength = $this->checkPwdstrength($this->nonhspwd);
+
             if ($this->nonhspwd != $_POST['pwd-repeat']){
-                return ('pwderror');
+                header("Location: /profile/modify?error=pwdrpt"); 
+            }else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+                header("Location: /profile/modify?error=invalidemail"); 
+            }else if ($rsltusermodel != 'valid'){
+                if ($rsltusermodel == 'usrnmexist'){
+                    header("Location: /profile/modify?error=usrnmexist"); 
+                }else{
+                    header("Location: /profile/modify?error=emailexist"); 
+                }
+            }else if($pwdstrength == FALSE){
+                header("Location: newuser?error=invalidpwd");
             }
         }
+
         public function myGallery(){
             
         }

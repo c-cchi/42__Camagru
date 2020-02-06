@@ -30,7 +30,7 @@
     }
 
     public function getlogin($sqlidata){
-        if (isset($_POST['login']) && isset($_POST['passwd']) && $_POST['submit'] == "Login"){
+        if (isset($_POST['login']) && isset($_POST['passwd'])){
             if (!$sqlidata){
                 session_destroy();
                 return ('usrnonexist');

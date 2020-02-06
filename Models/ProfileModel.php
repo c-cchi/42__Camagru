@@ -14,7 +14,7 @@
             }
         }
 
-        public function profileEmail(){
+        public function profileInfo(){
             $sql = "SELECT * FROM `users` WHERE `no`=:no";
             $arr = array('no' => $_SESSION['no']);
             $rslt = Connection::getInstance()->runQuery($sql, $arr);

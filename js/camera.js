@@ -30,7 +30,7 @@ function uploadpicture(){
     // .catch((error) => console.log(error))
 }
 
-window.addEventListener('load', startCamera());
+window.addEventListener('click', startCamera());
 document.getElementById("capture-btn").addEventListener("click", takepicture);
 form.addEventListener("submit", e => {
     e.preventDefault();

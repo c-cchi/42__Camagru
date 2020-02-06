@@ -12,6 +12,8 @@ if (isset($_GET['error'])){
                 echo '<div class=\"alert-box\">Username exist.</div>';
         }else if ($_GET['error'] == "emailexist"){
                 echo '<div class=\"alert-box\">E-mail exist.</div>';
+        }else if ($_GET['error'] == "sql"){
+                echo '<div class=\"alert-box\">Problem of Create NewUser, please try later.</div>';
         }
 }
 ?>

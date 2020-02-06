@@ -4,14 +4,12 @@
         protected $email;
         protected $pwd;
         protected $nonhspwd;
-        protected $conf_id;
         protected $verify_id;
 
         public function __construct(){
             $this->username = $_POST['uid'];
             $this->email = $_POST['email'];
             $this->nonhspwd = $_POST['pwd'];
-            $this->conf_id = uniqid('verifyemail');
         }
 
         public function checkUidmail(){
@@ -34,8 +32,8 @@
     
         public function addProfile(){
             $qryPrf = "INSERT INTO `profiles` (no_user) VALUES (:no);";
-            $arrPrf = array('no' => $rslt[0]['no']);
-            $rsltPrf = Connection::getInstance()->runQuery($qryPrf, $arrPrf);
+            $arrPrf = array('no' => $_SESSION['no']);
+            $rsltPrf = Connection::getInstance()->insertQuery($qryPrf, $arrPrf);
         }
 
         // public function sendMail(){
@@ -56,11 +54,14 @@
             $this->verify_id = uniqid(rand());
             $qry = "INSERT INTO `users` (username, password, email, verify_id) VALUES (:usrname, :pwd, :mail, :verify_id);";
             $arr = array('usrname' => $this->username, 'pwd' => $this->pwd, 'mail' => $this->email, 'verify_id' => $this->verify_id);
-            $addData = Connection::getInstance()->runQuery($qry, $arr);
-            // $qry = "SELECT `no` FROM `users` WHERE `username`=:username";
-            // $arr = array('username' => $this->username);
-            // $rslt = Connection::getInstance()->runQuery($qry, $arr);
-            // $_SESSION['no'] = $rslt[0]['no'];
+            $addData = Connection::getInstance()->insertQuery($qry, $arr);
+            $qry1 = "SELECT `no`,`username` FROM `users` WHERE `username`=:username";
+            $arr1 = array('username' => $this->username);
+            $rslt = Connection::getInstance()->runQuery($qry1, $arr1);
+            $_SESSION['no'] = $rslt[0]['no'];
+            $_SESSION['user'] = $rslt[0]['username'];
+            $this->addProfile();
+            return (TRUE);
             // if (sendMail() === FALSE){
             //     return (FALSE);
             // }

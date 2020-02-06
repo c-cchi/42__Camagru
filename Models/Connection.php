@@ -24,6 +24,11 @@ class Connection{
         }
     }
 
+    public function insertQuery($qry, $arr){
+        $stmt = $this->_conn->prepare($qry);
+        $stmt->execute($arr);
+    }
+
     public function runQuery($qry, $arr){
         $stmt = $this->_conn->prepare($qry);
         $stmt->execute($arr);

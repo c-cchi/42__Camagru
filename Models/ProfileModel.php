@@ -2,7 +2,16 @@
     class ProfileModel{
         protected $username;
         protected $email;
+        protected $pwd;
+        protected $nonhspwd;
         
+        public function setData(){
+            $this->username = $_POST['uid'];
+            $this->email = $_POST['email'];
+            $this->nonhspwd = $_POST['pwd'];
+            $this->pwd = password_hash($this->nonhspwd, PASSWORD_DEFAULT);
+        }
+
         public function profileImg(){
             $sql = "SELECT * FROM `profiles` WHERE `no_user`=:no";
             $arr = array('no' => $_SESSION['no']);
@@ -16,15 +25,17 @@
             }
         }
 
-        public function modify_checkUidmail(){
-            $qry = "SELECT * FROM `users` WHERE `username`=:username OR `email`=:email";
-            $arr = array('username' => $this->username, 'email' => $this->email);
-        }
-
         public function profileInfo(){
             $sql = "SELECT * FROM `users` WHERE `no`=:no";
             $arr = array('no' => $_SESSION['no']);
             $rslt = Connection::getInstance()->runQuery($sql, $arr);
             return ($rslt[0]);
+        }
+
+        public function updateProfile(){
+            $this->setData();
+            $qryUpd ="UPDATE `users` SET `username` = :username, `password` = :password,`email`=:email WHERE `no`=:no;";
+            $arrUpd = array('username' => $this->ursername, 'password' => $this->pwd,'email' => $this->email, 'no' => $_SESSION['no']);
+            $rsltUpd = Connection::getInstance()->updateQuery($qryUpd, $arrUpd);
         }
 }

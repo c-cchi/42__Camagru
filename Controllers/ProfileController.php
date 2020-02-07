@@ -53,13 +53,17 @@
                 if ($rsltusermodel == 'username exist'){
                     header("Location: /profile/modify?error=usrnmexist");
                 }else{
+                    header("Location: /profile/modify?error=usrnmexist");
                 }
             }else{
                 $sql = "SELECT `password` FROM `users` WHERE `no`= :no";
                 $arr = array('no' => $_SESSION['no']);
                 $sqlidata = Connection::getInstance()->runQuery($sql, $arr);
                 if ((password_verify($this->oldpwd, $sqlidata[0]['password'])) == TRUE){
-                    $usermodel->updateProfile();
+                    // $prfmodel = new ProfileModel;
+                    // $prfmodel->updateProfile();
+                    // $this->redirect('index');
+                    print_r($_POST);
                 }else{
                     header("Location: /profile/modify?error=incorrectoldpw"); 
                 }

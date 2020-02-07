@@ -35,4 +35,9 @@ class Connection{
         $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return ($r);
     }
+
+    public function updateQuery($qry, $arr){
+        $stmt = $this->_conn->prepare($qry);
+        $stmt->execute($arr);
+    }
 }

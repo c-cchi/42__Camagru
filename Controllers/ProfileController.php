@@ -37,12 +37,13 @@
         public function modifyInfo(){
             $this->email = $_POST['email'];
             $this->username = $_POST['uid'];
+            $this->oldpwd = $_POST['oldpwd'];
             $this->nonhspwd = $_POST['pwd'];
             $usermodel = new UserModel;
             $rsltusermodel = $usermodel->checkUidmail();
             $pwdstrength = $this->checkPwdstrength($this->nonhspwd);
 
-            if ($this->nonhspwd != $_POST['pwd-repeat']){
+            if ($this->nonhspwd != $_POST['pwdrepeat']){
                 header("Location: /profile/modify?error=pwdrpt"); 
             }else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
                 header("Location: /profile/modify?error=invalidemail"); 
@@ -52,10 +53,16 @@
                 if ($rsltusermodel == 'username exist'){
                     header("Location: /profile/modify?error=usrnmexist");
                 }else{
-                    header("Location: /profile/modify?error=emailexist"); 
                 }
             }else{
-
+                $sql = "SELECT `password` FROM `users` WHERE `no`= :no";
+                $arr = array('no' => $_SESSION['no']);
+                $sqlidata = Connection::getInstance()->runQuery($sql, $arr);
+                if ((password_verify($this->oldpwd, $sqlidata[0]['password'])) == TRUE){
+                    $usermodel->updateProfile();
+                }else{
+                    header("Location: /profile/modify?error=incorrectoldpw"); 
+                }
             }
         }
 

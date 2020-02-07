@@ -1,9 +1,10 @@
+<?php include "Views/displayError.phtml"?>
 <div class=login-box>
     <form method="post">
         <h2>Login</h2>
-        <input id="tx" type="text" name="uid" placeholder="Username">
+        <input type="text" name="uid" placeholder="Username" value="<?php echo $_GET['uid']?>">
         <br />
-        <input id="tx" type="password" name="passwd" placeholder="password">
+        <input type="password" name="passwd" placeholder="password">
         <br />
         <input type="submit" value="login">
     </form>

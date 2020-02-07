@@ -53,8 +53,8 @@
 
         public function invoke(){
             $qry = "SELECT `username`,`password`,`no`,`email` FROM `users` WHERE `username`= :username OR `email`= :username";
-            $username = $_POST['uid'];
-            $arr = array('username' => $username);
+            $this->username = $_POST['uid'];
+            $arr = array('username' => $this->username);
             $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
             $rslt = $this->getlogin($sqlidata);
             return ($rslt);

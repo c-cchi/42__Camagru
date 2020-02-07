@@ -15,11 +15,13 @@ if (isset($_GET['error'])){
         }else if ($_GET['error'] == "sql"){
                 echo '<div class="alert-box">Problem of Create NewUser, please try later.</div>';
         }else if ($_GET['error'] == 'pwdrpt'){
-                echo '<div class="alert-box">Password do not match, please try again.</div>';
+                echo '<div class="alert-box">New Password do not match, please try again.</div>';
         }else if ($_GET['error'] == 'incorrectpwd'){
                 echo '<div class="alert-box">Incorrect password, please try again.</div>';
         }else if ($_GET['error'] == 'usrnotexist'){
                 echo '<div class="alert-box">User not exist, please sign up.</div>';
+        }else if ($_GET['error'] == 'incorrectoldpw'){
+                echo '<div class="alert-box">Old password incorrect, please try again.</div>';
         }
 }
 ?>

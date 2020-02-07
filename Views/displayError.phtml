@@ -16,6 +16,10 @@ if (isset($_GET['error'])){
                 echo '<div class="alert-box">Problem of Create NewUser, please try later.</div>';
         }else if ($_GET['error'] == 'pwdrpt'){
                 echo '<div class="alert-box">Password do not match, please try again.</div>';
+        }else if ($_GET['error'] == 'incorrectpwd'){
+                echo '<div class="alert-box">Incorrect password, please try again.</div>';
+        }else if ($_GET['error'] == 'usrnotexist'){
+                echo '<div class="alert-box">User not exist, please sign up.</div>';
         }
 }
 ?>

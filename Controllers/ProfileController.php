@@ -11,7 +11,7 @@
             if ($parsedUrl[1] == 'modify'){
                 $this->view = 'modify';
                 $this->renderView();
-                if (isset($_POST['modify'])){
+                if (isset($_POST['uid']) && isset($_POST['email']) && isset($_POST['oldpwd']) && isset($_POST['pwd']) && isset($_POST['pwd-repeat'])){
                     $rslt = $this->modifyInfo();
                 }
             }else{
@@ -36,7 +36,7 @@
 
         public function modifyInfo(){
             $this->email = $_POST['email'];
-            $this->username = $_POST['username'];
+            $this->username = $_POST['uid'];
             $this->nonhspwd = $_POST['pwd'];
             $usermodel = new UserModel;
             $rsltusermodel = $usermodel->checkUidmail();
@@ -46,14 +46,16 @@
                 header("Location: /profile/modify?error=pwdrpt"); 
             }else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
                 header("Location: /profile/modify?error=invalidemail"); 
+            }else if($pwdstrength == FALSE){
+                header("Location: /profile/modify?error=invalidpwd");
             }else if ($rsltusermodel != 'valid'){
-                if ($rsltusermodel == 'usrnmexist'){
-                    header("Location: /profile/modify?error=usrnmexist"); 
+                if ($rsltusermodel == 'username exist'){
+                    header("Location: /profile/modify?error=usrnmexist");
                 }else{
                     header("Location: /profile/modify?error=emailexist"); 
                 }
-            }else if($pwdstrength == FALSE){
-                header("Location: newuser?error=invalidpwd");
+            }else{
+
             }
         }
 

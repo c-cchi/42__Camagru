@@ -1,6 +1,8 @@
 <?php
     class ProfileModel{
-
+        protected $username;
+        protected $email;
+        
         public function profileImg(){
             $sql = "SELECT * FROM `profiles` WHERE `no_user`=:no";
             $arr = array('no' => $_SESSION['no']);
@@ -16,6 +18,7 @@
 
         public function modify_checkUidmail(){
             $qry = "SELECT * FROM `users` WHERE `username`=:username OR `email`=:email";
+            $arr = array('username' => $this->username, 'email' => $this->email);
         }
 
         public function profileInfo(){

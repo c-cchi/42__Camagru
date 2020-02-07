@@ -39,6 +39,7 @@
                     if ($rslt == TRUE){
                         $_SESSION['user'] = $sqlidata[0]['username'];
                         $_SESSION['no'] = $sqlidata[0]['no'];
+                        $_SESSION['email'] = $sqlidata[0]['email'];
                         return (TRUE);
                     }else{
                         session_destroy();

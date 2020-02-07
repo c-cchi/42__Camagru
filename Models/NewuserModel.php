@@ -61,7 +61,7 @@
             $_SESSION['no'] = $rslt[0]['no'];
             $_SESSION['user'] = $rslt[0]['username'];
             $this->addProfile();
-            return (TRUE);
+            // return (TRUE);
             // if (sendMail() === FALSE){
             //     return (FALSE);
             // }

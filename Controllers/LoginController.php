@@ -8,7 +8,7 @@
             if (isset($_SESSION['user'])){
                 $this->redirect('gallery');
             }else{
-                echo "<h4>error of login</h4>";
+                echo "<h4>".$msg."</h4>";
             }
         }else if(isset($_POST['submit']) && $_POST['submit'] == "Logout"){
             session_destroy();
@@ -22,7 +22,7 @@
     }
 
     public function check_user($arr){
-        if (password_verify($_POST['passwd'], $arr[0]['password']) == TRUE){
+        if (password_verify($_POST['passwd'], $arr['password']) == TRUE){
             return (TRUE);
         }else{
             return (FALSE);
@@ -31,17 +31,18 @@
 
     public function getlogin($sqlidata){
         if (isset($_POST['login']) && isset($_POST['passwd'])){
-            if (!$sqlidata){
+            if (!isset($sqlidata)){
                 session_destroy();
                 return ('usrnonexist');
             }else{
-                if ($this->check_user($sqlidata) == TRUE){
+                $rslt = $this->check_user($sqlidata[0]);
+                if ($rslt == TRUE){
                     $_SESSION['user'] = $sqlidata[0]['username'];
                     $_SESSION['no'] = $sqlidata[0]['no'];
                     return (TRUE);
                 }else{
                     session_destroy();
-                    return (FALSE);
+                    return ('incorrect password');
                 }
             }
         }
@@ -52,6 +53,7 @@
         $username = $_POST['login'];
         $arr = array('username' => $username);
         $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
-        return ($this->getlogin($sqlidata));
+        $rslt = $this->getlogin($sqlidata);
+        return ($rslt);
     }
 }

@@ -31,7 +31,8 @@
                 }else if ($checkuidmail === 'emailexist'){
                     header("Location: newuser?error=emailexist&uid=".$this->username);
                 }else if ($checkuidmail === 'valid'){
-                    return ($usermodel->addUserdata());
+                    $usermodel->addUserdata();
+                    return (TRUE);
                 }
             }else if($pwdstrength == FALSE){
                 header("Location: newuser?error=invalidpwd&uid=".$this->username."&email=".$this->email);

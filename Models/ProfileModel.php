@@ -14,6 +14,10 @@
             }
         }
 
+        public function modify_checkUidmail(){
+            $qry = "SELECT * FROM `users` WHERE `username`=:username OR `email`=:email";
+        }
+
         public function profileInfo(){
             $sql = "SELECT * FROM `users` WHERE `no`=:no";
             $arr = array('no' => $_SESSION['no']);

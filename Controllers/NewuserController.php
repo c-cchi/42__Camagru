@@ -26,9 +26,9 @@
             $usermodel = new UserModel;
             $checkuidmail = $usermodel->checkUidmail();
             if($pwdstrength == TRUE){
-                if ($checkuidmail === 'usrnmexist'){
+                if ($checkuidmail === 'username exist'){
                     header("Location: newuser?error=usrnmexist&email=".$this->email);
-                }else if ($checkuidmail === 'emailexist'){
+                }else if ($checkuidmail === 'email exist'){
                     header("Location: newuser?error=emailexist&uid=".$this->username);
                 }else if ($checkuidmail === 'valid'){
                     $usermodel->addUserdata();

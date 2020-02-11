@@ -35,7 +35,7 @@
         public function updateProfile(){
             $this->setData();
             $qryUpd ="UPDATE `users` SET `username` = :username, `password` = :password,`email`=:email WHERE `no`=:no;";
-            $arrUpd = array('username' => $this->ursername, 'password' => $this->pwd,'email' => $this->email, 'no' => $_SESSION['no']);
+            $arrUpd = array('username' => $this->username, 'password' => $this->pwd,'email' => $this->email, 'no' => $_SESSION['no']);
             $rsltUpd = Connection::getInstance()->updateQuery($qryUpd, $arrUpd);
         }
 }

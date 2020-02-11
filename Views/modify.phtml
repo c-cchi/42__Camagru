@@ -1,0 +1,16 @@
+<?php include "Views/displayError.phtml"?>
+<form method="post">
+        <h2>mofidy</h2>
+        <input type="text" name="uid" placeholder="Username" value="<?php if(isset($_SESSION['user'])){echo $_SESSION['user'];}?>" required>
+        <br />
+        <input type="password" name="oldpwd"  placeholder="old password" required>
+        <br />
+        <input type="password" name="pwd"  placeholder="new password" required>
+        <br />
+        <input type="password" name="pwdrepeat" placeholder="Repeat Password" required>
+        <br />
+        <input type="text" name="email" placeholder="E-mail" value="<?php if(isset($_SESSION['email'])){echo $_SESSION['email'];}?>" required>
+        <br />
+        <button onclick="modify()">OK</button>
+</form>
+<a href="index"><input type="button" value="Return to LoginPage"></a>

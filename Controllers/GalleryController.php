@@ -3,8 +3,8 @@
         
         public function process($params){
             $this->view = 'gallery';
-            // $login = new LoginController;
-            // $login->process();
+            $login = new LoginController;
+            $login->process();
             if (isset($_SESSION['user'])){
                 if (isset($params[1]) && $params[1] === "uploads"){
                     $folder = "/uploads/photo";
@@ -18,7 +18,8 @@
                     $img = str_replace('data:image/png;base64,', '', $file);
                     $img = str_replace(' ', '+', $img);
                     $img = base64_decode($img);
-                    $file = date("d_m_Y_H_i_s")."-".time().".png";
+                    print_r($_SESSION);
+                    $file = $_SESSION['no']."--".date("d_m_Y_H_i_s")."-".time().".png";
                     $success = file_put_contents("$destinationFolder$file", $img);
                     echo $success;
                 }

@@ -43,19 +43,19 @@
             $rsltusermodel = $usermodel->checkUidmail();
             $pwdstrength = $this->checkPwdstrength($this->nonhspwd);
 
-            // if ($this->nonhspwd != $_POST['pwdrepeat']){
-            //     header("Location: /profile/modify?error=pwdrpt"); 
-            // }else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
-            //     header("Location: /profile/modify?error=invalidemail"); 
-            // }else if($pwdstrength == FALSE){
-            //     header("Location: /profile/modify?error=invalidpwd");
-            // }else if ($rsltusermodel != 'valid'){
-            //     if ($rsltusermodel == 'username exist'){
-            //         header("Location: /profile/modify?error=usrnmexist");
-            //     }else{
-            //         header("Location: /profile/modify?error=usrnmexist");
-            //     }
-            // }else{
+            if ($this->nonhspwd != $_POST['pwdrepeat']){
+                header("Location: /profile/modify?error=pwdrpt"); 
+            }else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+                header("Location: /profile/modify?error=invalidemail"); 
+            }else if($pwdstrength == FALSE){
+                header("Location: /profile/modify?error=invalidpwd");
+            }else if ($rsltusermodel != 'valid'){
+                if ($rsltusermodel == 'username exist'){
+                    header("Location: /profile/modify?error=usrnmexist");
+                }else{
+                    header("Location: /profile/modify?error=usrnmexist");
+                }
+            }else{
                 $sql = "SELECT `password` FROM `users` WHERE `no`= :no";
                 $arr = array('no' => $_SESSION['no']);
                 $sqlidata = Connection::getInstance()->runQuery($sql, $arr);
@@ -67,7 +67,7 @@
                     header("Location: /profile/modify?error=incorrectoldpw"); 
                 }
             }
-        // }
+        }
 
         public function myGallery(){
             

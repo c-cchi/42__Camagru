@@ -1,16 +1,12 @@
 <?php include "Views/displayError.phtml"?>
-<form method="post">
-        <h2>mofidy</h2>
-        <input type="text" name="uid" placeholder="Username" value="<?php if(isset($_SESSION['user'])){echo $_SESSION['user'];}?>" required>
-        <br />
-        <input type="password" name="oldpwd"  placeholder="old password" required>
-        <br />
-        <input type="password" name="pwd"  placeholder="new password" required>
-        <br />
-        <input type="password" name="pwdrepeat" placeholder="Repeat Password" required>
-        <br />
-        <input type="text" name="email" placeholder="E-mail" value="<?php if(isset($_SESSION['email'])){echo $_SESSION['email'];}?>" required>
-        <br />
-        <button onclick="modify()">OK</button>
+<h2>Modify Info</h2>
+<form class="modify-info" name="modify" method="POST">
+    <input type="text" name="uid" value="<?php echo $_SESSION['user'];?>" placeholder="Username" required/><br/>
+    <input type="text" name="email" value="<?php echo $_SESSION['email'];?>" placeholder="Email" required/><br/>
+    <input type="password" id="oldpwd" name="oldpwd"  placeholder="Old Password" required><br />
+    <input type="password" id="pwd" name="pwd"  placeholder="New Password" required><br />
+    <input type="password" id="pwdrepeat" name="pwdrepeat" placeholder="Repeat New Password" required><br />
+    <input type="button" value="Send" name="modify" onclick="noEmptyFields()" required><br/>
 </form>
-<a href="index"><input type="button" value="Return to LoginPage"></a>
+<a href="/profile"><input type="button" value="Return To Profile"></a>
+<script src="/js/modify.js"></script>

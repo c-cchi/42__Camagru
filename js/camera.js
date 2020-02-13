@@ -19,26 +19,16 @@ const form = document.querySelector('#uploadform');
 
 function uploadpicture(){
     let picture = document.getElementById("canvas").toDataURL('image/png');
-    // let xhr = new XMLHttpRequest(); 
-    // let url = '/gallery/uploads';
-    // xhr.open("POST", url, true); 
-    // xhr.setRequestHeader("Content-Type", "application/json"); 
-    // xhr.onreadystatechange = function () { 
-    //     if (xhr.readyState === 4 && xhr.status === 200) { 
-    //         result.innerHTML = this.responseText; 
-    //     } 
-    // }; 
-    // var data = JSON.stringify({ data: picture}); 
-    // xhr.send(data); 
-
     fetch('/gallery/uploads', {
     method : 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
     body   : JSON.stringify({data: picture})
     })
-
-    .then((res) => res.text())
-    .then((data) => console.log(data))
-//     .catch((error) => console.log(error))
+    .then((res) => res.json())
+    // .then((data) => console.log(data))
+    .catch((error) => console.log('error:', error))
 
 }
 
@@ -46,5 +36,21 @@ window.addEventListener('click', startCamera());
 document.getElementById("capture-btn").addEventListener("click", takepicture);
 form.addEventListener("click", e => {
     e.preventDefault();
-    uploadpicture();
+    const ctx = document.getElementById("canvas").getContext('2d');
+    const check = ctx.getImageData(0,0,640,480);
+    var len = check.data.length;
+    for(var i =0; i< len; i++) {
+        if(!check.data[i]) {
+            drawn = false;
+        }else if(check.data[i]) {
+            drawn = true;
+            break;
+        }
+    }
+    if (drawn == true){
+        uploadpicture();
+        ctx.clearRect(0, 0, 640, 480);
+    }else{
+        alert('Take a picture first!');
+    }
 });

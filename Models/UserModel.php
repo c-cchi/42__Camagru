@@ -42,11 +42,8 @@
             $rsltUpd = Connection::getInstance()->updateQuery($qryUpd, $arrUpd);
         }
 
-        public function send_v_mail(){
-            $sub = 'Mail: Activate your Account of Camagrue';
-            $msg = "Hello :,<br />To Activate your account of Camagrue<br />Click <a href='localhost:8080/activate?activate_id='>Here</a>";
-			$header = 'From: chichiahan@gmail.com';
-            $header .= "Content-Type: text/html; charset=\"utf-8\"\n";
+        public function send_v_mail($username, $verify_id){
+            require_once "mail/activate_mail.php";
             $rslt = mb_send_mail($this->email, $sub, $msg, $header);
             return ($rslt);
         }
@@ -56,13 +53,13 @@
             $qry = "INSERT INTO `users` (username, password, email, verify_id) VALUES (:usrname, :pwd, :mail, :verify_id);";
             $arr = array('usrname' => $this->username, 'pwd' => $this->pwd, 'mail' => $this->email, 'verify_id' => $this->verify_id);
             $addData = Connection::getInstance()->insertQuery($qry, $arr);
-            $qry1 = "SELECT `no`,`username` FROM `users` WHERE `username`=:username";
+            $qry1 = "SELECT `no`,`username`,`verify_id` FROM `users` WHERE `username`=:username";
             $arr1 = array('username' => $this->username);
             $rslt = Connection::getInstance()->runQuery($qry1, $arr1);
             $_SESSION['no'] = $rslt[0]['no'];
             $_SESSION['user'] = $rslt[0]['username'];
             $this->addProfile();
-            if ($this->send_v_mail() == FALSE){
+            if ($this->send_v_mail($rslt[0]['username'], $rslt[0]['verify_id']) == FALSE){
             //     return (FALSE);
             }
         }

@@ -9,7 +9,7 @@ class ActivateModel{
     public function activateAccount(){
         $qry = "Update `users` SET `confirmed` = True WHERE `verify_id`=:verifyid";
         $arr = array('verifyid' => $this->actId);
-        $rslt = Connection::getInstance()->runQuery($qry, $arr);
+        $rslt = Connection::getInstance()->updateQuery($qry, $arr);
         // return ($rslt);
     }
 }

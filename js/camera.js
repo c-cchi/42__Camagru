@@ -15,11 +15,11 @@ function takepicture() {
     // });
 }
 
-const form = document.querySelector('#uploadform');
+const uploadbtn = document.querySelector('#upload-btn');
 
 function uploadpicture(){
     let picture = document.getElementById("canvas").toDataURL('image/png');
-    fetch('/gallery/uploads', {
+    fetch('/gallery/take_photo/uploads', {
     method : 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ function uploadpicture(){
 
 window.addEventListener('click', startCamera());
 document.getElementById("capture-btn").addEventListener("click", takepicture);
-form.addEventListener("click", e => {
+uploadbtn.addEventListener("click", e => {
     e.preventDefault();
     const ctx = document.getElementById("canvas").getContext('2d');
     const check = ctx.getImageData(0,0,640,480);
@@ -51,6 +51,6 @@ form.addEventListener("click", e => {
         uploadpicture();
         ctx.clearRect(0, 0, 640, 480);
     }else{
-        alert('Take a picture first!');
+        alert('Take a photo first!');
     }
 });

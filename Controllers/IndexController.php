@@ -4,6 +4,6 @@
             $this->head = array(
                 'title' => 'Camagrue');
             $gallery = new GalleryController;
-            $gallery->process();
+            $gallery->process($params);
         }
     }

@@ -38,5 +38,12 @@ $sql = "CREATE TABLE photos (
 if ($con->query($sql) === FALSE)    
     echo "Error creating photos table: " . $con->error . "\n";
 
+
+$sql = "CREATE TABLE stickers (
+    id_sticker INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    sticker_name TEXT NOT NULL
+    )";
+if ($con->query($sql) === FALSE)    
+    echo "Error creating photos table: " . $con->error . "\n";
 $con->close();
 ?>

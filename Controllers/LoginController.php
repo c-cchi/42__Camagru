@@ -3,15 +3,16 @@
 
         protected $username;
 
-        public function process($login){
+        public function process($parsedUrl){
             $this->view = 'Login';
             if(isset($_POST['uid'])){
                 $this->invoke();
                 if (isset($_SESSION['user'])){
                     $this->redirect('gallery');
                 }
-            }
-            if(isset($_POST['submit']) && $_POST['submit'] == "Logout"){
+            }else if (isset($parsedUrl[1]) && $parsedUrl[1] === 'forgot_password'){
+                require_once "Views/forgot_password.phtml";
+            }else if(isset($_POST['submit']) && $_POST['submit'] == "Logout"){
                 session_destroy();
                 $this->redirect('index');
             }else if(isset($_SESSION['user'])){

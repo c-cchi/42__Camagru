@@ -7,16 +7,20 @@
         protected $confirmed;
 
         function process($parsedUrl){
-            $this->getData();
-            if ($parsedUrl[1] == 'modify'){
-                $this->view = 'modify';
-                $this->renderView();
-                if (isset($_POST['uid']) && isset($_POST['email']) && isset($_POST['oldpwd']) && isset($_POST['pwd']) && isset($_POST['pwdrepeat'])){
-                    $rslt = $this->modifyInfo();
+            $login = new LoginController;
+            $login->process($params);
+            if (isset($_SESSION['user'])){
+                $this->getData();
+                if ($parsedUrl[1] == 'modify'){
+                    $this->view = 'modify';
+                    $this->renderView();
+                    if (isset($_POST['uid']) && isset($_POST['email']) && isset($_POST['oldpwd']) && isset($_POST['pwd']) && isset($_POST['pwdrepeat'])){
+                        $rslt = $this->modifyInfo();
+                    }
+                }else{
+                    $this->view = 'profile';
+                    $this->renderView();
                 }
-            }else{
-                $this->view = 'profile';
-                $this->renderView();
             }
         }
 

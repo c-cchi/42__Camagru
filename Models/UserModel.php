@@ -42,18 +42,14 @@
             $rsltUpd = Connection::getInstance()->updateQuery($qryUpd, $arrUpd);
         }
 
-        // public function sendMail(){
-        //     $sub = 'Mail: Activate your Account of Camagrue';
-        //     $msg = "Hello ".$this->username." :,<br />
-        //     To Activate your account of Camagrue<br />
-        //     Click <a href='localhost:8080/activate?at_id=".$this->verify_id."'>Here</a>";
-        //     $headers = 'From: admin@camagrue.42';
-        //     mb_internal_encoding("UTF-8");
-        //     if (!mb_send_mail($this->email, $sub, $msg, $header)){
-        //         return (FALSE);
-        //     }
-        //     return (TRUE);
-        // }
+        public function send_v_mail(){
+            $sub = 'Mail: Activate your Account of Camagrue';
+            $msg = "Hello :,<br />To Activate your account of Camagrue<br />Click <a href='localhost:8080/activate?activate_id='>Here</a>";
+			$header = 'From: chichiahan@gmail.com';
+            $header .= "Content-Type: text/html; charset=\"utf-8\"\n";
+            $rslt = mb_send_mail($this->email, $sub, $msg, $header);
+            return ($rslt);
+        }
 
         public function addUserdata(){
             $this->verify_id = uniqid(rand());
@@ -65,11 +61,9 @@
             $rslt = Connection::getInstance()->runQuery($qry1, $arr1);
             $_SESSION['no'] = $rslt[0]['no'];
             $_SESSION['user'] = $rslt[0]['username'];
-            $_SESSION['email'] = $rslt[0]['email'];
             $this->addProfile();
-            // return (TRUE);
-            // if (sendMail() === FALSE){
+            if ($this->send_v_mail() == FALSE){
             //     return (FALSE);
-            // }
+            }
         }
     }

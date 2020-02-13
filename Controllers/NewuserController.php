@@ -20,7 +20,7 @@
         public function process($newuser){
 
             if (isset($_POST['signup'])){
-                $this->newuser();
+                $reslt = $this->newuser();
             }else{
                 $this->view = 'newuser';
                 $this->renderView();
@@ -35,14 +35,17 @@
             if($pwdstrength == TRUE){
                 if ($checkuidmail === 'username exist'){
                     header("Location: newuser?error=usrnmexist&email=".$this->email);
+                    exit;
                 }else if ($checkuidmail === 'email exist'){
-                    header("Location: newuser?error=emailexist&uid=".$this->username);
+                    // header("Location: newuser?error=emailexist&uid=".$this->username);
+                    // exit;
                 }else if ($checkuidmail === 'valid'){
                     $usermodel->addUserdata();
                     return (TRUE);
                 }
             }else if($pwdstrength == FALSE){
                 header("Location: newuser?error=invalidpwd&uid=".$this->username."&email=".$this->email);
+                exit;
             }
         }
 
@@ -52,16 +55,12 @@
                 $this->renderView();
             }else if(empty($this->username) || empty($this->email) || empty($this->pwd)){
                 header("Location: newuser?error=emptyfields&uid=".$this->username."&email=".$this->email); 
-                exit();
             }else if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
                 header("Location: newuser?error=invalidemail&uid=".$this->username);
-                exit();
             }else if (!preg_match("/^[a-zA-Z0-9]*$/", $this->username)){
                 header("Location: newuser?error=invaliduid&email=".$email);
-                exit();
             }else{
-            $rslt = $this->addUser();
-            }
+                $rslt = $this->addUser();
                 if ($rslt == TRUE){
                     $this->redirect("gallery");
                 }else{
@@ -69,3 +68,5 @@
                 }
             }
         }
+
+    }

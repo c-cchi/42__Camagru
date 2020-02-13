@@ -30,5 +30,13 @@ $sql = "CREATE TABLE profiles (
 if ($con->query($sql) === FALSE)    
     echo "Error creating photos table: " . $con->error . "\n";
 
+$sql = "CREATE TABLE photos (
+    id_photo INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    no_user INT(6) UNSIGNED,
+    filename TEXT NOT NULL
+    )";
+if ($con->query($sql) === FALSE)    
+    echo "Error creating photos table: " . $con->error . "\n";
+
 $con->close();
 ?>

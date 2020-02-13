@@ -5,10 +5,12 @@
             $this->view = 'gallery';
             $login = new LoginController;
             $login->process($params);
+            $galleryModel = new GalleryModel;
             if (isset($_SESSION['user'])){
                 if (isset($params[1]) && $params[1] === "uploads"){
                     require_once("uploads/upload.php");
-                    upload_res();
+                    $filename = upload_res();
+                    $galleryModel->photoTodb($filename);
                 }else
                     $this->renderView();
             }else{

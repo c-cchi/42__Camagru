@@ -13,16 +13,10 @@ function upload_res(){
         $img = str_replace('data:image/png;base64,', '', $file);
         $img = str_replace(' ', '+', $img);
         $img = base64_decode($img);
-        print_r($_SESSION);
         $file = $_SESSION['no']."-".date("d_m_Y_H_i_s")."-".time().".png";
         $success = file_put_contents("$destinationFolder$file", $img);
+        return ($file);
     }catch(Exception $ex){
-        //Process the exception
-    }
-
-    if ($success != 0){
-        return (TRUE);
-    }else{
-        return (FALSE);
+        echo $ex;
     }
 }

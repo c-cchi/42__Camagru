@@ -10,6 +10,5 @@ class ActivateModel{
         $qry = "Update `users` SET `confirmed` = True WHERE `verify_id`=:verifyid";
         $arr = array('verifyid' => $this->actId);
         $rslt = Connection::getInstance()->updateQuery($qry, $arr);
-        // return ($rslt);
     }
 }

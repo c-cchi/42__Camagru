@@ -8,7 +8,7 @@
 
         function process($parsedUrl){
             $login = new LoginController;
-            $login->process($params);
+            $login->process($parsedUrl);
             if (isset($_SESSION['user'])){
                 $this->getData();
                 if ($parsedUrl[1] == 'modify'){

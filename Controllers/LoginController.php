@@ -29,16 +29,16 @@
                     echo 'reset passwd';
                 }
             }else if(isset($_POST['uid'])){
-                $rsltlogin = $this->invoke();
-                if (isset($_SESSION['user'])){
-                    $this->redirect('gallery');
-                }else{
-                    if ($rsltlogin === 'usrnotexist'){
-                        header("Location: login?error=usrnotexist");
-                    }else{
-                        header("Location: login?error=incorrectpwd&uid=".$this->username);
-                    }
-                }
+                // $rsltlogin = $this->invoke();
+                // if (isset($_SESSION['user'])){
+                //     $this->redirect('gallery');
+                // }else{
+                //     if ($rsltlogin === 'usrnotexist'){
+                //         header("Location: login?error=usrnotexist");
+                //     }else{
+                //         header("Location: login?error=incorrectpwd&uid=".$this->username);
+                //     }
+                // }
             }else{
                 $this->renderView();
             }
@@ -86,9 +86,9 @@
             $arr = array('username' => $this->username);
             $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
             $token = md5($sqlidata[0]['username'].$sqlidata[0]['password'].$sqlidata[0]['no']);
-            $url = 'https://localhost:8080/login/reset?uid='.$this->username.'&token='.$token;
+            $url = 'localhost:8080/login/reset?uid='.$this->username."&token=".$token;
             $time = date('Y-m-d H:i');
-            $template = "resetpwd.php";
+            $template = "mail/resetpwd.php";
             $rslt = $this->ctl_sendMail($sqlidata[0]['username'], $sqlidata[0]['email'], $template, $url);
         }
 }

@@ -37,8 +37,8 @@
                     header("Location: newuser?error=usrnmexist&email=".$this->email);
                     exit;
                 }else if ($checkuidmail === 'email exist'){
-                    // header("Location: newuser?error=emailexist&uid=".$this->username);
-                    // exit;
+                    header("Location: newuser?error=emailexist&uid=".$this->username);
+                    exit;
                 }else if ($checkuidmail === 'valid'){
                     $usermodel->addUserdata();
                     return (TRUE);

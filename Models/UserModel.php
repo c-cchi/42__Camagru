@@ -18,7 +18,7 @@
             $arr = array('username' => $this->username, 'email' => $this->email);
             $sqlidata= Connection::getInstance()->runQuery($qry, $arr);
             if (isset($sqlidata[0])){
-                if (isset($sqlidata[0]['no'] === $_SESSION['no']){ //for ProfileController
+                if (isset($_SESSION['no']) && ($sqlidata[0]['no'] === $_SESSION['no'])){ //for ProfileController
                     return ('valid');
                 }else if ($sqlidata[0]['username'] === $this->username){ //for NewuserController and resetPassword
                     return ('username exist');
@@ -36,9 +36,9 @@
             $rsltPrf = Connection::getInstance()->insertQuery($qryPrf, $arrPrf);
         }
 
-        public function send_mail($username, $verify_id){
+        public function send_v_mail($username, $verify_id){
             require_once "mail/activate_mail.php";
-            $rslt = mb_send_mail($this->email, $sub, $msg, $header);
+            $rslt = mb_send_mail($this->email, $sub, $msg, $headers);
             return ($rslt);
         }
 
@@ -53,8 +53,8 @@
             $_SESSION['no'] = $rslt[0]['no'];
             $_SESSION['user'] = $rslt[0]['username'];
             $this->addProfile();
-            if ($this->send_mail($_SESSION['user'], $rslt[0]['verify_id']) == FALSE){
-            //     return (FALSE);
+            if ($this->send_v_mail($_SESSION['user'], $rslt[0]['verify_id']) == FALSE){
+                return (FALSE);
             }
         }
     }

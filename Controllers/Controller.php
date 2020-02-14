@@ -31,7 +31,7 @@ abstract class Controller{
 
     public function ctl_sendMail($username, $email, $template, $url){
         require_once ($template);
-        $rslt = mb_send_mail($email, $sub, $msg, $header);
+        $rslt = mb_send_mail($email, $sub, $msg, $headers);
         return ($rslt);
     }
 

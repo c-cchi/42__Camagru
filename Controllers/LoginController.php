@@ -16,7 +16,7 @@
                 if (isset($_POST['fgpwdbtn'])){
                     $checkuidmail = $this->invoke();
                     if ($checkuidmail === 'reset password'){
-                        $this->resetPwd();
+                        $this->mailresetPwd();
                     }else{
                         header("Location: /login/forgot_password?error=usrnotexist");
                         exit;
@@ -26,19 +26,21 @@
                 }
             }else if (isset($parsedUrl[1]) && $parsedUrl[1] === 'reset'){
                 if (isset($_GET['token'])){
-                    echo 'reset passwd';
+                    // if () //usrn and salted token correspond
+                    $salt = 'resetpwdforcamagru:o';
+                    $token = hash('sha1',$sqlidata[0]['username'].$sqlidata[0]['password'].$sqlidata[0]['no'].$salt);
                 }
             }else if(isset($_POST['uid'])){
-                // $rsltlogin = $this->invoke();
-                // if (isset($_SESSION['user'])){
-                //     $this->redirect('gallery');
-                // }else{
-                //     if ($rsltlogin === 'usrnotexist'){
-                //         header("Location: login?error=usrnotexist");
-                //     }else{
-                //         header("Location: login?error=incorrectpwd&uid=".$this->username);
-                //     }
-                // }
+                $rsltlogin = $this->invoke();
+                if (isset($_SESSION['user'])){
+                    $this->redirect('gallery');
+                }else{
+                    if ($rsltlogin === 'usrnotexist'){
+                        header("Location: login?error=usrnotexist");
+                    }else{
+                        header("Location: login?error=incorrectpwd&uid=".$this->username);
+                    }
+                }
             }else{
                 $this->renderView();
             }
@@ -80,15 +82,21 @@
             }
         }
 
-        public function resetPwd(){
+        public function mailresetPwd(){
             $getpasstime = time();
             $qry = "SELECT `username`,`password`,`no`,`email` FROM `users` WHERE `username`= :username OR `email`= :username";
             $arr = array('username' => $this->username);
             $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
-            $token = md5($sqlidata[0]['username'].$sqlidata[0]['password'].$sqlidata[0]['no']);
+            $salt = 'resetpwdforcamagru:o';
+            $token = hash('sha1',$sqlidata[0]['username'].$sqlidata[0]['password'].$sqlidata[0]['no'].$salt);
             $url = 'localhost:8080/login/reset?uid='.$this->username."&token=".$token;
             $time = date('Y-m-d H:i');
             $template = "mail/resetpwd.php";
-            $rslt = $this->ctl_sendMail($sqlidata[0]['username'], $sqlidata[0]['email'], $template, $url);
+            $rslt = $this->sendMail($sqlidata[0]['username'], $sqlidata[0]['email'], $template, $url);
+            if ($rslt == TRUE){
+                echo "<p>We just sended a reset password email to ".$sqlidata[0]['email']."</p>";
+            }else{
+                echo "<p>problem of send email to reset password</p>";
+            }
         }
 }

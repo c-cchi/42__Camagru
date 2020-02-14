@@ -29,10 +29,9 @@ abstract class Controller{
     }
 
 
-    public function ctl_sendMail($username, $email, $template, $url){
+    public function sendMail($username, $email, $template, $url){
         require_once ($template);
-        $rslt = mb_send_mail($email, $sub, $msg, $headers);
-        return ($rslt);
+        return (mb_send_mail($email, $sub, $msg, $headers));
     }
 
     public function addErrMessage($err){

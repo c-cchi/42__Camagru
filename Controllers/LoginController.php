@@ -36,7 +36,7 @@
                             if ((time() - strtotime($rsltUsr[0]['fgt_pwd_time'])) > 24*60*60){
                                 echo "<p>Link expired</p>";
                             }else{
-                                
+                                require_once "Views/resetpwd.phtml";
                             }
                         }
                     }

@@ -14,7 +14,7 @@
         }
 
         public function checkUidmail(){
-            $qry = "SELECT * FROM `users` WHERE `username`=:username OR `email`=:email";
+            $qry = "SELECT * FROM `users` WHERE `username`=:username OR `email`=:email;";
             $arr = array('username' => $this->username, 'email' => $this->email);
             $sqlidata= Connection::getInstance()->runQuery($qry, $arr);
             if (isset($sqlidata[0])){

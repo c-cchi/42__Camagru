@@ -26,9 +26,20 @@
                 }
             }else if (isset($parsedUrl[1]) && $parsedUrl[1] === 'reset'){
                 if (isset($_GET['token'])){
-                    // if () //usrn and salted token correspond
-                    $salt = 'resetpwdforcamagru:o';
-                    $token = hash('sha1',$sqlidata[0]['username'].$sqlidata[0]['password'].$sqlidata[0]['no'].$salt);
+                    if (isset($_GET['uid']) && isset($_GET['token'])){
+                        $qryUsr ="SELECT * FROM `users` WHERE `username`=:username";
+                        $arrUsr = array('username' => $_GET['uid']);
+                        $rsltUsr = Connection::getInstance()->runQuery($qryUsr, $arrUsr);
+                        $salt = 'resetpwdforcamagru:o';
+                        if (hash('sha1', $rsltUsr[0]['username'].$rsltUsr[0]['password'].$rsltUsr[0]['no'].$salt) === $_GET['token']){
+                            date_default_timezone_set('Europe/Paris');
+                            if ((time() - strtotime($rsltUsr[0]['fgt_pwd_time'])) > 24*60*60){
+                                echo "<p>Link expired</p>";
+                            }else{
+                                
+                            }
+                        }
+                    }
                 }
             }else if(isset($_POST['uid'])){
                 $rsltlogin = $this->invoke();
@@ -90,7 +101,11 @@
             $salt = 'resetpwdforcamagru:o';
             $token = hash('sha1',$sqlidata[0]['username'].$sqlidata[0]['password'].$sqlidata[0]['no'].$salt);
             $url = 'localhost:8080/login/reset?uid='.$this->username."&token=".$token;
-            $time = date('Y-m-d H:i');
+            $date = date_create(null, timezone_open('Europe/Paris'));
+            $time = date_format($date, 'Y-m-d H:i:s');
+            $qryTime = "UPDATE `users` SET `fgt_pwd_time` = :pwd_time WHERE `no`=:usrname;";
+            $arrTime = array('pwd_time' => $time, 'usrname' => $sqlidata[0]['no']);
+            Connection::getInstance()->updateQuery($qryTime, $arrTime);
             $template = "mail/resetpwd.php";
             $rslt = $this->sendMail($sqlidata[0]['username'], $sqlidata[0]['email'], $template, $url);
             if ($rslt == TRUE){
@@ -100,3 +115,4 @@
             }
         }
 }
+

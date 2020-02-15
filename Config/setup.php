@@ -16,7 +16,8 @@ $sql = "CREATE TABLE users (
     password VARCHAR(400) NOT NULL,
     email VARCHAR(100) NOT NULL,
     verify_id TEXT NOT NULL,
-    confirmed BOOLEAN DEFAULT FALSE
+    confirmed BOOLEAN DEFAULT FALSE,
+    fgt_pwd_time TIME (0) NOT NULL DEFALUT NOW()
     )";
 if ($con->query($sql) === FALSE)
     echo "Error creating users table: " . $con->error . "\n";

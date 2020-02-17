@@ -34,7 +34,15 @@
                         if (hash('sha1', $rsltUsr[0]['username'].$rsltUsr[0]['password'].$rsltUsr[0]['no'].$salt) === $_GET['token']){
                             date_default_timezone_set('Europe/Paris');
                             if ((time() - strtotime($rsltUsr[0]['fgt_pwd_time'])) > 24*60*60){
-                                echo "<p>Link expired</p>";
+                                echo "<p>Link expired</p><a href='/index'><input type='button' value='Back to Index'></a>";                              
+                            }else if (isset($_POST['pwd'])){
+                                if ($this->checkPwdstrength($_POST['pwd'])){
+                                    $prfMdl = new ProfileModel;
+                                    $prfMdl->updatePwd();
+                                    header("Location: /login?ok=pwdupdate");
+                                }else{
+                                    header("Location: /login/reset?uid=".$_GET["uid"]."&token=".$_GET["token"]."&error=invalidpwd");
+                                }
                             }else{
                                 require_once "Views/resetpwd.phtml";
                             }

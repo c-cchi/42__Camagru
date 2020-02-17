@@ -6,10 +6,14 @@
         protected $nonhspwd;
         
         public function setData(){
-            $this->username = $_POST['uid'];
-            $this->email = $_POST['email'];
-            $this->nonhspwd = $_POST['pwd'];
-            $this->pwd = password_hash($this->nonhspwd, PASSWORD_DEFAULT);
+            if (isset($_POST['uid']))
+                $this->username = $_POST['uid'];
+            if (isset($_POST['email']))
+                $this->email = $_POST['email'];
+            if (isset($_POST['pwd'])){
+                $this->nonhspwd = $_POST['pwd'];
+                $this->pwd = password_hash($this->nonhspwd, PASSWORD_DEFAULT);
+            }
         }
 
         public function profileImg(){
@@ -36,6 +40,14 @@
             $this->setData();
             $qryUpd ="UPDATE `users` SET `username` = :username, `password` = :password,`email`=:email WHERE `no`=:no;";
             $arrUpd = array('username' => $this->username, 'password' => $this->pwd,'email' => $this->email, 'no' => $_SESSION['no']);
+            $rsltUpd = Connection::getInstance()->updateQuery($qryUpd, $arrUpd);
+        }
+
+        public function updatePwd(){ // for forgetPwd
+            $this->setData();
+            $usrname = $_GET['uid'];
+            $qryUpd ="UPDATE `users` SET `password` = :password WHERE `username`=:username;";
+            $arrUpd = array('password' => $this->pwd, 'username' => $usrname);
             $rsltUpd = Connection::getInstance()->updateQuery($qryUpd, $arrUpd);
         }
 }

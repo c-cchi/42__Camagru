@@ -19,7 +19,7 @@
 
         public function process($newuser){
 
-            if (isset($_POST['signup'])){
+            if (isset($_POST['uid'])){
                 $reslt = $this->newuser();
             }else{
                 $this->view = 'newuser';
@@ -53,8 +53,6 @@
             $this->view = 'newuser';
             if (!isset($_POST['signup'])){
                 $this->renderView();
-            }else if(empty($this->username) || empty($this->email) || empty($this->pwd)){
-                header("Location: newuser?error=emptyfields&uid=".$this->username."&email=".$this->email); 
             }else if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
                 header("Location: newuser?error=invalidemail&uid=".$this->username);
             }else if (!preg_match("/^[a-zA-Z0-9]*$/", $this->username)){

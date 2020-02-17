@@ -1,13 +1,13 @@
 <?php include "Views/displayError.phtml"?>
-<form method="post">
+<form method="post" name=signup>
         <h2>Sign Up</h2>
-        <input type="text" name="uid" placeholder="Username" value="<?php if(isset($_GET['uid'])){echo $_GET['uid'];}?>">
+        <input type="text" name="uid" placeholder="Username" value="<?php if(isset($_GET['uid'])){echo $_GET['uid'];}?>" required/>
         <br />
-        <input type="password" name="pwd"  placeholder="password">
+        <input type="password" name="pwd"  placeholder="password" required/>
         <br />
-        <input type="password" name="pwd-repeat" placeholder="Repeat Password">
+        <input type="password" name="pwd-repeat" placeholder="Repeat Password" required/>
         <br />
-        <input type="text" name="email" placeholder="E-mail" value="<?php if(isset($_GET['email'])){echo $_GET['email'];}?>">
+        <input type="text" name="email" placeholder="E-mail" value="<?php if(isset($_GET['email'])){echo $_GET['email'];}?>" required/>
         <br />
         <input type="submit" name="signup" value="Signup">
 </form>

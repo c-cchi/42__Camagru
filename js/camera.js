@@ -13,9 +13,9 @@ function takepicture() {
     // camera.srcObject.getVideoTracks().forEach((track) => {
         // track.stop(); 
     // });
+
 }
 
-const uploadbtn = document.querySelector('#upload-btn');
 
 function uploadpicture(){
     let picture = document.getElementById("canvas").toDataURL('image/png');
@@ -32,8 +32,11 @@ function uploadpicture(){
 
 }
 
-window.addEventListener('click', startCamera());
+window.addEventListener('load', startCamera);
 document.getElementById("capture-btn").addEventListener("click", takepicture);
+
+const uploadbtn = document.getElementById('upload-btn');
+
 uploadbtn.addEventListener("click", e => {
     e.preventDefault();
     const ctx = document.getElementById("canvas").getContext('2d');
@@ -54,3 +57,20 @@ uploadbtn.addEventListener("click", e => {
         alert('Take a photo first!');
     }
 });
+
+function addsticker(){
+    const contxt = document.getElementById("canvas2").getContext('2d');
+    const img = new Image();
+    img.src = '/uploads/sticker/flower-1.png';
+    // const stickername = document.querySelector(".canvas2");
+    img.addEventListener("load", ()=>{
+        contxt.drawImage(img, 0, 0);
+    })
+    // addsticker();
+}
+
+document.getElementById('1').addEventListener("click", e => {
+    e.preventDefault();
+    console.log('click');
+});
+

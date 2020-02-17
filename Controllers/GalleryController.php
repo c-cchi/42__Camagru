@@ -13,6 +13,9 @@
                     $filename = upload_res();
                     $galleryModel->photoTodb($filename);
                 }else if (isset($params[1]) && $params[1] === "take_photo"){
+                    $qry = "SELECT * FROM `stickers`";
+                    $arr = array();
+                    $stickers = Connection::getInstance()->runQuery($qry, $arr);
                     require_once("Views/take_photo.phtml");
                 }else if (isset($params[1]) && $params[1] === "my_gallery"){
                     $rsltmygallery = $galleryModel->my_gallery();

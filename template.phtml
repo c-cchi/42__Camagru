@@ -44,26 +44,36 @@
                 top: 20px;
             } */
 
-            #canvas2 {
-                border: 2px solid;
-                position :absolute;
-                top: 0px;
-            }
-
             .photo{
                 width: 45%;
                 margin:5px
             }
 
-            .ssitcker{
-                
+            div.camera div{
+                z-index: 15;
             }
+
             .sitcker img{
                 width: 100px;
             }
 
+            div.camera video{
+                z-index: 5;
+                position: absolute;
+                top: calc(15%);
+            }
+            div.sticker {
+                position: absolute;
+                top: calc(40%);
+            }
+            div.camera canvas {
+                position: absolute;
+                top: calc(15%);
+                z-index: 15;
+            }
             div.camera button{
                 border:0;
+                z-index: 15;
             }
 
             .addsticker{

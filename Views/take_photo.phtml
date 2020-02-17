@@ -1,11 +1,11 @@
 <div class='camera'>
     <video id="player" width="640" height="480" autoplay></video>
     <canvas id="canvas2" width="640px" height="480px"></canvas>
-    <div class='sitcker'>
-    <?php foreach ($stickers as $value){
+</div>
+<div class='sitcker'>
+<?php foreach ($stickers as $value){
         echo "<img id='".$value['id_sticker']."' name='".$value['sticker_name']."' src='/uploads/sticker/".$value['sticker_name']."'>";
     }?>
-    </div>
 </div>
 <button id="capture-btn">Capture</button>
 <form enctype="multipart/form-data" class="uploadform">

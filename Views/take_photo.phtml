@@ -1,93 +1,19 @@
-<div class='camera'>
-    <video id="player" width="640" height="480" autoplay></video>
-    <canvas id="canvas2" width="640px" height="480px"></canvas>
+<div class='takepic'>
+    <div class='camera'>
+        <video id="player" width="640" height="480" autoplay></video>
+        <canvas id="canvas2" width="640px" height="480px"></canvas>
+        <button id="capture-btn">Capture</button>
+    </div>
+    <div class='sitcker'>
+        <?php foreach ($stickers as $value){
+                echo "<img id='".$value['id_sticker']."' name='".$value['sticker_name']."' src='/uploads/sticker/".$value['sticker_name']."'>";
+            }?>
+    </div>
+    <div class='uploadpic'>
+        <form enctype="multipart/form-data" class="uploadform">
+            <canvas id="canvas" name="canvas" width="640px" height="480px"></canvas>
+            <button id="upload-btn" name="uploadphoto">upload</button>
+        </form>
+    </div>
 </div>
-<div class='sitcker'>
-<?php foreach ($stickers as $value){
-        echo "<img id='".$value['id_sticker']."' name='".$value['sticker_name']."' src='/uploads/sticker/".$value['sticker_name']."'>";
-    }?>
-</div>
-<button id="capture-btn">Capture</button>
-<form enctype="multipart/form-data" class="uploadform">
-    <canvas id="canvas" name="canvas" width="640px" height="480px"></canvas>
-    <button id="upload-btn" name="uploadphoto">upload</button>
-</form>
-<!-- <script src="/js/camera.js"></script> -->
-<script>
-    function startCamera(){
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-            player.srcObject = stream;
-            // video.play();
-        });
-    }
-}
-function takepicture() {
-    var camera = document.getElementById("player");
-    document.getElementById("canvas").getContext('2d').drawImage(camera, 0, 0, 640 , 480);
-    // document.getElementById('photo').setAttribute('src', data);
-    // camera.srcObject.getVideoTracks().forEach((track) => {
-        // track.stop(); 
-    // });
-
-}
-
-
-function uploadpicture(){
-    let picture = document.getElementById("canvas").toDataURL('image/png');
-    fetch('/gallery/take_photo/uploads', {
-    method : 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body   : JSON.stringify({data: picture})
-    })
-    .then((res) => res.json())
-    // .then((data) => console.log(data))
-    .catch((error) => console.log('error:', error))
-
-}
-
-window.addEventListener('load', startCamera);
-document.getElementById("capture-btn").addEventListener("click", takepicture);
-
-const uploadbtn = document.getElementById('upload-btn');
-
-uploadbtn.addEventListener("click", e => {
-    e.preventDefault();
-    const ctx = document.getElementById("canvas").getContext('2d');
-    const check = ctx.getImageData(0,0,640,480);
-    var len = check.data.length;
-    for(var i =0; i< len; i++) {
-        if(!check.data[i]) {
-            drawn = false;
-        }else if(check.data[i]) {
-            drawn = true;
-            break;
-        }
-    }
-    if (drawn == true){
-        uploadpicture();
-        ctx.clearRect(0, 0, 640, 480);
-    }else{
-        alert('Take a photo first!');
-    }
-});
-
-function addsticker(){
-    const contxt = document.getElementById("canvas2").getContext('2d');
-    const img = new Image();
-    img.src = '/uploads/sticker/flower-1.png';
-    // const stickername = document.querySelector(".canvas2");
-    img.addEventListener("load", ()=>{
-        contxt.drawImage(img, 0, 0, 150, 150);
-    })
-    // addsticker();
-}
-
-document.getElementById('1').addEventListener("click", e => {
-    e.preventDefault();
-    addsticker();
-});
-
-</script>
+<script src="/js/camera.js"></script>

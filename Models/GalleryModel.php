@@ -23,9 +23,12 @@ class GalleryModel{
     }
     
     public function my_gallery(){
-        $qry = "SELECT filename FROM photos WHERE `no_user` = :nousr ORDER BY `id_photo` DESC LIMIT 6 ";
+        $qry = "SELECT filename FROM photos WHERE `no_user` = :nousr ORDER BY `id_photo` DESC";
         $arr = array('nousr' => $this->no_user);
         $rslt = Connection::getInstance()->runQuery($qry, $arr);
         return ($rslt);
     }
+
+    public function one_pic(){}
+    
 }

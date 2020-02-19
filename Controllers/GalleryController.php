@@ -26,14 +26,20 @@
                             }
                         }
                     }
+                }else if(isset($params[1]) && $params[1] === "p"){
+                    $this->view = 'p';
+                    $this->renderView();
                 }else{
                     $rsltAllgallery = $galleryModel->all_gallery();             
                     if(isset($rsltAllgallery)){
                         for ($i = 0; $i < 6; $i++) {
                             if (isset($rsltAllgallery[$i]['filename'])){
-                                echo "<img class='photo' src='/uploads/photo/".$rsltAllgallery[$i]['filename']."'>";
+                                echo "<a href='/gallery/p?pic=".$rsltAllgallery[$i]['filename']."'>
+                                <img class='photo' name='.$rsltAllgallery[$i]['filename'].' src='/uploads/photo/".$rsltAllgallery[$i]['filename']."'></a>";
                             }
                         }
+                        $this->view = 'all_gellery';
+                        $this->renderView();
                     }
                 }
             }else{

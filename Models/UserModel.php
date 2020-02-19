@@ -52,6 +52,7 @@
             $rslt = Connection::getInstance()->runQuery($qry1, $arr1);
             $_SESSION['no'] = $rslt[0]['no'];
             $_SESSION['user'] = $rslt[0]['username'];
+            $_SESSION['email'] = $rslt[0]['email'];
             $this->addProfile();
             if ($this->send_v_mail($_SESSION['user'], $rslt[0]['verify_id']) == FALSE){
                 return (FALSE);

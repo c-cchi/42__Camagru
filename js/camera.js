@@ -8,12 +8,14 @@ function startCamera(){
 }
 function takepicture() {
     var camera = document.getElementById("player");
+    var stickercnv = document.getElementById("canvas2");
     document.getElementById("canvas").getContext('2d').drawImage(camera, 0, 0, 640 , 480);
+    document.getElementById("canvas").getContext('2d').drawImage(stickercnv, 0, 0, 640 , 480);
+
     // document.getElementById('photo').setAttribute('src', data);
     // camera.srcObject.getVideoTracks().forEach((track) => {
         // track.stop(); 
     // });
-
 }
 
 
@@ -27,7 +29,6 @@ function uploadpicture(){
     body   : JSON.stringify({data: picture})
     })
     .then((res) => res.json())
-    // .then((data) => console.log(data))
     .catch((error) => console.log('error:', error))
 
 }
@@ -58,19 +59,39 @@ uploadbtn.addEventListener("click", e => {
     }
 });
 
-function addsticker(){
+function addsticker1(){
     const contxt = document.getElementById("canvas2").getContext('2d');
     const img = new Image();
     img.src = '/uploads/sticker/flower-1.png';
-    // const stickername = document.querySelector(".canvas2");
     img.addEventListener("load", ()=>{
-        contxt.drawImage(img, 0, 0);
+        contxt.drawImage(img, 0, 0, 150, 150);
     })
-    // addsticker();
 }
-
+function addsticker2(){
+    const contxt = document.getElementById("canvas2").getContext('2d');
+    const img = new Image();
+    img.src = '/uploads/sticker/flower-2.png';
+    img.addEventListener("load", ()=>{
+        contxt.drawImage(img, 40, 60, 150, 150);
+    })
+}
+function addsticker3(){
+    const contxt = document.getElementById("canvas2").getContext('2d');
+    const img = new Image();
+    img.src = '/uploads/sticker/vintage-1.png';
+    img.addEventListener("load", ()=>{
+        contxt.drawImage(img, 200, 300, 150, 150);
+    })
+}
 document.getElementById('1').addEventListener("click", e => {
     e.preventDefault();
-    console.log('click');
+    addsticker1();
 });
-
+document.getElementById('2').addEventListener("click", e => {
+    e.preventDefault();
+    addsticker2();
+});
+document.getElementById('3').addEventListener("click", e => {
+    e.preventDefault();
+    addsticker3();
+});

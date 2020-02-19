@@ -35,57 +35,106 @@
             form.modify-info {
                 font-family: Verdana, Arial, Helvetica, sans-serif;
             }
-
-            .uploadform{
-                position: relative;
-            }
-            /* canvas {
-                position: absolute;
-                top: 20px;
-            } */
-
             .photo{
                 width: 45%;
                 margin:5px
             }
 
-            div.camera div{
-                z-index: 15;
+            div.takepic {
+                position: relative;
             }
 
-            .sitcker img{
+            div.camera {
+                position: absolute;
+                top: 0px;
+                z-index: 15;
+            }
+            div.cap {
+                position: absolute;
+                top: 0px;
+            }
+            div.sitcker{
+                position: absolute;
+                top: 800px;
+            }
+            div.sitcker img{
                 width: 100px;
             }
 
             div.camera video{
                 z-index: 5;
                 position: absolute;
-                top: calc(15%);
+                top: 0px;
+                margin: 1em;
+            }
+            div.camera canvas {
+                z-index: 15;
+                position: absolute;
+                top: 0px;
+                margin: 1em;
+            }
+            div.camera button{
+                z-index: 15;
+                position: absolute;
+                top: 500px;
+                left: 520px;
+                border-radius: 3px; 
+                cursor: pointer; 
+                display: inline-block; 
+                font-family: Verdana, sans-serif; 
+                font-weight: 800;
+                font-size: 12px; 
+                font-weight: 400; 
+                line-height: 20px; 
+                padding: 9px 16px 9px;
+                margin: 16px 0 0 16px; 
+
             }
             div.sticker {
                 position: absolute;
-                top: calc(40%);
+                top: 0px;
             }
-            div.camera canvas {
+
+            div.uploadpic {
                 position: absolute;
-                top: calc(15%);
+                margin: 1em;
+                top: 0px;
+                left: 700px;
+            }
+
+            div.uploadpic button{
                 z-index: 15;
+                position: absolute;
+                top: 500px;
+                left: 520px;
+                border-radius: 3px; 
+                cursor: pointer; 
+                display: inline-block; 
+                font-family: Verdana, sans-serif; 
+                font-weight: 800;
+                font-size: 12px; 
+                font-weight: 400; 
+                line-height: 20px; 
+                padding: 9px 16px 9px;
+                margin: 16px 0 0 16px; 
             }
-            div.camera button{
-                border:0;
-                z-index: 15;
+            
+            .comment input{
+                width: 200px;
+                margin: 10px;
             }
 
-            .addsticker{
-                border: none;
-            }
 
-
+/* 
+            footer{
+                position: absolute;
+                top: calc(95%);
+            } */
 
         </style>
     </head>
     <body>
         <?= $content ?>
-        <footer><h5>© 2019 Cchi Camagrue</h5></footer>
+        <!-- <footer><h5>© 2019 Cchi Camagrue</h5></footer> -->
     </body>
 </html>

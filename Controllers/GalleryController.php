@@ -6,10 +6,9 @@
             $login = new LoginController;
             $login->process($params);
             $galleryModel = new GalleryModel;
-            if (isset($_SESSION['user'])){
                 $this->renderView();
                 if (isset($params[2]) && $params[2] === "uploads"){
-                    require_once("uploads/upload.php");
+                    require_once("/uploads/upload.php");
                     $filename = upload_res();
                     $galleryModel->photoTodb($filename);
                 }else if (isset($params[1]) && $params[1] === "take_photo"){
@@ -27,24 +26,23 @@
                         }
                     }
                 }else if(isset($params[1]) && $params[1] === "p"){
-                    $this->view = 'p';
-                    $this->renderView();
+                    $rsltLike = $galleryModel->p_gallery();
+                    include "Views/p.phtml";
+                    if (isset($_POST['like_x'])){
+                        $galleryModel->p_like($rsltLike);
+                    }
                 }else{
-                    $rsltAllgallery = $galleryModel->all_gallery();             
+                    $rsltAllgallery = $galleryModel->all_gallery();
                     if(isset($rsltAllgallery)){
                         for ($i = 0; $i < 6; $i++) {
-                            if (isset($rsltAllgallery[$i]['filename'])){
-                                echo "<a href='/gallery/p?pic=".$rsltAllgallery[$i]['filename']."'>
-                                <img class='photo' name='.$rsltAllgallery[$i]['filename'].' src='/uploads/photo/".$rsltAllgallery[$i]['filename']."'></a>";
+                            $fname = $rsltAllgallery[$i]['filename'];
+                            if (isset($fname)){
+                                echo "<a href='/gallery/p?pic=".$fname."&id_photo=".$rsltAllgallery[$i]['id_photo']."'>
+                                <img class='photo' name='.$fname.' src='/uploads/photo/".$fname."'></a>";
                             }
                         }
-                        $this->view = 'all_gellery';
-                        $this->renderView();
                     }
                 }
-            }else{
-                // msg Please log in or sign up, turn to login page
-            }
         }
 
         public function personnal_gallery(){

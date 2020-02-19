@@ -46,5 +46,13 @@ $sql = "CREATE TABLE stickers (
     )";
 if ($con->query($sql) === FALSE)    
     echo "Error creating photos table: " . $con->error . "\n";
+
+$sql = "CREATE TABLE like_photo (
+    id_photo INT(6) UNSIGNED,
+    no_user INT(6) UNSIGNED
+    )";
+if ($con->query($sql) === FALSE)    
+    echo "Error creating photos table: " . $con->error . "\n";
+
 $con->close();
 ?>

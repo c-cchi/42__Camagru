@@ -52,4 +52,10 @@ class GalleryModel{
             $rslt = Connection::getInstance()->runQuery($qry, $arr);
             return ($rslt);
     }
+
+    public function p_dlt_cmt($id_cmt){
+        $qry = "DELETE FROM `comment` WHERE `id_comment` = :idcmt;";
+        $arr = array('idcmt' => $id_cmt);
+        Connection::getInstance()->insertQuery($qry, $arr);
+    }
 }

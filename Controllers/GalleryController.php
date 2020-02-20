@@ -27,20 +27,23 @@
                             }
                         }
                     }
-                }if(isset($params[1]) && $params[1] === "p" && isset($_GET['id_photo'])){
-                    if (isset($_POST['comment'])){
-                        require "uploads/uploadcomment.php";
-                    }else if (isset($_POST['form-comment'])){
-                        require "uploads/deletecomment.php";
-                    }
+                }
+                if(isset($params[1]) && $params[1] === "p" && isset($_GET['id_photo'])){
+                    $rsltCmmt = $galleryModel->p_cmmt();
+                    $rsltLike = $galleryModel->p_gallery();
                     if (isset($_SESSION['no'])){
-                        $rsltLike = $galleryModel->p_gallery();
+                        if (isset($_POST['comment'])){
+                            require "uploads/uploadcomment.php";
+                        }else if (isset($_POST['delete_x'])){
+                            $id_cmt = $_POST['id_comment'];
+                            $galleryModel->p_dlt_cmt($id_cmt);
+                        }else if (isset($_POST['like_x'])){
+                            $galleryModel->p_like($rsltLike);
+                        }
                         $rsltCmmt = $galleryModel->p_cmmt();
+                        $rsltLike = $galleryModel->p_gallery();
                     }
                     require "Views/p.phtml";
-                    if (isset($_POST['like_x'])){
-                        $galleryModel->p_like($rsltLike);
-                    }
                 }else{
                     $rsltAllgallery = $galleryModel->all_gallery();
                     if(isset($rsltAllgallery)){

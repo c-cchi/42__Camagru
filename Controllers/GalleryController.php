@@ -8,7 +8,7 @@
             $galleryModel = new GalleryModel;
                 $this->renderView();
                 if (isset($params[2]) && $params[2] === "uploads"){
-                    require_once("/uploads/upload.php");
+                    require_once("uploads/upload.php");
                     $filename = upload_res();
                     $galleryModel->photoTodb($filename);
                 }else if (isset($params[1]) && $params[1] === "take_photo"){
@@ -25,11 +25,14 @@
                             }
                         }
                     }
-                }else if(isset($params[1]) && $params[1] === "p"){
+                }else if(isset($params[1]) && $params[1] === "p" && isset($_GET['id_photo'])){
                     $rsltLike = $galleryModel->p_gallery();
-                    include "Views/p.phtml";
+                    $rsltCmmt = $galleryModel->p_cmmt();
+                    require "Views/p.phtml";
                     if (isset($_POST['like_x'])){
                         $galleryModel->p_like($rsltLike);
+                    }else if (isset($_POST['comment'])){
+                        require "uploads/uploadcomment.php";
                     }
                 }else{
                     $rsltAllgallery = $galleryModel->all_gallery();

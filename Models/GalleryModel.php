@@ -45,4 +45,11 @@ class GalleryModel{
         $arr = array('idphoto' => $_GET['id_photo'], 'nouser' => $_SESSION['no']);
         Connection::getInstance()->insertQuery($qry, $arr);
     }
+
+    public function p_cmmt(){
+        $qry = "SELECT * FROM `comment` WHERE `id_photo` = :idphoto;";
+        $arr = array('idphoto' => $_GET['id_photo']);
+        $rslt = Connection::getInstance()->runQuery($qry, $arr);
+        return ($rslt);
+    }
 }

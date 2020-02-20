@@ -6,6 +6,7 @@ function startCamera(){
         });
     }
 }
+
 function takepicture() {
     var camera = document.getElementById("player");
     var stickercnv = document.getElementById("canvas2");
@@ -17,7 +18,6 @@ function takepicture() {
         // track.stop(); 
     // });
 }
-
 
 function uploadpicture(){
     let picture = document.getElementById("canvas").toDataURL('image/png');
@@ -33,8 +33,19 @@ function uploadpicture(){
 
 }
 
+function clearcnv(){
+    const stickercnv = document.getElementById("canvas2").getContext('2d');
+    stickercnv.clearRect(0, 0, 640, 480);
+}
+
 window.addEventListener('load', startCamera);
+
+document.getElementById('clearcnv').addEventListener("click", e => {
+    e.preventDefault();
+    clearcnv();
+});
 document.getElementById("capture-btn").addEventListener("click", takepicture);
+
 
 const uploadbtn = document.getElementById('upload-btn');
 
@@ -42,6 +53,7 @@ uploadbtn.addEventListener("click", e => {
     e.preventDefault();
     const ctx = document.getElementById("canvas").getContext('2d');
     const check = ctx.getImageData(0,0,640,480);
+
     var len = check.data.length;
     for(var i =0; i< len; i++) {
         if(!check.data[i]) {

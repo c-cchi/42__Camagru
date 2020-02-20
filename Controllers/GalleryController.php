@@ -7,32 +7,39 @@
             $login->process($params);
             $galleryModel = new GalleryModel;
                 $this->renderView();
-                if (isset($params[2]) && $params[2] === "uploads"){
-                    require_once("uploads/upload.php");
-                    $filename = upload_res();
-                    $galleryModel->photoTodb($filename);
-                }else if (isset($params[1]) && $params[1] === "take_photo"){
-                    $qry = "SELECT * FROM `stickers`";
-                    $arr = array();
-                    $stickers = Connection::getInstance()->runQuery($qry, $arr);
-                    require_once("Views/take_photo.phtml");
-                }else if (isset($params[1]) && $params[1] === "my_gallery"){
-                    $rsltmygallery = $galleryModel->my_gallery();
-                    if(isset($rsltmygallery)){
-                        for ($i = 0; $i < 6; $i++) {
-                            if (isset($rsltmygallery[$i]['filename'])){
-                                echo "<img class='photo' src='/uploads/photo/".$rsltmygallery[$i]['filename']."'>";
+                if ($_SESSION['no']){
+                    if (isset($params[2]) && $params[2] === "uploads"){
+                        require_once("uploads/upload.php");
+                        $filename = upload_res();
+                        $galleryModel->photoTodb($filename);
+                    }else if (isset($params[1]) && $params[1] === "take_photo"){
+                        $qry = "SELECT * FROM `stickers`";
+                        $arr = array();
+                        $stickers = Connection::getInstance()->runQuery($qry, $arr);
+                        require_once("Views/take_photo.phtml");
+                    }else if (isset($params[1]) && $params[1] === "my_gallery"){
+                        $rsltmygallery = $galleryModel->my_gallery();
+                        if(isset($rsltmygallery)){
+                            for ($i = 0; $i < 6; $i++) {
+                                if (isset($rsltmygallery[$i]['filename'])){
+                                    echo "<img class='photo' src='/uploads/photo/".$rsltmygallery[$i]['filename']."'>";
+                                }
                             }
                         }
                     }
-                }else if(isset($params[1]) && $params[1] === "p" && isset($_GET['id_photo'])){
-                    $rsltLike = $galleryModel->p_gallery();
-                    $rsltCmmt = $galleryModel->p_cmmt();
+                }if(isset($params[1]) && $params[1] === "p" && isset($_GET['id_photo'])){
+                    if (isset($_POST['comment'])){
+                        require "uploads/uploadcomment.php";
+                    }else if (isset($_POST['form-comment'])){
+                        require "uploads/deletecomment.php";
+                    }
+                    if (isset($_SESSION['no'])){
+                        $rsltLike = $galleryModel->p_gallery();
+                        $rsltCmmt = $galleryModel->p_cmmt();
+                    }
                     require "Views/p.phtml";
                     if (isset($_POST['like_x'])){
                         $galleryModel->p_like($rsltLike);
-                    }else if (isset($_POST['comment'])){
-                        require "uploads/uploadcomment.php";
                     }
                 }else{
                     $rsltAllgallery = $galleryModel->all_gallery();

@@ -37,19 +37,19 @@ class GalleryModel{
     }
 
     public function p_like($rsltLike){
-        if (isset($rsltLike[0])){
-            $qry = "DELETE FROM `like_photo` WHERE `id_photo`=:idphoto AND `no_user`=:nouser;";
-        }else{
-            $qry = "INSERT INTO `like_photo` (id_photo, no_user) VALUES (:idphoto, :nouser);";
-        }
-        $arr = array('idphoto' => $_GET['id_photo'], 'nouser' => $_SESSION['no']);
-        Connection::getInstance()->insertQuery($qry, $arr);
+            if (isset($rsltLike[0])){
+                $qry = "DELETE FROM `like_photo` WHERE `id_photo`=:idphoto AND `no_user`=:nouser;";
+            }else{
+                $qry = "INSERT INTO `like_photo` (id_photo, no_user) VALUES (:idphoto, :nouser);";
+            }
+            $arr = array('idphoto' => $_GET['id_photo'], 'nouser' => $_SESSION['no']);
+            Connection::getInstance()->insertQuery($qry, $arr);
     }
 
     public function p_cmmt(){
-        $qry = "SELECT * FROM `comment` WHERE `id_photo` = :idphoto;";
-        $arr = array('idphoto' => $_GET['id_photo']);
-        $rslt = Connection::getInstance()->runQuery($qry, $arr);
-        return ($rslt);
+            $qry = "SELECT * FROM `comment` WHERE `id_photo` = :idphoto;";
+            $arr = array('idphoto' => $_GET['id_photo']);
+            $rslt = Connection::getInstance()->runQuery($qry, $arr);
+            return ($rslt);
     }
 }

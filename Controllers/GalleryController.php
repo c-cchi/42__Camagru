@@ -18,14 +18,24 @@
                     $stickers = Connection::getInstance()->runQuery($qry, $arr);
                     require_once("Views/take_photo.phtml");
                 }else if (isset($params[1]) && $params[1] === "my_gallery"){
+                    if (isset($_POST['id_photo'])){
+                        $galleryModel->dlt_photo();
+                    }
                     $rsltmygallery = $galleryModel->my_gallery();
                     if(isset($rsltmygallery)){
-                        for ($i = 0; $i < 6; $i++) {
-                            if (isset($rsltmygallery[$i]['filename'])){
-                                echo "<img class='photo' src='/uploads/photo/".$rsltmygallery[$i]['filename']."'>";
-                            }
-                        }
+                        require "Views/my_gallery.phtml";
                     }
+                }else if(isset($params[1]) && $params[1] === "p" && isset($_GET['id_photo'])){
+                    $rsltCmmt = $galleryModel->p_cmmt();
+                    $rsltLike = $galleryModel->p_gallery();
+                        if (isset($_POST['comment'])){
+                            require "uploads/uploadcomment.php";
+                        }else if (isset($_POST['delete_x'])){
+                            $id_cmt = $_POST['id_comment'];
+                            $galleryModel->p_dlt_cmt($id_cmt);
+                        }else if (isset($_POST['like_x'])){
+                            $galleryModel->p_like($rsltLike);
+                        }
                 }
             }
             $rsltAllgallery = $galleryModel->all_gallery();

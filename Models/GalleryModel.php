@@ -23,7 +23,7 @@ class GalleryModel{
     }
     
     public function my_gallery(){
-        $qry = "SELECT filename FROM photos WHERE `no_user` = :nousr ORDER BY `id_photo` DESC";
+        $qry = "SELECT * FROM photos WHERE `no_user` = :nousr ORDER BY `id_photo` DESC";
         $arr = array('nousr' => $this->no_user);
         $rslt = Connection::getInstance()->runQuery($qry, $arr);
         return ($rslt);
@@ -56,6 +56,16 @@ class GalleryModel{
     public function p_dlt_cmt($id_cmt){
         $qry = "DELETE FROM `comment` WHERE `id_comment` = :idcmt;";
         $arr = array('idcmt' => $id_cmt);
+        Connection::getInstance()->insertQuery($qry, $arr);
+    }
+
+    public function dlt_photo(){
+        $qry = "DELETE FROM `photos` WHERE `id_photo` = :idcmt;";
+        $arr = array('idcmt' => $_POST['id_photo']);
+        Connection::getInstance()->insertQuery($qry, $arr);
+        $qry = "DELETE FROM `comment` WHERE `id_photo` = :idcmt;";
+        Connection::getInstance()->insertQuery($qry, $arr);
+        $qry = "DELETE FROM `like_photo` WHERE `id_photo` = :idcmt;";
         Connection::getInstance()->insertQuery($qry, $arr);
     }
 }

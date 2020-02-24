@@ -14,7 +14,6 @@
     }
     ?>
     
-    <!-- <div class="div-comment"> -->
         <?php foreach($rsltCmmt as $value){
             echo "<form method='post' class='form-comment'>";
             if ($_SESSION['no'] == $value['no_user']){
@@ -27,7 +26,6 @@
             echo "</div>";
         }
         ?>
-    <!-- </div> -->
     <?php 
     if (isset($_SESSION['no'])){
         require "Views/comment.phtml";

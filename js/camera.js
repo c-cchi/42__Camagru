@@ -87,6 +87,7 @@ document.getElementById("uplphoto").addEventListener("change", e =>{
     })
 })
 
+
 const uploadbtn = document.getElementById('upload-btn');
 
 uploadbtn.addEventListener("click", e => {

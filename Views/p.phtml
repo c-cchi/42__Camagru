@@ -1,0 +1,37 @@
+<strong>Photo</strong>
+<div class='single_photo'>
+<img src='/uploads/photo/<?php if (isset($_GET['pic'])){echo $_GET['pic'];}?>'><br/>
+    <?php if (isset($_SESSION['user'])){
+            echo "<form method='post' autocomplete='off' class='like'>";
+            echo "<input type='image' id='likeunlike' src='/uploads/";
+                if (isset($rsltLike[0]['no_user'])){
+                    echo 'like.png';
+                }else{
+                    echo 'unlike.png';
+                } 
+            echo "' style='width: 20px; margin: 0.4em;' name='like'>";
+            echo "</form>";
+    }
+    ?>
+    
+    <!-- <div class="div-comment"> -->
+        <?php foreach($rsltCmmt as $value){
+            echo "<form method='post' class='form-comment'>";
+            if ($_SESSION['no'] == $value['no_user']){
+                echo "<input type='image' src='/uploads/delete.png' style='width: 15px; position: absolute; left: 100px; cursor: pointer;' name='delete'>";
+                echo "<input type='hidden' name='id_comment' value='".$value['id_comment']."'/>";
+            }
+            echo "<div class='cmmtctx'>".$value['comment'];
+            echo "<h5>from ".$value['username']."<h5>";
+            echo "</form>";
+            echo "</div>";
+        }
+        ?>
+    <!-- </div> -->
+    <?php 
+    if (isset($_SESSION['no'])){
+        require "Views/comment.phtml";
+    }?>
+    <a href="/gallery"><input type="button" class="btn-gallery" value="Back to Gallery"></a>
+</div>
+<!-- <script src='/js/p.js'></script> -->

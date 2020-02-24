@@ -6,7 +6,7 @@
             $login = new LoginController;
             $login->process($params);
             $galleryModel = new GalleryModel;
-                $this->renderView();
+            $this->renderView();
             if ($_SESSION['no']){
                 if (isset($params[2]) && $params[2] === "uploads"){
                     require_once("uploads/upload.php");
@@ -24,19 +24,6 @@
                             if (isset($rsltmygallery[$i]['filename'])){
                                 echo "<img class='photo' src='/uploads/photo/".$rsltmygallery[$i]['filename']."'>";
                             }
-                        }
-                    }
-                }else if(isset($params[1]) && $params[1] === "p" && isset($_GET['id_photo'])){
-                    $rsltCmmt = $galleryModel->p_cmmt();
-                    $rsltLike = $galleryModel->p_gallery();
-                    if (isset($_SESSION['no'])){
-                        if (isset($_POST['comment'])){
-                            require "uploads/uploadcomment.php";
-                        }else if (isset($_POST['delete_x'])){
-                            $id_cmt = $_POST['id_comment'];
-                            $galleryModel->p_dlt_cmt($id_cmt);
-                        }else if (isset($_POST['like_x'])){
-                            $galleryModel->p_like($rsltLike);
                         }
                     }
                 }

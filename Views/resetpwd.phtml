@@ -1,0 +1,13 @@
+<?php include "displayError.phtml";
+        include "displayOk.phtml";?>
+<script src="/js/resetpwd.js"></script>
+<form method="post" class="resetpwd" name="resetpwd">
+        <h2>Reset Password</h2>
+        Hello <?php if(isset($_GET['uid'])){echo $_GET['uid'];}?><br/>
+        <br />
+        <input type="password" name="pwd"  placeholder="password" required>
+        <br />
+        <input type="password" name="pwd-repeat" placeholder="Repeat Password" required>
+        <br />
+        <input type="button" name="resetpwd" value="submit" onclick="comparePwd()">
+</form>

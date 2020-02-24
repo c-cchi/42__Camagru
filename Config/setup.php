@@ -54,5 +54,15 @@ $sql = "CREATE TABLE like_photo (
 if ($con->query($sql) === FALSE)    
     echo "Error creating photos table: " . $con->error . "\n";
 
+$sql = "CREATE TABLE comment (
+    id_comment INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    no_user INT(6) UNSIGNED DEFAULT NULL,
+    username VARCHAR(80) NOT NULL,
+    id_photo INT(6) UNSIGNED NOT NULL,
+    comment TEXT NOT NULL
+    )";
+if ($con->query($sql) === FALSE)    
+    echo "Error creating photos table: " . $con->error . "\n";
+
 $con->close();
 ?>

@@ -7,8 +7,9 @@
             $login->process($params);
             $galleryModel = new GalleryModel;
                 $this->renderView();
+            if ($_SESSION['no']){
                 if (isset($params[2]) && $params[2] === "uploads"){
-                    require_once("/uploads/upload.php");
+                    require_once("uploads/upload.php");
                     $filename = upload_res();
                     $galleryModel->photoTodb($filename);
                 }else if (isset($params[1]) && $params[1] === "take_photo"){
@@ -25,24 +26,35 @@
                             }
                         }
                     }
-                }else if(isset($params[1]) && $params[1] === "p"){
+                }else if(isset($params[1]) && $params[1] === "p" && isset($_GET['id_photo'])){
+                    $rsltCmmt = $galleryModel->p_cmmt();
                     $rsltLike = $galleryModel->p_gallery();
-                    include "Views/p.phtml";
-                    if (isset($_POST['like_x'])){
-                        $galleryModel->p_like($rsltLike);
-                    }
-                }else{
-                    $rsltAllgallery = $galleryModel->all_gallery();
-                    if(isset($rsltAllgallery)){
-                        for ($i = 0; $i < 6; $i++) {
-                            $fname = $rsltAllgallery[$i]['filename'];
-                            if (isset($fname)){
-                                echo "<a href='/gallery/p?pic=".$fname."&id_photo=".$rsltAllgallery[$i]['id_photo']."'>
-                                <img class='photo' name='.$fname.' src='/uploads/photo/".$fname."'></a>";
-                            }
+                    if (isset($_SESSION['no'])){
+                        if (isset($_POST['comment'])){
+                            require "uploads/uploadcomment.php";
+                        }else if (isset($_POST['delete_x'])){
+                            $id_cmt = $_POST['id_comment'];
+                            $galleryModel->p_dlt_cmt($id_cmt);
+                        }else if (isset($_POST['like_x'])){
+                            $galleryModel->p_like($rsltLike);
                         }
                     }
                 }
+            }
+            $rsltAllgallery = $galleryModel->all_gallery();
+            if(isset($params[1]) && $params[1] === "p" && isset($_GET['id_photo'])){
+                $rsltCmmt = $galleryModel->p_cmmt();
+                $rsltLike = $galleryModel->p_gallery();
+                require "Views/p.phtml";
+            }else if(isset($rsltAllgallery) && !isset($params[1])){
+                for ($i = 0; $i < 6; $i++) {
+                    $fname = $rsltAllgallery[$i]['filename'];
+                    if (isset($fname)){
+                        echo "<a href='/gallery/p?pic=".$fname."&id_photo=".$rsltAllgallery[$i]['id_photo']."'>
+                        <img class='photo' name='.$fname.' src='/uploads/photo/".$fname."'></a>";
+                    }
+                }
+            }
         }
 
         public function personnal_gallery(){

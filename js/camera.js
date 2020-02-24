@@ -1,23 +1,12 @@
 function startCamera(){
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-            player.srcObject = stream;
-            // video.play();
+            document.getElementById("player").srcObject = stream;
+        }).catch(function(err) {
+            console.log(err);
         });
     }
 }
-function takepicture() {
-    var camera = document.getElementById("player");
-    var stickercnv = document.getElementById("canvas2");
-    document.getElementById("canvas").getContext('2d').drawImage(camera, 0, 0, 640 , 480);
-    document.getElementById("canvas").getContext('2d').drawImage(stickercnv, 0, 0, 640 , 480);
-
-    // document.getElementById('photo').setAttribute('src', data);
-    // camera.srcObject.getVideoTracks().forEach((track) => {
-        // track.stop(); 
-    // });
-}
-
 
 function uploadpicture(){
     let picture = document.getElementById("canvas").toDataURL('image/png');
@@ -33,8 +22,70 @@ function uploadpicture(){
 
 }
 
+function clearcnv(){
+    const stickercnv = document.getElementById("canvas2").getContext('2d');
+    stickercnv.clearRect(0, 0, 640, 480);
+}
+
+function check_cnv1(){
+    const ctx1 = document.getElementById("canvas1").getContext('2d');
+    const check = ctx1.getImageData(0,0,640,480);
+    var len = check.data.length;
+
+    for(var i = 0; i < len; i++) {
+        if(!check.data[i]) {
+        }else if(check.data[i]) {
+            return (true);
+        }
+    }
+    return (false);
+}
+
 window.addEventListener('load', startCamera);
-document.getElementById("capture-btn").addEventListener("click", takepicture);
+
+document.getElementById('clearcnv').addEventListener("click", e => {
+    e.preventDefault();
+    clearcnv();
+});
+
+document.getElementById("capture-btn").addEventListener("click",  e => {
+    e.preventDefault();
+    var camera = document.getElementById("player");
+    var stickercnv = document.getElementById("canvas2");
+    const ctx = document.getElementById("canvas2").getContext('2d');
+    const check = ctx.getImageData(0,0,640,480);
+    const ctx1 = document.getElementById("canvas1");
+
+    var len = check.data.length;
+    for(var i = 0; i < len; i++) {
+        if(!check.data[i]) {
+            drawn = false;
+        }else if(check.data[i]) {
+            drawn = true;
+            break;
+        }
+    }
+    if (drawn == true){
+        if (check_cnv1()){
+            document.getElementById("canvas").getContext('2d').drawImage(ctx1, 0, 0, 640 , 480);
+        }else{
+            document.getElementById("canvas").getContext('2d').drawImage(camera, 0, 0, 640 , 480);
+        }
+        document.getElementById("canvas").getContext('2d').drawImage(stickercnv, 0, 0, 640 , 480);
+    }else{
+        alert('Choose a sticker first!');
+    }
+});
+
+document.getElementById("uplphoto").addEventListener("change", e =>{
+    e.preventDefault();
+    var url = URL.createObjectURL(e.target.files[0]);
+    var img = new Image();
+    img.src = url;
+    img.addEventListener('load', ()=>{
+        document.getElementById('canvas1').getContext('2d').drawImage(img, 0, 0, 640, 480); 
+    })
+})
 
 const uploadbtn = document.getElementById('upload-btn');
 
@@ -42,8 +93,9 @@ uploadbtn.addEventListener("click", e => {
     e.preventDefault();
     const ctx = document.getElementById("canvas").getContext('2d');
     const check = ctx.getImageData(0,0,640,480);
+
     var len = check.data.length;
-    for(var i =0; i< len; i++) {
+    for(var i = 0; i < len; i++) {
         if(!check.data[i]) {
             drawn = false;
         }else if(check.data[i]) {

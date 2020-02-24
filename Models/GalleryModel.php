@@ -16,7 +16,7 @@ class GalleryModel{
     }
 
     public function all_gallery(){
-        $qry = "SELECT filename, id_photo FROM photos ORDER BY rand() LIMIT 6";
+        $qry = "SELECT filename, id_photo FROM photos ORDER BY `id_photo` DESC LIMIT 6";
         $arr = array();
         $rslt = Connection::getInstance()->runQuery($qry, $arr);
         return ($rslt);
@@ -37,12 +37,25 @@ class GalleryModel{
     }
 
     public function p_like($rsltLike){
-        if (isset($rsltLike[0])){
-            $qry = "DELETE FROM `like_photo` WHERE `id_photo`=:idphoto AND `no_user`=:nouser;";
-        }else{
-            $qry = "INSERT INTO `like_photo` (id_photo, no_user) VALUES (:idphoto, :nouser);";
-        }
-        $arr = array('idphoto' => $_GET['id_photo'], 'nouser' => $_SESSION['no']);
+            if (isset($rsltLike[0])){
+                $qry = "DELETE FROM `like_photo` WHERE `id_photo`=:idphoto AND `no_user`=:nouser;";
+            }else{
+                $qry = "INSERT INTO `like_photo` (id_photo, no_user) VALUES (:idphoto, :nouser);";
+            }
+            $arr = array('idphoto' => $_GET['id_photo'], 'nouser' => $_SESSION['no']);
+            Connection::getInstance()->insertQuery($qry, $arr);
+    }
+
+    public function p_cmmt(){
+            $qry = "SELECT * FROM `comment` WHERE `id_photo` = :idphoto;";
+            $arr = array('idphoto' => $_GET['id_photo']);
+            $rslt = Connection::getInstance()->runQuery($qry, $arr);
+            return ($rslt);
+    }
+
+    public function p_dlt_cmt($id_cmt){
+        $qry = "DELETE FROM `comment` WHERE `id_comment` = :idcmt;";
+        $arr = array('idcmt' => $id_cmt);
         Connection::getInstance()->insertQuery($qry, $arr);
     }
 }

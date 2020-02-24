@@ -11,7 +11,7 @@
             $login->process($parsedUrl);
             if (isset($_SESSION['user'])){
                 $this->getData();
-                if ($parsedUrl[1] == 'modify'){
+                if (isset($parsedUrl[1]) && $parsedUrl[1] == 'modify'){
                     $this->view = 'modify';
                     $this->renderView();
                     if (isset($_POST['uid']) && isset($_POST['email']) && isset($_POST['oldpwd']) && isset($_POST['pwd']) && isset($_POST['pwdrepeat'])){

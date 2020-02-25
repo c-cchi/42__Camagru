@@ -44,13 +44,7 @@
                 $rsltLike = $galleryModel->p_gallery();
                 require "Views/p.phtml";
             }else if(isset($rsltAllgallery) && !isset($params[1])){
-                for ($i = 0; $i < 6; $i++) {
-                    $fname = $rsltAllgallery[$i]['filename'];
-                    if (isset($fname)){
-                        echo "<a href='/gallery/p?pic=".$fname."&id_photo=".$rsltAllgallery[$i]['id_photo']."'>
-                        <img class='photo' name='.$fname.' src='/uploads/photo/".$fname."'></a>";
-                    }
-                }
+                require "Views/all_gallery.phtml";
             }
         }
 

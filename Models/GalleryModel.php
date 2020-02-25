@@ -16,7 +16,7 @@ class GalleryModel{
     }
 
     public function all_gallery(){
-        $qry = "SELECT filename, id_photo FROM photos ORDER BY `id_photo` DESC LIMIT 6";
+        $qry = "SELECT filename, id_photo FROM photos ORDER BY `id_photo` DESC";
         $arr = array();
         $rslt = Connection::getInstance()->runQuery($qry, $arr);
         return ($rslt);

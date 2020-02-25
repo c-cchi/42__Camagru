@@ -1,1 +1,23 @@
-<script src='/js/all_gallery.phtml'></script>
+<?php
+    $page = intval($_GET['page']) * 6;
+    for ($i = 0; $i < 6; $i++) {
+        $j = $i + $page;
+        $fname = $rsltAllgallery[$j]['filename'];
+        if (isset($fname)){
+            echo "<a href='/gallery/p?pic=".$fname."&id_photo=".$rsltAllgallery[$j]['id_photo']."'>
+            <img class='photo' name='.$fname.' src='/uploads/photo/".$fname."'></a>";
+        }
+    }
+?>
+<br/>
+<br/>
+<div class="lnk-page">
+<?php
+    foreach($rsltAllgallery as $value){
+        $t++;
+    }
+    $pages = $t / 6;
+    for($t=0; $t < $pages; $t++)
+        echo "<a href='gallery?page=".$t."'>".$t."</a>";
+?>
+</div>

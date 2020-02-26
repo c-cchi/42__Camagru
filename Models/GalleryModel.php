@@ -63,13 +63,18 @@ class GalleryModel{
     }
 
     public function dlt_photo(){
-        $qry = "DELETE FROM `photos` WHERE `id_photo` = :idcmt;";
-        $arr = array('idcmt' => $_POST['id_photo']);
-        Connection::getInstance()->insertQuery($qry, $arr);
-        $qry = "DELETE FROM `comment` WHERE `id_photo` = :idcmt;";
-        Connection::getInstance()->insertQuery($qry, $arr);
-        $qry = "DELETE FROM `like_photo` WHERE `id_photo` = :idcmt;";
-        Connection::getInstance()->insertQuery($qry, $arr);
+        $qry = "SELECT `filename` FROM `photos` WHERE `id_photo` = :idphoto;";
+        $arr = array('idphoto' => $_POST['id_photo']);
+        $filename = Connection::getInstance()->runQuery($qry, $arr);
+        if (unlink("uploads/photo/".$filename[0]['filename']."")){
+            $qry = "DELETE FROM `photos` WHERE `id_photo` = :idcmt;";
+            $arr = array('idcmt' => $_POST['id_photo']);
+            Connection::getInstance()->insertQuery($qry, $arr);
+            $qry = "DELETE FROM `comment` WHERE `id_photo` = :idcmt;";
+            Connection::getInstance()->insertQuery($qry, $arr);
+            $qry = "DELETE FROM `like_photo` WHERE `id_photo` = :idcmt;";
+            Connection::getInstance()->insertQuery($qry, $arr);
+        }
     }
 
     public function user_email($id_photo){

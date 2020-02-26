@@ -3,164 +3,238 @@
     <head>
         <meta charset="utf-8" />
         <title><?= $title?></title>
+        <!-- <link rel="stylesheet" href = "stylesheet.css" type = "text/css" /> -->
         <style>
-            .alert-box {
-                padding: 20px;
-                margin-bottom: 20px;
-                border: 1px solid transparent;
-                border-radius: 4px; 
-                color: #a94442;
-                background-color: #f2dede;
-                border-color: #ebccd1;
-                font-family: Arial, Helvetica, sans-serif;
-            }
+            body{
+    background-color: #ebe6cc;
+}
+.alert-box {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px; 
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.success-box {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px; 
+    color: #5fc240;
+    background-color: #def2de;
+    border-color: #d1ebcc;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-            .success-box {
-                padding: 20px;
-                margin-bottom: 20px;
-                border: 1px solid transparent;
-                border-radius: 4px; 
-                color: #5fc240;
-                background-color: #def2de;
-                border-color: #d1ebcc;
-                font-family: Arial, Helvetica, sans-serif;
-            }
+div.login-box form{
+    left: calc(100% - 100px);
+}
 
-            div.profile img{
-                width: 100px;
-            }
-            div.profile {
-                font-family: Verdana, Arial, Helvetica, sans-serif;
-            }
-            form.modify-info {
-                font-family: Verdana, Arial, Helvetica, sans-serif;
-            }
+.login-box input{
+    border-radius: 3em;
+    padding: 0.7em;
+    margin: 5px;
+    border: 0;
+    outline: 0;
+    background-color: #acb8be;
+    color: #e7e5e0;
+    text-transform: uppercase;
+    cursor: pointer;
+}
 
-            .photo{
-                width: 45%;
-                margin:5px
-            }
+#log-bx-input{
+    background-color: white;
+    cursor: text;
+    color: #a59d8a;
+    text-transform: none;
+}
 
-            div.takepic {
-                position: relative;
-            }
+#login-box-btn {
+    padding: 0.5em;
+    font-size: 12px;
+    border: 0;
+    outline: 0;
+    border-radius: 5em;
+    box-sizing: border-box;
+    color: #e7e5e0;
+    position: absolute;
+    left: 157px;
+    top: 25px;
+}
 
-            div.camera {
-                position: absolute;
-                top: 0px;
-                z-index: 15;
-            }
+div.profile img{
+    width: 100px;
+}
+div.profile {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+form.modify-info {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
-            div.sitcker{
-                position: absolute;
-                top: 800px;
-            }
-            div.sitcker img{
-                width: 100px;
-            }
+.photo{
+    width: 45%;
+    margin:5px
+}
 
-            div.camera video{
-                z-index: 5;
-                position: absolute;
-                top: 0px;
-                margin: 1em;
-            }
-            div.camera canvas {
-                z-index: 15;
-                position: absolute;
-                top: 0px;
-                margin: 1em;
-            }
+.mygallery{
+    display: flex;
+    flex-wrap: wrap;
+}
+.mygallery > div{
+    width: 400px;
+    margin: 10px;
+}
+.myphoto{
+    width: 90%;
+}
 
-            #clearcnv {
-                z-index: 15;
-                position: absolute;
-                top: 500px;
-                left: 300px;
-                border-radius: 3px; 
-                cursor: pointer; 
-                display: inline-block; 
-                font-family: Verdana, sans-serif; 
-                font-weight: 800;
-                font-size: 12px; 
-                font-weight: 400; 
-                line-height: 20px; 
-                padding: 9px 16px 9px;
-                margin: 16px 0 0 16px; 
-            }
-            #capture-btn{
-                z-index: 15;
-                position: absolute;
-                top: 500px;
-                left: 520px;
-                border-radius: 3px; 
-                cursor: pointer; 
-                display: inline-block; 
-                font-family: Verdana, sans-serif; 
-                font-weight: 800;
-                font-size: 12px; 
-                font-weight: 400; 
-                line-height: 20px; 
-                padding: 9px 16px 9px;
-                margin: 16px 0 0 16px; 
-            }
+div.takepic {
+    position: relative;
+}
 
-            div.sticker {
-                position: absolute;
-                top: 0px;
-            }
+div.camera {
+    position: absolute;
+    top: 0px;
+    z-index: 15;
+}
 
-            div.uploadpic {
-                position: absolute;
-                margin: 1em;
-                top: 0px;
-                left: 700px;
-            }
+div.sitcker{
+    position: absolute;
+    top: 800px;
+}
+div.sitcker img{
+    width: 100px;
+}
 
-            div.uploadpic button{
-                z-index: 15;
-                position: absolute;
-                top: 500px;
-                left: 520px;
-                border-radius: 3px; 
-                cursor: pointer; 
-                display: inline-block; 
-                font-family: Verdana, sans-serif; 
-                font-weight: 800;
-                font-size: 12px; 
-                font-weight: 400; 
-                line-height: 20px; 
-                padding: 9px 16px 9px;
-                margin: 16px 0 0 16px; 
-            }
+div.camera video{
+    position: absolute;
+    top: 0px;
+    margin: 1em;
+}
+div.camera #canvas2 {
+    position: absolute;
+    top: 0px;
+    margin: 1em;
+}
+div.camera #canvas1 {
+    position: absolute;
+    top: 0px;
+    margin: 1em;
+}
 
-            div.single_photo{
-                position: relative;
-            }
+div.camera div{
+    position: absolute;
+    top: 500px;
+    margin: 2em;
+}
+#clearcnv {
+    z-index: 15;
+    position: absolute;
+    top: 500px;
+    left: 300px;
+    border-radius: 3px; 
+    cursor: pointer; 
+    display: inline-block; 
+    font-family: Verdana, sans-serif; 
+    font-weight: 800;
+    font-size: 12px; 
+    font-weight: 400; 
+    line-height: 20px; 
+    padding: 9px 16px 9px;
+    margin: 16px 0 0 16px; 
+}
+#capture-btn{
+    z-index: 15;
+    position: absolute;
+    top: 500px;
+    left: 520px;
+    border-radius: 3px; 
+    cursor: pointer; 
+    display: inline-block; 
+    font-family: Verdana, sans-serif; 
+    font-weight: 800;
+    font-size: 12px; 
+    font-weight: 400; 
+    line-height: 20px; 
+    padding: 9px 16px 9px;
+    margin: 16px 0 0 16px; 
+}
 
-            .cmmtctx {
-                font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-                font-size: 15px; 
-            }
-            .cmmtctx h5{
-                font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-                font-size: 12px;
-                
-            }
-            .comment input{
-                width: 200px;
-                margin: 10px;
-            }
+div.sticker {
+    position: absolute;
+    top: 0px;
+}
 
-            #like_photo{
-                cursor: pointer; 
-            }
+div.uploadpic {
+    position: absolute;
+    margin: 1em;
+    top: 0px;
+    left: 700px;
+}
 
-/* 
-            footer{
-                position: absolute;
-                top: calc(95%);
-            } */
+div.uploadpic button{
+    z-index: 15;
+    position: absolute;
+    top: 500px;
+    left: 520px;
+    border-radius: 3px; 
+    cursor: pointer; 
+    display: inline-block; 
+    font-family: Verdana, sans-serif; 
+    font-weight: 800;
+    font-size: 12px; 
+    font-weight: 400; 
+    line-height: 20px; 
+    padding: 9px 16px 9px;
+    margin: 16px 0 0 16px; 
+}
+
+div.upl-img{
+    font-family: Verdana, sans-serif;
+    font-size: 10px; 
+}
+
+div.single_photo{
+    position: relative;
+}
+
+.cmmtctx {
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-size: 15px; 
+}
+.cmmtctx h5{
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-size: 12px;
+    
+}
+.comment input{
+    width: 200px;
+    margin: 10px;
+}
+
+#like_photo{
+    cursor: pointer; 
+}
+
+.lnk-page {
+    margin: 10px;
+    padding: 10px;
+}
+.lnk-page > a{
+    color: #666;
+    font-family: Arial, sans-serif; 
+    border: 2px solid;
+    border-radius: 50%;
+    font-size: 14px;
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    text-decoration: none;
+}
 
         </style>
     </head>

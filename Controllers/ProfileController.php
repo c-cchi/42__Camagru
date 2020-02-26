@@ -1,6 +1,5 @@
 <?php
     class ProfileController extends Controller{
-        public $pic_pro;
         protected $email;
         protected $username;
         protected $nonhspwd;
@@ -11,7 +10,7 @@
             $login->process($parsedUrl);
             if (isset($_SESSION['user'])){
                 $this->getData();
-                if ($parsedUrl[1] == 'modify'){
+                if (isset($parsedUrl[1]) && $parsedUrl[1] == 'modify'){
                     $this->view = 'modify';
                     $this->renderView();
                     if (isset($_POST['uid']) && isset($_POST['email']) && isset($_POST['oldpwd']) && isset($_POST['pwd']) && isset($_POST['pwdrepeat'])){
@@ -26,7 +25,6 @@
 
         public function getData(){
             $profilemodel = new ProfileModel;
-            $this->pic_pro = $profilemodel->profileImg();
             $arr = $profilemodel->profileInfo();
             if (isset($arr)){
                 $this->email = $arr['email'];

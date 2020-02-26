@@ -1,9 +1,16 @@
 <div class='takepic'>
     <div class='camera'>
         <video id="player" width="640" height="480" autoplay></video>
+        <canvas id="canvas1" width="640px" height="480px"></canvas>
         <canvas id="canvas2" width="640px" height="480px"></canvas>
         <button id="clearcnv">Clear</button>
         <button id="capture-btn">Capture</button>
+        <div class="upl-img">
+            or Upload an image
+            <form method="post" enctype="multipart/form-data" class="upl-img-form">
+                <input type="file" name="files[]" id="uplphoto" multiple />
+            </form>
+        </div>
     </div>
     <div class='sitcker'>
         <?php foreach ($stickers as $value){
@@ -13,8 +20,8 @@
     <div class='uploadpic'>
         <form enctype="multipart/form-data" class="uploadform">
             <canvas id="canvas" name="canvas" width="640px" height="480px"></canvas>
-            <button id="upload-btn" name="uploadphoto">upload</button>
-        </form>
+            <button id="upload-btn" name="uploadphoto">Send</button>
+        </form>        
     </div>
 </div>
 <script src="/js/camera.js"></script>

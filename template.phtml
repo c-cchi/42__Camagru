@@ -29,7 +29,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-div.login-box form{
+.login-box form{
     left: calc(100% - 100px);
 }
 
@@ -45,13 +45,31 @@ div.login-box form{
     cursor: pointer;
 }
 
+.modify-info input{
+    padding: 0.3em;
+    margin: 5px;
+    border: 0;
+    outline: 0;
+    background-color: white;
+    color: black;
+    cursor: text;
+    width: 140px;
+}
+.modify-info input[type=button]{
+    background-color: #d7dde0;
+    color: white;
+}
+.modify-info input[type=button]:hover{
+    background-color: #a06d7c;
+    cursor: pointer;
+}
+
 #log-bx-input{
     background-color: white;
     cursor: text;
     color: #a59d8a;
     text-transform: none;
 }
-
 #login-box-btn {
     padding: 0.5em;
     font-size: 12px;
@@ -64,7 +82,34 @@ div.login-box form{
     left: 157px;
     top: 25px;
 }
-
+#logout[type=submit]{
+    border-radius: 3em;
+    padding: 0.7em;
+    margin: 5px;
+    border: 0;
+    outline: 0;
+    background-color: #acb8be;
+    color: #e7e5e0;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+#logout[type=submit]:hover{
+    background-color: #a06d7c;
+    /* border: 2px solid #e5d8db; */
+}
+#login-link[type=button]{
+    border-radius: 3em;
+    padding: 0.7em;
+    margin: 5px;
+    border: 0;
+    outline: 0;
+    background-color: #acb8be;
+    color: #e7e5e0;
+    cursor: pointer;
+}
+#login-link[type=button]:hover{
+    background-color: #81939c;
+}
 div.profile img{
     width: 100px;
 }
@@ -78,6 +123,7 @@ form.modify-info {
 .photo{
     width: 45%;
     margin:5px
+    
 }
 
 .mygallery{

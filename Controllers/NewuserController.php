@@ -25,7 +25,6 @@
                 $this->view = 'newuser';
                 $this->renderView();
             }
-
         }
 
         public function addUser(){
@@ -66,5 +65,4 @@
                 }
             }
         }
-
     }

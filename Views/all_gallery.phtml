@@ -1,7 +1,10 @@
 <?php
-    $page = intval($_GET['page']) * 6;
+    $p = 0;
+    if (isset($_GET['page'])){
+        $p = intval($_GET['page']) * 6;
+    }
     for ($i = 0; $i < 6; $i++) {
-        $j = $i + $page;
+        $j = $i + $p;
         $fname = $rsltAllgallery[$j]['filename'];
         if (isset($fname)){
             echo "<a href='/gallery/p?pic=".$fname."&id_photo=".$rsltAllgallery[$j]['id_photo']."'>
@@ -13,6 +16,7 @@
 <br/>
 <div class="lnk-page">
 <?php
+    $t = 0;
     foreach($rsltAllgallery as $value){
         $t++;
     }

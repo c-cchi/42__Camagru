@@ -1,0 +1,31 @@
+<div class='mygallery'>
+<?php
+    $page = 0;
+    if (isset($_GET['page'])){
+        $page = intval($_GET['page']) * 9;
+    }
+    for ($i = 0; $i < 9; $i++) {
+        $j = $i + $page;
+        if (isset($rsltmygallery[$j]['filename'])){
+            $fname = $rsltmygallery[$j]['filename'];
+            echo "<div><form method='post'>
+                <input type='image' src='/uploads/delete.png' style='width: 15px; cursor: pointer;' name='delete'>
+                <input type='hidden' name='id_photo' value='".$rsltmygallery[$j]['id_photo']."'/>
+                <a href='/gallery/p?pic=".$fname."&id_photo=".$rsltmygallery[$j]['id_photo']."'>
+                <img class='myphoto' name='.$fname.' src='/uploads/photo/".$fname."'></a>
+                </form></div>";
+        }
+    }
+?>
+</div>
+<div class="lnk-page">
+<?php
+    $i = 0;
+    foreach($rsltmygallery as $value){
+        $i++;
+    }
+    $pages = $i / 6;
+    for($t=0; $t < $pages; $t++)
+        echo "<a href='/gallery/my_gallery?page=".$t."'>".$t."</a>";
+?>
+</div>

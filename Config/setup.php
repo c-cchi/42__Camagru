@@ -22,15 +22,6 @@ $sql = "CREATE TABLE users (
 if ($con->query($sql) === FALSE)
     echo "Error creating users table: " . $con->error . "\n";
 
-$sql = "CREATE TABLE profiles (
-    id_pic INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    no_user INT(6) UNSIGNED,
-    src TEXT DEFAULT NULL,
-    status BOOLEAN DEFAULT FALSE
-    )";
-if ($con->query($sql) === FALSE)    
-    echo "Error creating photos table: " . $con->error . "\n";
-
 $sql = "CREATE TABLE photos (
     id_photo INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     no_user INT(6) UNSIGNED,

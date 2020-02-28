@@ -1,2 +1,9 @@
 <h1>Error 404</h1>
-<p>The requested page was not found, please check the URL.</p>
+<?php
+    if (isset($_GET['db'])){
+        echo "<p>Database connection error</p>";
+    }else{
+        echo "<p>The requested page was not found, please check the URL.</p>";
+    }
+?>
+<a href="/index"><input id="err-rel" type="button" value="Reload"></a>

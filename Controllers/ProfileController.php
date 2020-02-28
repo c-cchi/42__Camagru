@@ -1,6 +1,5 @@
 <?php
     class ProfileController extends Controller{
-        public $pic_pro;
         protected $email;
         protected $username;
         protected $nonhspwd;
@@ -26,7 +25,6 @@
 
         public function getData(){
             $profilemodel = new ProfileModel;
-            $this->pic_pro = $profilemodel->profileImg();
             $arr = $profilemodel->profileInfo();
             if (isset($arr)){
                 $this->email = $arr['email'];

@@ -18,9 +18,10 @@ class Connection{
             // $this->_conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
             $this->_conn = new PDO("mysql:host=localhost;dbname=camagrue;charset=utf8", "root", "123456");
             $this->_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             echo 'Error!: ' . $e->getMessage();
-            die();
+            header("Location: /error?db");
+            exit();
         }
     }
 

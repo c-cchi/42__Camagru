@@ -7,7 +7,7 @@
             $login->process($params);
             $galleryModel = new GalleryModel;
             $this->renderView();
-            if ($_SESSION['no']){
+            if (isset($_SESSION['no'])){
                 if (isset($params[2]) && $params[2] === "uploads"){
                     require_once("uploads/upload.php");
                     $filename = upload_res();
@@ -30,11 +30,19 @@
                     $rsltLike = $galleryModel->p_gallery();
                         if (isset($_POST['comment'])){
                             require "uploads/uploadcomment.php";
+                            $rslt = $galleryModel->user_email($_GET['id_photo']);
+                            $noti_mail = 'mail/noti_comment.php';
+                            $this->sendMail($rslt[0]['username'],$rslt[0]['email'], $noti_mail, null);
                         }else if (isset($_POST['delete_x'])){
                             $id_cmt = $_POST['id_comment'];
                             $galleryModel->p_dlt_cmt($id_cmt);
                         }else if (isset($_POST['like_x'])){
-                            $galleryModel->p_like($rsltLike);
+                            $like = $galleryModel->p_like($rsltLike);
+                            if ($like){
+                                $rslt = $galleryModel->user_email($_GET['id_photo']);
+                                $noti_mail = 'mail/noti_mail.php';
+                                $this->sendMail($rslt[0]['username'],$rslt[0]['email'], $noti_mail, null);
+                            }
                         }
                 }
             }
@@ -47,11 +55,4 @@
                 require "Views/all_gallery.phtml";
             }
         }
-
-        public function personnal_gallery(){
-            }
-        public function one_photo(){
-            }
-        public function take_picture(){
-            }
     }

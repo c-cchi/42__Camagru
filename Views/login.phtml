@@ -1,13 +1,11 @@
 <?php include "Views/displayError.phtml";
         include "Views/displayOk.phtml"; ?>
-<div class=login-box>
+<div class='login-box'>
     <form method="post">
-        <h2>Login</h2>
-        <input type="text" name="uid" placeholder="Username" value="<?php if (isset($_GET['uid'])) {echo $_GET['uid'];}?>" required>
+        <input id='log-bx-input' type="text" name="uid" placeholder="Username" value="<?php if (isset($_GET['uid'])) {echo $_GET['uid'];}?>" required>
         <br />
-        <input type="password" name="passwd" placeholder="password" required>
-        <br />
-        <input type="submit" value="login">
+        <input id='log-bx-input' type="password" name="passwd" placeholder="password" required>
+        <input id='login-box-btn' type="submit" value="sigin">
     </form>
     <a href="/newuser"><input type="button" value="Sign Up"></a>
     <a href="/login/forgot_password"><input type="button" value="Forgot password"></a>

@@ -31,7 +31,8 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.login-box form{
+.login-box{
+
 }
 
 .login-box input{
@@ -44,6 +45,19 @@
     color: #e7e5e0;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.modify {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.modify input{
+    margin: 10px;
+    padding: 10px;
 }
 
 .modify-info input{
@@ -80,8 +94,6 @@
     border-radius: 5em;
     box-sizing: border-box;
     color: #e7e5e0;
-    left: 157px;
-    top: 25px;
 }
 
 #err-rel{
@@ -99,6 +111,14 @@
     background-color: #f0e6b4;
     cursor: pointer;
     border: 2px solid white;
+}
+
+.logout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
 }
 
 #logout[type=submit]{
@@ -129,33 +149,69 @@
 #login-link[type=button]:hover{
     background-color: #81939c;
 }
-div.profile img{
-    width: 100px;
+
+.profile {
+    font-family: 'Roboto Slab';
+    letter-spacing: 1px;
+    padding: 5px;
+    position:relative;
+    display: inline-block;
 }
-div.profile {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+.profile > li {
+    float: left;
+    width: 50%;
+    margin: 10px;
 }
+
 form.modify-info {
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
+.allgallery{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
 .photo{
-    width: 25%;
+    width: 450px;
     border-top: 5px solid #352813;
-    margin: 2%;
-    padding: 0.5%;
+    padding: 40px;
+    filter: grayscale(30%);
 }
 
+.photo:hover{
+    cursor: pointer;
+    filter: none;
+    padding: 0;
+}
+
+.gallery-tle{
+    font-family: 'Roboto Slab';
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 2px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 .mygallery{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 .mygallery > div{
     width: 400px;
     margin: 10px;
 }
+
 .myphoto{
-    width: 90%;
+    width: 95%;
 }
 
 div.takepic {
@@ -289,23 +345,28 @@ div.single_photo{
 .lnk-page {
     margin: 10px;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+
 }
 .lnk-page > a{
     color: #666;
     font-family: Arial, sans-serif; 
     border: 1.5px solid;
     border-radius: 50%;
-    font-size: 12px;
-    width: 30px;
-    height: 30px;
+    font-size: 10px;
+    width: 10px;
+    height: 10px;
     padding: 7px;
     margin: 7px;
-    letter-spacing: 3px;
+    /* letter-spacing: 3px; */
     text-decoration: none;
 }
 .lnk-page > a:hover{
-    background-color: white;
-    border-color: #8c8c8c;
+    border: dotted;
 }
 .header{
     font-family: 'Roboto Slab';
@@ -316,14 +377,27 @@ div.single_photo{
     letter-spacing: 5px;
     color: #624823;
     border: 3px solid #614922;
-    border-radius: 50%;
-    width: 350px;
     margin: 20px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* display: table-cell;
+    vertical-align: middle; */
+}
+
+.deco {
+    width: 100%;
+    background-color: #282828;
+    margin: 10px;
+    margin: 10px;
 }
 
     </style>
     </head>
     <body>
+        <div class="deco"></div>
         <div class="header">。Camagru。</div>
         <?= $content ?>
         <!-- <footer><h5>© 2019 Cchi Camagrue</h5></footer> -->

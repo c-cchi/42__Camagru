@@ -1,7 +1,7 @@
 <div class="profile">
-    Hello <?= $_SESSION['user']?><br/>
-    UID:   <?php echo $_SESSION['user']?><br/>
-    Email: <?php echo $this->email;?><br/>
-    Email Verify: <?php echo $this->confirmed;?><br/>
+    <li>Hello <?= $_SESSION['user']?></li>
+    <li>UID:   <?php echo $_SESSION['user']?></li>
+    <li>Email: <?php echo $this->email;?></li>
+    <li>Email Verify: <?php echo $this->confirmed;?></li>
+    <a href="/profile/modify"><input  id='login-link' class='modify-info' type="button" value="Modify Info"></a>
 </div>
-<a href="/profile/modify"><input type="button" value="Modify Info"></a>

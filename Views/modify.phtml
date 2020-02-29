@@ -1,12 +1,13 @@
 <?php include "Views/displayError.phtml"?>
-<h2>Modify Info</h2>
-<form class="modify-info" name="modify" method="POST">
-    <input type="text" name="uid" value="<?php echo $_SESSION['user'];?>" placeholder="Username" required/><br/>
-    <input type="text" name="email" value="<?php echo $_SESSION['email'];?>" placeholder="Email" required/><br/>
-    <input type="password" id="oldpwd" name="oldpwd"  placeholder="Old Password" required><br />
-    <input type="password" id="pwd" name="pwd"  placeholder="New Password" required><br />
-    <input type="password" id="pwdrepeat" name="pwdrepeat" placeholder="Repeat New Password" required><br />
-    <input type="button" value="Send" name="modify" onclick="noEmptyFields()" required><br/>
-</form>
-<a href="/profile"><input type="button" value="Return To Profile"></a>
+<div class='modify'>
+    <form class="modify-info" name="modify" method="POST">
+        <input type="text" name="uid" value="<?php echo $_SESSION['user'];?>" placeholder="Username" required/><br/>
+        <input type="text" name="email" value="<?php echo $_SESSION['email'];?>" placeholder="Email" required/><br/>
+        <input type="password" id="oldpwd" name="oldpwd"  placeholder="Old Password" required><br />
+        <input type="password" id="pwd" name="pwd"  placeholder="New Password" required><br />
+        <input type="password" id="pwdrepeat" name="pwdrepeat" placeholder="Repeat New Password" required><br />
+        <input type="button" value="Send" name="modify" onclick="noEmptyFields()" required><br/>
+    </form>
+<a href="/profile"><input id='login-link' type="button" value="Return To Profile"></a>
+</div>
 <script src="/js/modify.js"></script>

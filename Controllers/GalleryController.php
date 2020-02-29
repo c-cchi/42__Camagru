@@ -40,6 +40,7 @@
                             $like = $galleryModel->p_like($rsltLike);
                             if ($like){
                                 $rslt = $galleryModel->user_email($_GET['id_photo']);
+                                $liker = $_SESSION['user'];
                                 $noti_mail = 'mail/noti_mail.php';
                                 $this->sendMail($rslt[0]['username'],$rslt[0]['email'], $noti_mail, null);
                             }

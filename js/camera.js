@@ -83,6 +83,8 @@ document.getElementById("uplphoto").addEventListener("change", e =>{
     var img = new Image();
     img.src = url;
     img.addEventListener('load', ()=>{
+        document.getElementById('canvas1').getContext('2d').fillStyle = "white";
+        document.getElementById('canvas1').getContext('2d').fillRect(0, 0, canvas.width, canvas.height);
         document.getElementById('canvas1').getContext('2d').drawImage(img, 0, 0, 640, 480); 
     })
 })

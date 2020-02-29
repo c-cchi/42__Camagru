@@ -1,4 +1,5 @@
 <?php
+    $liker = $_SESSION['user'];
     $sub = 'Notification From Camagru';
     $headers = "From: chichiahan@gmail.com\r\n";
     $headers .= "MIME-Version: 1.0\r\n";

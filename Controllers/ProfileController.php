@@ -64,14 +64,11 @@
                 if ((password_verify($this->oldpwd, $sqlidata[0]['password'])) == TRUE){
                     $prfmodel = new ProfileModel;
                     $prfmodel->updateProfile();
+                    session_destroy();
                     $this->redirect('index');
                 }else{
                     header("Location: /profile/modify?error=incorrectoldpw"); 
                 }
             }
-        }
-
-        public function myGallery(){
-            
         }
     }

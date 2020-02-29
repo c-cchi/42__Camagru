@@ -9,6 +9,7 @@
         
             body{
     background-color: #ebe6cc;
+    font-family: 'Roboto Slab';
 }
 .alert-box {
     padding: 20px;
@@ -298,7 +299,7 @@ div.uploadpic {
     left: 700px;
 }
 
-div.uploadpic button{
+.uploadpic button{
     z-index: 15;
     position: absolute;
     top: 500px;
@@ -362,14 +363,12 @@ div.single_photo{
     height: 10px;
     padding: 7px;
     margin: 7px;
-    /* letter-spacing: 3px; */
     text-decoration: none;
 }
 .lnk-page > a:hover{
     border: dotted;
 }
 .header{
-    font-family: 'Roboto Slab';
     font-size: 26px;
     text-align: center;
     font-weight: Black;
@@ -386,12 +385,55 @@ div.single_photo{
     /* display: table-cell;
     vertical-align: middle; */
 }
-
+.activ > p{
+    text-align: center;
+}
+.start {
+    border-radius: 50%;
+    padding: 0.7em;
+    margin: 5px;
+    border: 0;
+    outline: 0;
+    width: 100px;
+    height: 100px;
+    background-color: #acb8be;
+    color: #e7e5e0;
+    cursor: pointer;
+    position: absolute;
+    left: calc(50% - 50px);
+}
+.start:hover {
+    background-color: #a87c02;
+}
 .deco {
     width: 100%;
     background-color: #282828;
     margin: 10px;
     margin: 10px;
+}
+
+.fgt-pwd input{
+    border-radius: 3em;
+    padding: 0.7em;
+    margin: 5px;
+    border: 0;
+    outline: 0;
+}
+.fgt-pwd input[type=submit]{
+    background-color: #acb8be;
+    color: #f0ede4;
+}
+.fgt-pwd input[type=submit]:hover{
+    cursor: pointer;
+}
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #624823;
+    text-align: center;
+    letter-spacing: 3px;
 }
 
     </style>
@@ -400,6 +442,6 @@ div.single_photo{
         <div class="deco"></div>
         <div class="header">。Camagru。</div>
         <?= $content ?>
-        <!-- <footer><h5>© 2019 Cchi Camagrue</h5></footer> -->
+        <footer class='footer'><h5>© 2019 Cchi Camagrue</h5></footer>
     </body>
 </html>

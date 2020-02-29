@@ -2,7 +2,7 @@
     class IndexController extends Controller{
         function process($params){
             $this->head = array(
-                'title' => 'Camagrue');
+                'title' => 'Camagru');
             $gallery = new GalleryController;
             $gallery->process($params);
         }

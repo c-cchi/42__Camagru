@@ -7,6 +7,11 @@
             $login->process($params);
             $galleryModel = new GalleryModel;
             $this->renderView();
+            if (isset($_SESSION['confirmed'])){
+                if ($_SESSION['confirmed'] == FALSE){
+                    $this->redirect('profile?verify=no');
+                }
+            }
             if (isset($_SESSION['no'])){
                 if (isset($params[2]) && $params[2] === "uploads"){
                     require_once("uploads/upload.php");
@@ -40,7 +45,6 @@
                             $like = $galleryModel->p_like($rsltLike);
                             if ($like){
                                 $rslt = $galleryModel->user_email($_GET['id_photo']);
-                                $liker = $_SESSION['user'];
                                 $noti_mail = 'mail/noti_mail.php';
                                 $this->sendMail($rslt[0]['username'],$rslt[0]['email'], $noti_mail, null);
                             }

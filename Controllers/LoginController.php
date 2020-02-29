@@ -80,6 +80,7 @@
                         $_SESSION['user'] = $sqlidata[0]['username'];
                         $_SESSION['no'] = $sqlidata[0]['no'];
                         $_SESSION['email'] = $sqlidata[0]['email'];
+                        $_SESSION['confirmed'] = $sqlidata[0]['confirmed'];
                         return (TRUE);
                     }else{
                         return ('incorrectpwd');
@@ -88,7 +89,7 @@
         }
 
         public function invoke(){
-            $qry = "SELECT `username`,`password`,`no`,`email` FROM `users` WHERE `username`= :username OR `email`= :username";
+            $qry = "SELECT `username`,`password`,`no`,`email`,`confirmed` FROM `users` WHERE `username`= :username OR `email`= :username";
             $arr = array('username' => $this->username);
             $sqlidata = Connection::getInstance()->runQuery($qry, $arr);
             if (!isset($sqlidata[0])){

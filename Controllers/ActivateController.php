@@ -10,6 +10,7 @@ class ActivateController extends Controller{
             $actAccount = $activeModel->activateAccount();
             echo "<p>Your account is activated</p>";
             echo "<a href='/index'><input type='button' value='Start Camagru'></a>";
+            session_destroy();
         }
     }
 }

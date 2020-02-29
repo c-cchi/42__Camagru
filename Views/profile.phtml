@@ -1,3 +1,8 @@
+<?php
+    if (isset($_GET['verify'])){
+        echo "<div class='alert-box'>You have to verify your email first to start to use Camagru.</div>";
+    }
+?>
 <div class="profile">
     <li>Hello <?= $_SESSION['user']?></li>
     <li>UID:   <?php echo $_SESSION['user']?></li>

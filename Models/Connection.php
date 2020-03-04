@@ -16,7 +16,7 @@ class Connection{
         // require "Config/database.php";
         try {
             // $this->_conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-            $this->_conn = new PDO("mysql:host=localhost;dbname=camagrue;charset=utf8", "root", "123456");
+            $this->_conn = new PDO("mysql:host=localhost;dbname=camagru;charset=utf8", "root", "123456");
             $this->_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
             echo 'Error!: ' . $e->getMessage();

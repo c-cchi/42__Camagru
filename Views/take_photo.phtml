@@ -1,3 +1,8 @@
+<div class='sitcker'>
+        <?php foreach ($stickers as $value){
+                echo "<img id='".$value['id_sticker']."' hspace='20' name='".$value['sticker_name']."' src='/uploads/sticker/".$value['sticker_name']."'>";
+            }?>
+</div>
 <div class='takepic'>
     <div class='camera'>
         <video id="player" width="640" height="480" autoplay></video>
@@ -7,15 +12,10 @@
         <button id="capture-btn">Capture</button>
         <div class="upl-img">
             or Upload an image
-            <form method="post" enctype="multipart/form-data" class="upl-img-form">
+            <form method="post" accept='image/*' class="upl-img-form">
                 <input type="file" name="files[]" id="uplphoto" multiple />
             </form>
         </div>
-    </div>
-    <div class='sitcker'>
-        <?php foreach ($stickers as $value){
-                echo "<img id='".$value['id_sticker']."' name='".$value['sticker_name']."' src='/uploads/sticker/".$value['sticker_name']."'>";
-            }?>
     </div>
     <div class='uploadpic'>
         <form enctype="multipart/form-data" class="uploadform">

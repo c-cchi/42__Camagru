@@ -5,8 +5,12 @@
 ?>
 <div class="profile">
     <li>Hello <?= $_SESSION['user']?></li>
-    <li>UID:   <?php echo $_SESSION['user']?></li>
+    <li>UID: <?php echo $_SESSION['user']?></li>
     <li>Email: <?php echo $this->email;?></li>
     <li>Email Verify: <?php echo $this->confirmed;?></li>
-    <a href="/profile/modify"><input  id='login-link' class='modify-info' type="button" value="Modify Info"></a>
+    <li>Email Notification: <?php if ($this->notif == 1) {echo 'Yes';} else {echo 'No';}?></li>
+
+    <div>
+    <a href="/profile/modify"><input  id='login-link' type="button" value="Modify Info"></a>
+    </div>
 </div>

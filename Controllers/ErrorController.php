@@ -3,7 +3,6 @@
 
         public function process($parsedURL){
             $this->view = 'error';
-            // $this->head
             $this->renderView();
         }
     }

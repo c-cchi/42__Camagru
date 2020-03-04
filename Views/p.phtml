@@ -17,7 +17,7 @@
         <?php foreach($rsltCmmt as $value){
             echo "<form method='post' class='form-comment'>";
             if ($_SESSION['no'] == $value['no_user']){
-                echo "<input type='image' src='/uploads/delete.png' style='width: 15px; position: absolute; left: 100px; cursor: pointer;' name='delete'>";
+                echo "<input type='image' src='/uploads/delete.png' style='width: 15px; position: relative; left: calc(80%); cursor: pointer;' name='delete'>";
                 echo "<input type='hidden' name='id_comment' value='".$value['id_comment']."'/>";
             }
             echo "<div class='cmmtctx'>".$value['comment'];
@@ -32,4 +32,3 @@
     }?>
     <a href="/gallery"><input type="button" class="btn-gallery" value="Back to Gallery"></a>
 </div>
-<!-- <script src='/js/p.js'></script> -->

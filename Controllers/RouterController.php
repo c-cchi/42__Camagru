@@ -10,8 +10,6 @@ class RouterController extends Controller {
         if (file_exists('Controllers/' . $controllerClass . '.php')){
             $this->controller = new $controllerClass;
             $this->controller->process($parsedUrl);
-            // $this->data['title'] = $this->controller->head['title'];
-            // $this->data['description'] = $this->controller->head['description'];
         }
         else{
             $this->redirect('error');

@@ -127,7 +127,7 @@ function addsticker2(){
     const img = new Image();
     img.src = '/uploads/sticker/flower-2.png';
     img.addEventListener("load", ()=>{
-        contxt.drawImage(img, 40, 60, 150, 150);
+        contxt.drawImage(img, 400, 60, 150, 150);
     })
 }
 function addsticker3(){

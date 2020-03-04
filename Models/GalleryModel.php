@@ -81,7 +81,7 @@ class GalleryModel{
         $qry = "SELECT `no_user` FROM `photos` WHERE `id_photo` = :idphoto;";
         $arr = array('idphoto' => $id_photo);
         $rslt = Connection::getInstance()->runQuery($qry, $arr);
-        $qry = "SELECT `email`,`username` FROM `users` WHERE `no` = :nouser;";
+        $qry = "SELECT `email`,`username`,`notification` FROM `users` WHERE `no` = :nouser;";
         $arr = array('nouser' => $rslt[0]['no_user']);
         $rslt = Connection::getInstance()->runQuery($qry, $arr);
         return ($rslt);

@@ -1,7 +1,7 @@
 function comparePwd(){
-    var form = document.querySelector('.resetpwd');
-    var str1 = form.querySelector('input[name="pwd"]').value;
-    var str2 = form.querySelector('input[name="pwd-repeat"]').value;
+    var form = document.getElementById('resetpwd');
+    var str1 = document.getElementById('pwd').value;
+    var str2 = document.getElementById('pwd-repeat').value;
     var result = str1.localeCompare(str2);
     if (result == 0){
         form.submit();

@@ -1,59 +1,19 @@
 <?php
-$con = new mysqli("localhost", "root", "123456");
-if ($con->connect_error)
-    die("Connection failed: " . $con->connect_error . "\n");
+    require "database.php";
+    try
+    {
+        $DB = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+        $sql = file_get_contents('camagru.sql');
+        $DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $DB->exec("CREATE DATABASE IF NOT EXISTS `$DB_NAME`");
+        $DB->query("use $DB_NAME");
+        $DB->exec($sql);
+        if ($DB)
+                echo "Connected to the db";
+    }
+    catch(Exception $e)
+    {
+        echo $e->getMessage();
+    }
 
-$sql = "CREATE DATABASE camagrue";
-if ($con->query($sql) === FALSE)
-    echo "Error creating database: " . $con->error . "\n";
-
-if ($con->query("USE camagrue") === FALSE)
-    echo "Error using database: " . $con->error . "\n";
-
-$sql = "CREATE TABLE users (
-    no INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-    username VARCHAR(100) NOT NULL,
-    password VARCHAR(400) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    verify_id TEXT NOT NULL,
-    confirmed BOOLEAN DEFAULT FALSE,
-    fgt_pwd_time TIME (0) NOT NULL DEFALUT NOW()
-    )";
-if ($con->query($sql) === FALSE)
-    echo "Error creating users table: " . $con->error . "\n";
-
-$sql = "CREATE TABLE photos (
-    id_photo INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    no_user INT(6) UNSIGNED,
-    filename TEXT NOT NULL
-    )";
-if ($con->query($sql) === FALSE)    
-    echo "Error creating photos table: " . $con->error . "\n";
-
-
-$sql = "CREATE TABLE stickers (
-    id_sticker INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    sticker_name TEXT NOT NULL
-    )";
-if ($con->query($sql) === FALSE)    
-    echo "Error creating photos table: " . $con->error . "\n";
-
-$sql = "CREATE TABLE like_photo (
-    id_photo INT(6) UNSIGNED,
-    no_user INT(6) UNSIGNED
-    )";
-if ($con->query($sql) === FALSE)    
-    echo "Error creating photos table: " . $con->error . "\n";
-
-$sql = "CREATE TABLE comment (
-    id_comment INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    no_user INT(6) UNSIGNED DEFAULT NULL,
-    username VARCHAR(80) NOT NULL,
-    id_photo INT(6) UNSIGNED NOT NULL,
-    comment TEXT NOT NULL
-    )";
-if ($con->query($sql) === FALSE)    
-    echo "Error creating photos table: " . $con->error . "\n";
-
-$con->close();
 ?>

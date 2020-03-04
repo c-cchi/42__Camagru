@@ -1,6 +1,6 @@
 <?php include "Views/displayError.phtml"?>
-<form method="post" name=signup>
-        <h2>Sign Up</h2>
+<h2>Sign Up</h2>
+<form method="post" name='signup' class="signup">
         <input type="text" name="uid" placeholder="Username" value="<?php if(isset($_GET['uid'])){echo $_GET['uid'];}?>" required/>
         <br />
         <input type="password" name="pwd"  placeholder="password" required/>
@@ -11,5 +11,7 @@
         <br />
         <input type="submit" name="signup" value="Signup">
 </form>
-<h5>Already Member?<h5>
-<a href="index"><input type="button" value="Return to LoginPage"></a>
+<div>
+        Already Member?<br/>
+        <a href="index"><input id="login-link" type="button" value="Return to LoginPage"></a>
+</div>

@@ -37,7 +37,9 @@
                             require "uploads/uploadcomment.php";
                             $rslt = $galleryModel->user_email($_GET['id_photo']);
                             $noti_mail = 'mail/noti_comment.php';
-                            $this->sendMail($rslt[0]['username'],$rslt[0]['email'], $noti_mail, null);
+                            if ($rslt[0]['notification']){
+                                $this->sendMail($rslt[0]['username'], $rslt[0]['email'], $noti_mail, null);
+                            }
                         }else if (isset($_POST['delete_x'])){
                             $id_cmt = $_POST['id_comment'];
                             $galleryModel->p_dlt_cmt($id_cmt);
@@ -46,7 +48,9 @@
                             if ($like){
                                 $rslt = $galleryModel->user_email($_GET['id_photo']);
                                 $noti_mail = 'mail/noti_mail.php';
-                                $this->sendMail($rslt[0]['username'],$rslt[0]['email'], $noti_mail, null);
+                                if ($rslt[0]['notification']){
+                                    $this->sendMail($rslt[0]['username'],$rslt[0]['email'], $noti_mail, null);
+                                }
                             }
                         }
                 }

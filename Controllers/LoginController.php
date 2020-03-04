@@ -27,7 +27,7 @@
             }else if (isset($parsedUrl[1]) && $parsedUrl[1] === 'reset'){
                 if (isset($_GET['token'])){
                     if (isset($_GET['uid']) && isset($_GET['token'])){
-                        $qryUsr ="SELECT * FROM `users` WHERE `username`=:username";
+                        $qryUsr ="SELECT * FROM `users` WHERE `username`=:username OR `email`=:username";
                         $arrUsr = array('username' => $_GET['uid']);
                         $rsltUsr = Connection::getInstance()->runQuery($qryUsr, $arrUsr);
                         $salt = 'resetpwdforcamagru:o';

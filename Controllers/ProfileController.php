@@ -4,6 +4,8 @@
         protected $username;
         protected $nonhspwd;
         protected $confirmed;
+        protected $notif;
+        protected $oldpwd;
 
         function process($parsedUrl){
             $login = new LoginController;
@@ -13,7 +15,7 @@
                 if (isset($parsedUrl[1]) && $parsedUrl[1] == 'modify'){
                     $this->view = 'modify';
                     $this->renderView();
-                    if (isset($_POST['uid']) && isset($_POST['email']) && isset($_POST['oldpwd']) && isset($_POST['pwd']) && isset($_POST['pwdrepeat'])){
+                    if (isset($_POST['modify'])){
                         $rslt = $this->modifyInfo();
                     }
                 }else{
@@ -33,6 +35,12 @@
                 }else{
                     $this->confirmed = 'Yes';
                 }
+                if ($arr['notification'] == 0){
+                    $this->notif = 0;
+                }else{
+                    $this->notif = 1;
+                }
+
             }
         }
 
@@ -41,6 +49,7 @@
             $this->username = $_POST['uid'];
             $this->oldpwd = $_POST['oldpwd'];
             $this->nonhspwd = $_POST['pwd'];
+            $this->notif = $_POST['notif'];   
             $usermodel = new UserModel;
             $rsltusermodel = $usermodel->checkUidmail();
             $pwdstrength = $this->checkPwdstrength($this->nonhspwd);
@@ -65,7 +74,7 @@
                     $prfmodel = new ProfileModel;
                     $prfmodel->updateProfile();
                     session_destroy();
-                    $this->redirect('index');
+                    $this->redirect('index?ok=pwdupdate');
                 }else{
                     header("Location: /profile/modify?error=incorrectoldpw"); 
                 }

@@ -12,7 +12,7 @@
     $router = new RouterController();
     $router->process(array($_SERVER['REQUEST_URI']));
 
-    $title = "Camagrue";
+    $title = "Camagru";
     $content = ob_get_clean();
     require('template.phtml');
     ob_flush();

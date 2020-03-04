@@ -1,7 +1,6 @@
 <?php
 abstract class Controller{
     protected $data = array();
-    // which will be used to store data retrieved from models.
     protected $view = "";
     protected $head = array('title' => '', 'description' => '');
 
@@ -21,7 +20,7 @@ abstract class Controller{
     }
 
     public function checkPwdstrength($password){
-        if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,50}$/', $password)|| strcmp($this->pwdrepeat, $this->pwd)) {
+        if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,50}$/', $password)) {
             return (FALSE);
         }else{
             return (TRUE);
@@ -34,6 +33,4 @@ abstract class Controller{
         return (mb_send_mail($email, $sub, $msg, $headers));
     }
 
-    public function addErrMessage($err){
-    }
 }
